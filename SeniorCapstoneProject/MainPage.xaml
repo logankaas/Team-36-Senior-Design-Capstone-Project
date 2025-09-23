@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SeniorCapstoneProject.MainPage"
+             Title="Login">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="30,0" Spacing="25" VerticalOptions="CenterAndExpand">
+            <Image Source="dotnet_bot.png" HeightRequest="120" Aspect="AspectFit" />
+            <Label Text="Login" Style="{StaticResource Headline}" HorizontalOptions="Center" />
+
+            <Entry x:Name="UsernameEntry" Placeholder="Username" />
+            <Entry x:Name="PasswordEntry" Placeholder="Password" IsPassword="True" />
+
+            <Button Text="Login" x:Name="LoginButton" Clicked="OnLoginClicked" HorizontalOptions="Fill" />
+
+            <Label x:Name="LoginMessage" Text="" TextColor="Red" IsVisible="False" HorizontalOptions="Center" />
+
+            <Button Text="Create New Account" Clicked="OnCreateAccountClicked" HorizontalOptions="Center" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

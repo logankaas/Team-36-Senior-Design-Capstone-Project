@@ -1,0 +1,18 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SeniorCapstoneProject.ProfilePage"
+             Title="Profile">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="30,0" Spacing="20" VerticalOptions="Center">
+            <Label Text="Edit Profile" FontSize="24" HorizontalOptions="Center"/>
+            <Entry x:Name="EmailEntry" Placeholder="Email"/>
+            <Entry x:Name="FirstNameEntry" Placeholder="First Name"/>
+            <Entry x:Name="LastNameEntry" Placeholder="Last Name"/>
+            <Entry x:Name="UsernameEntry" Placeholder="Username"/>
+            <Entry x:Name="PasswordEntry" Placeholder="Password" IsPassword="True"/>
+            <Button Text="Save Changes" Clicked="OnSaveClicked"/>
+            <Label x:Name="ProfileMessage" Text="" TextColor="Red" IsVisible="False" HorizontalOptions="Center"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
