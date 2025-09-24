@@ -12,9 +12,6 @@ public class UserDatabase
         _db.CreateTableAsync<User>().Wait();
     }
 
-    public Task<User> GetUserAsync(string username, string password) =>
-        _db.Table<User>().FirstOrDefaultAsync(u => u.Username == username && u.Password == password);
-
     public Task<User> GetUserByUsernameAsync(string username) =>
         _db.Table<User>().FirstOrDefaultAsync(u => u.Username == username);
 

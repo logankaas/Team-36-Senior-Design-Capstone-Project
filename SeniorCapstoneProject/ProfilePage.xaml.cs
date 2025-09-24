@@ -1,32 +1,18 @@
-﻿using System.IO;
-using Microsoft.Maui.Controls;
+﻿
 
 namespace SeniorCapstoneProject
 {
     public partial class ProfilePage : ContentPage
     {
+        private readonly FirestoreService _firestoreService = new FirestoreService("seniordesigncapstoneproj-49cfd");
+
         private readonly UserDatabase _userDb;
         private User _user;
-
-        private bool _isPasswordHidden = true;
-
-        public bool IsPasswordHidden
-        {
-            get => _isPasswordHidden;
-            set
-            {
-                _isPasswordHidden = value;
-                PasswordEntry.IsPassword = value;
-                PasswordToggleButton.Source = value ? "eyeslash.svg" : "eye.svg";
-            }
-        }
 
         public ProfilePage(User user)
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
-
-            IsPasswordHidden = true;
 
             var dbPath = Path.Combine(FileSystem.AppDataDirectory, "users.db3");
             _userDb = new UserDatabase(dbPath);
@@ -37,23 +23,27 @@ namespace SeniorCapstoneProject
             FirstNameEntry.Text = _user.FirstName;
             LastNameEntry.Text = _user.LastName;
             UsernameEntry.Text = _user.Username;
-            PasswordEntry.Text = _user.Password;
-        }
-
-        private void OnPasswordToggleClicked(object sender, EventArgs e)
-        {
-            IsPasswordHidden = !IsPasswordHidden;
         }
 
         private async void OnSaveClicked(object sender, EventArgs e)
         {
-            _user.Email = EmailEntry.Text?.Trim() ?? "";
-            _user.FirstName = FirstNameEntry.Text?.Trim() ?? "";
-            _user.LastName = LastNameEntry.Text?.Trim() ?? "";
-            _user.Username = UsernameEntry.Text?.Trim() ?? "";
-            _user.Password = PasswordEntry.Text ?? "";
+            var newEmail = EmailEntry.Text?.Trim() ?? "";
+            var newFirstName = FirstNameEntry.Text?.Trim() ?? "";
+            var newLastName = LastNameEntry.Text?.Trim() ?? "";
+            var newUsername = UsernameEntry.Text?.Trim() ?? "";
+
+            _user.Email = newEmail;
+            _user.FirstName = newFirstName;
+            _user.LastName = newLastName;
+            _user.Username = newUsername;
 
             await _userDb.UpdateUserAsync(_user);
+
+            var idToken = await SecureStorage.GetAsync("firebase_id_token");
+            if (!string.IsNullOrEmpty(idToken))
+            {
+                await _firestoreService.SaveUserAsync(_user, idToken);
+            }
 
             ProfileMessage.Text = "Profile updated!";
             ProfileMessage.TextColor = Colors.Green;

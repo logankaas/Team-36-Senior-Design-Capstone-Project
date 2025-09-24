@@ -7,24 +7,14 @@
     <ScrollView>
         <VerticalStackLayout Padding="30,0" Spacing="25" VerticalOptions="CenterAndExpand">
             <Image Source="hospital.png" HeightRequest="120" Aspect="AspectFit" />
-            <Label Text="Login" Style="{StaticResource Headline}" HorizontalOptions="Center" />
+            <Label Text="Login" FontSize="32" FontAttributes="Bold" HorizontalOptions="Center" />
 
-            <Entry x:Name="UsernameEntry" Placeholder="Username" />
+            <Entry x:Name="EmailEntry" Placeholder="Email" Keyboard="Email" />
             <Grid>
                 <Entry x:Name="PasswordEntry"
                        Placeholder="Password"
-                       IsPassword="{Binding IsPasswordHidden, Mode=TwoWay}"
-                       Text="{Binding Password, Mode=TwoWay}" 
+                       IsPassword="True"
                        Grid.Column="0" />
-                <ImageButton x:Name="PasswordToggleButton"
-                             Source="{Binding PasswordToggleIcon}"
-                             Clicked="OnPasswordToggleClicked"
-                             BackgroundColor="Transparent"
-                             WidthRequest="20"
-                             HeightRequest="20"
-                             HorizontalOptions="End"
-                             VerticalOptions="Center"
-                             Grid.Column="1"/>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
@@ -36,6 +26,8 @@
             <Label x:Name="LoginMessage" Text="" TextColor="Red" IsVisible="False" HorizontalOptions="Center" />
 
             <Button Text="Create New Account" Clicked="OnCreateAccountClicked" HorizontalOptions="Center" Background="#FF8C87" />
+
+            <Button Text="Forgot Password?" Clicked="OnForgotPasswordClicked" BackgroundColor="Transparent" TextColor="#FF8C87" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

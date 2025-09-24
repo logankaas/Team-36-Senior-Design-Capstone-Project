@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "888428684074",
+    "project_id": "seniordesigncapstoneproj-49cfd",
+    "storage_bucket": "seniordesigncapstoneproj-49cfd.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:888428684074:android:787ba509e83c53b6c6b453",
+        "android_client_info": {
+          "package_name": "com.uc.seniordesigncapstoneproject"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_WhqRi9PKiFcsswW543zMBTr3OFyQsLs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

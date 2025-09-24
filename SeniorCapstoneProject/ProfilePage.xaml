@@ -16,15 +16,6 @@
                        IsPassword="{Binding IsPasswordHidden, Mode=TwoWay}"
                        Text="{Binding Password, Mode=TwoWay}" 
                        Grid.Column="0" />
-                <ImageButton x:Name="PasswordToggleButton"
-                             Source="{Binding PasswordToggleIcon}"
-                             Clicked="OnPasswordToggleClicked"
-                             BackgroundColor="Transparent"
-                             WidthRequest="20"
-                             HeightRequest="20"
-                             HorizontalOptions="End"
-                             VerticalOptions="Center"
-                             Grid.Column="1"/>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />

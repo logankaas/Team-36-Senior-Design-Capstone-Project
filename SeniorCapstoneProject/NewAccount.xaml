@@ -5,7 +5,7 @@
 
     <ScrollView>
         <VerticalStackLayout Padding="30,0" Spacing="25" VerticalOptions="CenterAndExpand">
-            <Image Source="dotnet_bot.png" HeightRequest="120" Aspect="AspectFit" />
+            <Image Source="hospital.png" HeightRequest="120" Aspect="AspectFit" />
             <Label Text="Create New Account" FontSize="24" HorizontalOptions="Center" />
 
             <Entry x:Name="RegisterEmailEntry" Placeholder="Email Address" Keyboard="Email" />
@@ -18,24 +18,15 @@
                        IsPassword="{Binding IsPasswordHidden, Mode=TwoWay}"
                        Text="{Binding Password, Mode=TwoWay}"
                        Grid.Column="0" />
-                <ImageButton x:Name="PasswordToggleButton"
-                             Source="{Binding PasswordToggleIcon}"
-                             Clicked="OnPasswordToggleClicked"
-                             BackgroundColor="Transparent"
-                             WidthRequest="20"
-                             HeightRequest="20"
-                             HorizontalOptions="End"
-                             VerticalOptions="Center"
-                             Grid.Column="1"/>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
             </Grid>
 
-            <Button Text="Register" Clicked="OnRegisterClicked" HorizontalOptions="Fill" />
+            <Button Text="Register" Clicked="OnRegisterClicked" HorizontalOptions="Fill" BackgroundColor="#FF8C87" />
             <Label x:Name="RegisterMessage" Text="" TextColor="Red" IsVisible="False" HorizontalOptions="Center" />
-            <Button Text="Back to Login" Clicked="OnBackToLoginClicked" HorizontalOptions="Center" />
+            <Button Text="Back to Login" Clicked="OnBackToLoginClicked" HorizontalOptions="Center" BackgroundColor="#FF8C87" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

@@ -5,35 +5,17 @@ namespace SeniorCapstoneProject
 {
     public partial class NewAccountPage : ContentPage
     {
+        private readonly FirebaseAuthService _firebaseAuthService = new FirebaseAuthService("AIzaSyA_WhqRi9PKiFcsswW543zMBTr3OFyQsLs");
+
         private readonly UserDatabase _userDb;
-
-        private bool _isPasswordHidden = true;
-
-        public bool IsPasswordHidden
-        {
-            get => _isPasswordHidden;
-            set
-            {
-                _isPasswordHidden = value;
-                RegisterPasswordEntry.IsPassword = value;
-                PasswordToggleButton.Source = value ? "eyeslash.svg" : "eye.svg";
-            }
-        }
 
         public NewAccountPage()
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
 
-            IsPasswordHidden = true;
-
             var dbPath = Path.Combine(FileSystem.AppDataDirectory, "users.db3");
             _userDb = new UserDatabase(dbPath);
-        }
-
-        private void OnPasswordToggleClicked(object sender, EventArgs e)
-        {
-            IsPasswordHidden = !IsPasswordHidden;
         }
 
         private async void OnRegisterClicked(object sender, EventArgs e)
@@ -55,24 +37,28 @@ namespace SeniorCapstoneProject
                 return;
             }
 
-            var existingUser = await _userDb.GetUserByUsernameAsync(username);
-            if (existingUser != null)
+            // Register with Firebase
+            var firebaseIdToken = await _firebaseAuthService.SignUpAsync(email, password);
+            if (firebaseIdToken == null)
             {
-                RegisterMessage.Text = "User already exists.";
+                RegisterMessage.Text = "Registration failed (email may already be in use).";
                 RegisterMessage.TextColor = Colors.Red;
                 RegisterMessage.IsVisible = true;
                 return;
             }
 
+            // After successful Firebase registration
             var user = new User
             {
                 Email = email,
                 FirstName = firstName,
                 LastName = lastName,
-                Username = username,
-                Password = password
+                Username = username
             };
-            await _userDb.AddUserAsync(user);
+
+            // Save user profile to Firestore
+            var firestoreService = new FirestoreService("seniordesigncapstoneproj-49cfd");
+            await firestoreService.SaveUserAsync(user, firebaseIdToken);
 
             RegisterMessage.Text = "User registered successfully!";
             RegisterMessage.TextColor = Colors.Green;
