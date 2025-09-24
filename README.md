@@ -3,7 +3,7 @@
 # My Health Assistant
 
 **Senior Design Capstone Project (2025–2026)**  
-Team 36 – University of Cincinnati  
+**Team 36** – University of Cincinnati  
 College of Education, Criminal Justice, and Human Services  
 School of Information Technology  
 
