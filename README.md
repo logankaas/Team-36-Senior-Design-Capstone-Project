@@ -10,10 +10,10 @@ School of Information Technology
 ---
 
 ## ✅ Current Status
-- ✔️ Contract signed and development scope defined
-- ✔️ Research phase complete (Task 1)
-- 🚧 Currently building the **core scheduling app** (Task 2)
-- ⏭ Next step: **Integrate AI engine** into the app (Task 3)
+- Contract signed and development scope defined
+- Research phase complete (Task 1)
+- Currently building the **core scheduling app** (Task 2)
+- Next step: **Integrate AI engine** into the app (Task 3)
 
 ---
 
