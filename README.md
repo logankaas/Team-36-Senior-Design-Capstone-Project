@@ -1,4 +1,4 @@
-# SeniorCapstoneProject
+# Senior Design Capstone Project
 ==============
 <img src="~/senior-capstone-design-one" />
 ==============
