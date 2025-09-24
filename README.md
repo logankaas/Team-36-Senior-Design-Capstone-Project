@@ -17,13 +17,7 @@ School of Information Technology
 
 ---
 
-==========================================
-
-
 <img src="https://github.com/logankaas/Senior-Design-Capstone-Project/blob/main/senior-capstone-design-one.png" />
-
-
-==========================================
 
 ---
 
