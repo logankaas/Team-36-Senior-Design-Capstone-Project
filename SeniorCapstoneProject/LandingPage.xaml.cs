@@ -1,17 +1,23 @@
-﻿using Microsoft.Maui.Controls;
-using static SeniorCapstoneProject.App;
+﻿using SeniorCapstoneProject;
+using Microsoft.Maui.Controls;
 
 namespace SeniorCapstoneProject
 {
     public partial class LandingPage : ContentPage
     {
-        private readonly User _user;
+        private readonly User? _user;
 
         public LandingPage(User user)
         {
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
+
             _user = user;
-            WelcomeLabel.Text = $"Welcome, {_user.FirstName}!";
+
+            if (!string.IsNullOrEmpty(_user?.FirstName))
+                ProfileInitial.Text = _user.FirstName.Substring(0, 1).ToUpper();
+            else
+                ProfileInitial.Text = "?";
         }
 
         private async void OnProfileClicked(object sender, EventArgs e)
@@ -19,24 +25,24 @@ namespace SeniorCapstoneProject
             await Navigation.PushAsync(new ProfilePage(_user));
         }
 
-        private void OnChatClicked(object sender, EventArgs e)
+        private async void OnChatClicked(object sender, EventArgs e)
         {
-            // Navigate to chat page
+            // await Navigation.PushAsync(new ChatPage(_user));
         }
 
-        private void OnHistoryClicked(object sender, EventArgs e)
+        private async void OnHistoryClicked(object sender, EventArgs e)
         {
-            // Navigate to history page
+            // await Navigation.PushAsync(new HistoryPage(_user));
         }
 
-        private void OnSettingsClicked(object sender, EventArgs e)
+        private async void OnSettingsClicked(object sender, EventArgs e)
         {
-            // Navigate to settings page
+            // await Navigation.PushAsync(new SettingsPage(_user));
         }
 
-        private void OnHelpClicked(object sender, EventArgs e)
+        private async void OnHelpClicked(object sender, EventArgs e)
         {
-            // Navigate to help page
+            //  await Navigation.PushAsync(new HelpPage(_user));
         }
     }
 }

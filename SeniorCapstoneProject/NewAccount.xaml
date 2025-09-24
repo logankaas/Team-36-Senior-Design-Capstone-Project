@@ -12,7 +12,26 @@
             <Entry x:Name="RegisterFirstNameEntry" Placeholder="First Name" />
             <Entry x:Name="RegisterLastNameEntry" Placeholder="Last Name" />
             <Entry x:Name="RegisterUsernameEntry" Placeholder="Username" />
-            <Entry x:Name="RegisterPasswordEntry" Placeholder="Password" IsPassword="True" />
+            <Grid>
+                <Entry x:Name="RegisterPasswordEntry"
+                       Placeholder="Password"
+                       IsPassword="{Binding IsPasswordHidden, Mode=TwoWay}"
+                       Text="{Binding Password, Mode=TwoWay}"
+                       Grid.Column="0" />
+                <ImageButton x:Name="PasswordToggleButton"
+                             Source="{Binding PasswordToggleIcon}"
+                             Clicked="OnPasswordToggleClicked"
+                             BackgroundColor="Transparent"
+                             WidthRequest="20"
+                             HeightRequest="20"
+                             HorizontalOptions="End"
+                             VerticalOptions="Center"
+                             Grid.Column="1"/>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+            </Grid>
 
             <Button Text="Register" Clicked="OnRegisterClicked" HorizontalOptions="Fill" />
             <Label x:Name="RegisterMessage" Text="" TextColor="Red" IsVisible="False" HorizontalOptions="Center" />

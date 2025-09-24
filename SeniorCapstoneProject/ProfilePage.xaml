@@ -10,8 +10,27 @@
             <Entry x:Name="FirstNameEntry" Placeholder="First Name"/>
             <Entry x:Name="LastNameEntry" Placeholder="Last Name"/>
             <Entry x:Name="UsernameEntry" Placeholder="Username"/>
-            <Entry x:Name="PasswordEntry" Placeholder="Password" IsPassword="True"/>
-            <Button Text="Save Changes" Clicked="OnSaveClicked"/>
+            <Grid>
+                <Entry x:Name="PasswordEntry"
+                       Placeholder="Password"
+                       IsPassword="{Binding IsPasswordHidden, Mode=TwoWay}"
+                       Text="{Binding Password, Mode=TwoWay}" 
+                       Grid.Column="0" />
+                <ImageButton x:Name="PasswordToggleButton"
+                             Source="{Binding PasswordToggleIcon}"
+                             Clicked="OnPasswordToggleClicked"
+                             BackgroundColor="Transparent"
+                             WidthRequest="20"
+                             HeightRequest="20"
+                             HorizontalOptions="End"
+                             VerticalOptions="Center"
+                             Grid.Column="1"/>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+            </Grid>
+            <Button Text="Save Changes" Clicked="OnSaveClicked" Background="#FF8C87"/>
             <Label x:Name="ProfileMessage" Text="" TextColor="Red" IsVisible="False" HorizontalOptions="Center"/>
         </VerticalStackLayout>
     </ScrollView>

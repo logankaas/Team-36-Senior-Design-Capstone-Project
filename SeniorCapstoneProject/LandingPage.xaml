@@ -1,43 +1,165 @@
-﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SeniorCapstoneProject.LandingPage"
              Title="Home">
 
-    <Grid RowDefinitions="Auto,*">
-        <Grid Grid.Row="0" Padding="10,10,10,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            
-            <!-- Welcome, User Label -->
-            <Label x:Name="WelcomeLabel" Text="Welcome," FontSize="24" VerticalOptions="Center" HorizontalOptions="Start"/>
-            
-            <ImageButton Source="profile_icon.png"
-                         x:Name="ProfileButton"
-                         Clicked="OnProfileClicked"
-                         WidthRequest="40"
-                         HeightRequest="40"
-                         BackgroundColor="Transparent"
-                         HorizontalOptions="End"
-                         VerticalOptions="Center"
-                         Grid.Column="1"/>
+    <Grid RowDefinitions="Auto,*,Auto,Auto" ColumnDefinitions="*">
+        <!-- Header -->
+        <Grid Grid.Row="0" Padding="24,24,24,0" ColumnDefinitions="*,Auto">
+            <Label Text="Your Health"
+                   FontSize="32"
+                   FontAttributes="Bold"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Start"
+                   TextColor="Black"/>
+            <Border
+                WidthRequest="32"
+                HeightRequest="32"
+                StrokeThickness="0"
+                Background="#FF8C87"
+                StrokeShape="RoundRectangle 16"
+                HorizontalOptions="End"
+                VerticalOptions="Center"
+                Margin="0,0,0,0"
+                Grid.Column="1">
+                <Label
+                    x:Name="ProfileInitial"
+                    Text="A"
+                    FontSize="20"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    VerticalTextAlignment="Center"
+                    HorizontalTextAlignment="Center"/>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnProfileClicked"/>
+                </Border.GestureRecognizers>
+            </Border>
         </Grid>
 
-        <Grid Grid.Row="1" Padding="20" RowSpacing="20" ColumnSpacing="20">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+        <!-- 2x2 Feature Grid -->
+        <Grid Grid.Row="1" Padding="5,20,5,0" RowSpacing="16" ColumnSpacing="1" RowDefinitions="Auto,Auto" ColumnDefinitions="*,*">
+            <!-- Doctors -->
+            <Border Background="#FF8C87" StrokeShape="RoundRectangle 8" Grid.Row="0" Grid.Column="0" HeightRequest="200" WidthRequest="200">
+                <Grid>
+                    <Label Text="Doctors"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="White"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Start"
+                           Margin="12,10,0,0"/>
+                    <Image Source="doctor.png"
+                           HeightRequest="100"
+                           WidthRequest="100"
+                           HorizontalOptions="End"
+                           VerticalOptions="End"
+                           Margin="0,0,10,10"/>
+                </Grid>
+            </Border>
+            <!-- Medicine -->
+            <Border Background="#FF8C87" StrokeShape="RoundRectangle 8" Grid.Row="0" Grid.Column="1" HeightRequest="200" WidthRequest="200">
+                <Grid>
+                    <Label Text="Medicine"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="White"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Start"
+                           Margin="12,10,0,0"/>
+                    <Image Source="medicine.png"
+                           HeightRequest="100"
+                           WidthRequest="100"
+                           HorizontalOptions="End"
+                           VerticalOptions="End"
+                           Margin="0,0,10,10"/>
+                </Grid>
+            </Border>
+            <!-- Tests -->
+            <Border Background="#FF8C87" StrokeShape="RoundRectangle 8" Grid.Row="1" Grid.Column="0" HeightRequest="200" WidthRequest="200">
+                <Grid>
+                    <Label Text="Tests"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="White"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Start"
+                           Margin="12,10,0,0"/>
+                    <Image Source="sample_tube.png"
+                           HeightRequest="100"
+                           WidthRequest="100"
+                           HorizontalOptions="End"
+                           VerticalOptions="End"
+                           Margin="0,0,10,10"/>
+                </Grid>
+            </Border>
+            <!-- Prescriptions -->
+            <Border Background="#FF8C87" StrokeShape="RoundRectangle 8" Grid.Row="1" Grid.Column="1" HeightRequest="200" WidthRequest="200">
+                <Grid>
+                    <Label Text="Prescriptions"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="White"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Start"
+                           Margin="12,10,0,0"/>
+                    <Image Source="prescription.png"
+                           HeightRequest="100"
+                           WidthRequest="100"
+                           HorizontalOptions="End"
+                           VerticalOptions="End"
+                           Margin="0,0,10,10"/>
+                </Grid>
+            </Border>
+        </Grid>
 
-            <Button Grid.Row="0" Grid.Column="0" Text="Chat" Clicked="OnChatClicked"/>
-            <Button Grid.Row="0" Grid.Column="1" Text="History" Clicked="OnHistoryClicked"/>
-            <Button Grid.Row="1" Grid.Column="0" Text="Settings" Clicked="OnSettingsClicked"/>
-            <Button Grid.Row="1" Grid.Column="1" Text="Help" Clicked="OnHelpClicked"/>
+        <!-- Appointments List -->
+        <VerticalStackLayout Grid.Row="2" Padding="24,24,24,0" Spacing="10">
+            <!-- Appointment 1 -->
+            <Grid ColumnDefinitions="4,Auto,*,Auto" RowDefinitions="Auto">
+                <BoxView Color="#FF8C87" WidthRequest="4" HeightRequest="48" VerticalOptions="Start" CornerRadius="2"/>
+                <VerticalStackLayout Grid.Column="1" Spacing="0" Padding="8,0,0,0">
+                    <Label Text="04" FontSize="16" FontAttributes="Bold" TextColor="Black"/>
+                    <Label Text="JUNE" FontSize="10" TextColor="#A0A0A0"/>
+                </VerticalStackLayout>
+                <VerticalStackLayout Grid.Column="2" Spacing="0">
+                    <Label Text="Visit to Dr. Markins" FontSize="16" TextColor="Black"/>
+                    <Label Text="15:00 - 17:00" FontSize="12" TextColor="#A0A0A0"/>
+                </VerticalStackLayout>
+            </Grid>
+            <!-- Appointment 2 -->
+            <Grid ColumnDefinitions="4,Auto,*,Auto" RowDefinitions="Auto">
+                <BoxView Color="#FF8C87" WidthRequest="4" HeightRequest="48" VerticalOptions="Start" CornerRadius="2"/>
+                <VerticalStackLayout Grid.Column="1" Spacing="0" Padding="8,0,0,0">
+                    <Label Text="09" FontSize="16" FontAttributes="Bold" TextColor="Black"/>
+                    <Label Text="JUNE" FontSize="10" TextColor="#A0A0A0"/>
+                </VerticalStackLayout>
+                <VerticalStackLayout Grid.Column="2" Spacing="0">
+                    <Label Text="Visit to Dr. Markins" FontSize="16" TextColor="Black"/>
+                    <Label Text="16:00 - 17:00" FontSize="12" TextColor="#A0A0A0"/>
+                </VerticalStackLayout>
+            </Grid>
+        </VerticalStackLayout>
+
+        <!-- Bottom Navigation Bar -->
+        <Grid Grid.Row="3" Padding="0,24,0,0" HeightRequest="64" BackgroundColor="White"
+              ColumnDefinitions="*,*,*,*">
+            <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                <Image Source="emergency_call.png" HeightRequest="24" WidthRequest="24"/>
+                <Label Text="Calendar" FontSize="10" TextColor="#A0A0A0"/>
+            </VerticalStackLayout>
+            <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center">
+                <Image Source="your_health.png" HeightRequest="24" WidthRequest="24"/>
+                <Label Text="Your Health" FontSize="10" TextColor="#FF8C87"/>
+            </VerticalStackLayout>
+            <VerticalStackLayout Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center">
+                <Image Source="sources.png" HeightRequest="24" WidthRequest="24"/>
+                <Label Text="Sources" FontSize="10" TextColor="#A0A0A0"/>
+            </VerticalStackLayout>
+            <VerticalStackLayout Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center">
+                <Image Source="medical_report.png" HeightRequest="24" WidthRequest="24"/>
+                <Label Text="Medical ID" FontSize="10" TextColor="#A0A0A0"/>
+            </VerticalStackLayout>
         </Grid>
     </Grid>
 </ContentPage>

@@ -51,12 +51,49 @@
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
 		<MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="300,185" />
+    <MauiImage Update="Resources\Images\person.svg" Resize="True" BaseSize="300,185" />
+    <MauiImage Update="Resources\Images\eye.svg" Resize="True" BaseSize="300,185" />
+    <MauiImage Update="Resources\Images\eyeslash.svg" Resize="True" BaseSize="300,185" />
+    <MauiImage Include="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\doctor.png" />
+    <MauiImage Include="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\emergency_call.png" />
+
+    <!-- Images: Login -->
+    <MauiImage Include="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\hospital.png" />
+    <MauiImage Include="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\medical_report.png" />
+
+    <!-- Images: Home -->
+    <MauiImage Include="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\medicine.png" />
+    <MauiImage Include="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\nurse.png" />
+    <MauiImage Include="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\prescription.png" />
+    <MauiImage Include="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\sample_tube.png" />
+    <MauiImage Include="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\sources.png" />
+    <MauiImage Include="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\your_health.png" />
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
 
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+	</ItemGroup>
+
+	<ItemGroup>
+    <None Remove="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\Doctor.png" />
+    <None Remove="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\emergency_call.png" />
+    <None Remove="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\hospital.png" />
+    <None Remove="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\medical_report.png" />
+    <None Remove="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\medicine.png" />
+    <None Remove="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\nurse.png" />
+    <None Remove="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\prescription.png" />
+    <None Remove="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\sample_tube.png" />
+    <None Remove="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\sources.png" />
+    <None Remove="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\your_health.png" />
+  </ItemGroup>
+
+	<ItemGroup>
+	  <None Include="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\.DS_Store" />
+	  <None Include="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Flat\.DS_Store" />
+	  <None Include="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Line\.DS_Store" />
+	  <None Include="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Line\SVG\.DS_Store" />
 	</ItemGroup>
 
 	<ItemGroup>
