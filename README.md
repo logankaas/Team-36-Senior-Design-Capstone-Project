@@ -136,12 +136,7 @@ By reducing manual workload, clinics can improve **staff efficiency** and **pati
 
 ## 📬 Contact
 For questions or collaboration, reach out to any of the team members via their UC email addresses.  
-==========================================
 
-
-<img src="https://github.com/logankaas/Senior-Design-Capstone-Project/blob/main/senior-capstone-design-one.png" />
-
-
-==========================================
+---
 
 >>>>>> c94f4714415a61278eebf27ee038cc35339a2c53
