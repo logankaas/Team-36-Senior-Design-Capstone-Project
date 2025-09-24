@@ -1,6 +1,6 @@
 # Senior Design Capstone Project
 ==============
-<img src="~/senior-capstone-design-one" />
+<img src="[~/senior-capstone-design-one](https://github.com/logankaas/Senior-Design-Capstone-Project/blob/main/senior-capstone-design-one.png)" />
 ==============
 
 # Senior-Design-Capstone-Project
