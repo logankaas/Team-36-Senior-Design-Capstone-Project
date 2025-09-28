@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SeniorCapstoneProject.CalendarPage"
+             Title="Appointments Calendar">
+
+    <VerticalStackLayout Padding="20" Spacing="20">
+        <Label Text="Your Appointments"
+               FontSize="28"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"/>
+
+        <CollectionView ItemsSource="{Binding Appointments}" Margin="16">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame BorderColor="#FF8C87" CornerRadius="12" Padding="16" Margin="0,8" HasShadow="True" BackgroundColor="#FFF8F6">
+                        <VerticalStackLayout>
+                            <Label Text="{Binding DoctorName}" FontSize="20" FontAttributes="Bold" TextColor="#FF8C87"/>
+                            <Label Text="{Binding Date, StringFormat='{}{0:MMMM dd, yyyy}'}" FontSize="16" TextColor="Black"/>
+                            <Label Text="{Binding TimeRange}" FontSize="16" TextColor="#A0A0A0"/>
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+</ContentPage>

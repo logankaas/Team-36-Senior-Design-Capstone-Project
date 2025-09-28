@@ -24,13 +24,13 @@ namespace SeniorCapstoneProject
                 if (!string.IsNullOrEmpty(token) && !string.IsNullOrEmpty(email))
                 {
                     var firestore = new FirestoreService("seniordesigncapstoneproj-49cfd");
-                    var user = await firestore.GetUserByEmailAsync(email, token);
+                    var (user, docId) = await firestore.GetUserByEmailAsync(email, token);
 
                     System.Diagnostics.Debug.WriteLine(user != null
                         ? $"[LoadingPage] User found: {user.Email}"
                         : "[LoadingPage] User not found in Firestore");
 
-                    if (user != null)
+                    if (user != null && docId != null)
                     {
                         Application.Current.MainPage = new NavigationPage(new LandingPage(user));
                         return;

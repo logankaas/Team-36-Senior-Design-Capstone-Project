@@ -44,5 +44,11 @@ namespace SeniorCapstoneProject
         {
             //  await Navigation.PushAsync(new HelpPage(_user));
         }
+
+        private async void OnCalendarTapped(object sender, EventArgs e)
+        {
+            if (_user != null && !string.IsNullOrEmpty(_user.Email))
+                await Navigation.PushAsync(new CalendarPage(_user.Email));
+        }
     }
 }

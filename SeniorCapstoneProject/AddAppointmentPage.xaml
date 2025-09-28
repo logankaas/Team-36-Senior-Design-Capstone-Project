@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SeniorCapstoneProject.AddAppointmentPage"
+             Title="Add Appointment">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="24" Spacing="24">
+            <Label Text="Add Appointment"
+                   FontSize="32"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   TextColor="#FF8C87"/>
+
+            <!-- User Picker -->
+            <Label Text="Select User" FontSize="16" TextColor="Black"/>
+            <Picker x:Name="UserPicker"
+                    Title="Choose a user"
+                    ItemsSource="{Binding Users}"
+                    ItemDisplayBinding="{Binding Email}"
+                    SelectedItem="{Binding SelectedUser}" />
+
+            <!-- Doctor Picker -->
+            <Label Text="Select Doctor" FontSize="16" TextColor="Black"/>
+            <Picker x:Name="DoctorPicker"
+                    Title="Choose a doctor"
+                    ItemsSource="{Binding Doctors}"
+                    ItemDisplayBinding="{Binding Name}"
+                    SelectedItem="{Binding SelectedDoctor}" />
+
+            <!-- Date Picker -->
+            <Label Text="Select Date" FontSize="16" TextColor="Black"/>
+            <DatePicker x:Name="DatePicker"
+                        Date="{Binding SelectedDate}" />
+
+            <!-- Time Picker -->
+            <Label Text="Select Time" FontSize="16" TextColor="Black"/>
+            <Picker x:Name="TimePicker"
+                    Title="Choose a time slot"
+                    ItemsSource="{Binding AvailableTimes}"
+                    SelectedItem="{Binding SelectedTime}" />
+
+            <!-- Add Button -->
+            <Button Text="Add Appointment"
+                    Clicked="OnAddAppointmentClicked"
+                    BackgroundColor="#FF8C87"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    CornerRadius="8"
+                    HeightRequest="48"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

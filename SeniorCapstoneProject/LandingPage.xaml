@@ -145,7 +145,11 @@
         <Grid Grid.Row="3" Padding="0,24,0,0" HeightRequest="64" BackgroundColor="White"
               ColumnDefinitions="*,*,*,*">
             <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
-                <Image Source="emergency_call.png" HeightRequest="24" WidthRequest="24"/>
+                <Image Source="emergency_call.png" HeightRequest="24" WidthRequest="24">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnCalendarTapped"/>
+                    </Image.GestureRecognizers>
+                </Image>
                 <Label Text="Calendar" FontSize="10" TextColor="#A0A0A0"/>
             </VerticalStackLayout>
             <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center">

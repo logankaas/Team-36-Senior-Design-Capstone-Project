@@ -41,8 +41,8 @@ namespace SeniorCapstoneProject
             await SecureStorage.SetAsync("firebase_id_token", firebaseIdToken);
             await SecureStorage.SetAsync("user_email", email);
 
-            var user = await _firestoreService.GetUserByEmailAsync(email, firebaseIdToken);
-            if (user == null)
+            var (user, docId) = await _firestoreService.GetUserByEmailAsync(email, firebaseIdToken);
+            if (user == null || docId == null)
             {
                 LoginMessage.Text = "User profile not found in Firestore. Please try again or create a new account.";
                 LoginMessage.TextColor = Colors.Red;
