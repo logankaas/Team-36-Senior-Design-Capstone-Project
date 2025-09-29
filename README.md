@@ -110,21 +110,7 @@ By reducing manual workload, clinics can improve **staff efficiency** and **pati
 - Use **secure, encrypted channels** for all communications.  
 - Obtain **explicit patient consent** before collecting data.  
 - Ensure **AI transparency**: users will be informed they are interacting with an AI system.  
-- Avoid bias or unfair scheduling logic.  
-
----
-
-## 📜 Team Rules
-- Stay current on tasks to meet milestones.  
-- Notify the team at least 24 hours in advance if a deadline may be missed.  
-- Notify instructors and teammates of absences.  
-- Plagiarism will not be tolerated.  
-
----
-
-## 📚 References
-- Brainforge. (2024). *How AI appointment scheduling is changing healthcare.* [Brainforge](https://www.brainforge.ai/blog/how-ai-is-transforming-appointment-scheduling-in-healthcare)  
-- Paubox. (2024). *AI in healthcare privacy: Enhancing security or introducing new risks?* [Paubox](https://www.paubox.com)  
+- Avoid bias or unfair scheduling logic.    
 
 ---
 
