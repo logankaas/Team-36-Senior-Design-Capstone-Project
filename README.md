@@ -9,7 +9,7 @@ School of Information Technology
 
 ---
 
-## ✅ Current Status
+## Current Status
 - Contract signed and development scope defined
 - Research phase complete (Task 1)
 - Currently building the **core scheduling app** (Task 2)
@@ -21,7 +21,7 @@ School of Information Technology
 
 ---
 
-## 📖 Project Summary
+## Project Summary
 Patients at local doctors' offices often face long hold times when scheduling appointments over the phone. This results in frustration, abandoned calls, and additional stress for clinic staff.  
 
 Our solution: **My Health Assistant**, an **AI-powered chatbot** designed to automate and streamline medical appointment scheduling.  
@@ -34,7 +34,7 @@ The chatbot will allow patients to:
 
 ---
 
-## ❗ Problem Statement
+## Problem Statement
 - Patients face **long wait times** when scheduling via phone.  
 - Many calls are abandoned or redirected to other providers.  
 - Clinic staff are overwhelmed, resulting in **decreased productivity and poor service quality**.  
@@ -42,7 +42,7 @@ The chatbot will allow patients to:
 
 ---
 
-## 💡 Solution
+## Solution
 Our chatbot integrates with clinic scheduling systems to provide:
 - **Natural language scheduling** via an AI-powered interface  
 - **Provider, time slot, and location selection**  
@@ -53,21 +53,21 @@ By reducing manual workload, clinics can improve **staff efficiency** and **pati
 
 ---
 
-## 🎯 Project Objectives & Goals
+## Project Objectives & Goals
 - Reduce patient scheduling time  
 - Decrease staff call volume  
 - Improve patient satisfaction with self-service options  
 - Provide smarter scheduling powered by AI logic  
 
 **Major Features**:
-- 🤖 AI Chatbot  
-- 🩺 Provider & slot selection  
-- 📅 Confirmation & reminder system  
-- 📊 Admin dashboard  
+- AI Chatbot  
+- Provider & slot selection  
+- Confirmation & reminder system  
+- Admin dashboard  
 
 ---
 
-## 👥 Team Members & Responsibilities
+## Team Members & Responsibilities
 - **Ashley Curran** – Front-end chatbot interface, UI/UX design  
 - **Logan Kaas** – Chatbot logic development & integration  
 - **Caleb Stepp** – Back-end support, cloud infrastructure  
@@ -76,7 +76,7 @@ By reducing manual workload, clinics can improve **staff efficiency** and **pati
 
 ---
 
-## 📦 Technologies Used
+## Technologies Used
 - **Backend**: C#, Flask  
 - **AI Engine**: Dialogflow or Rasa  
 - **Hosting/Storage**: Firebase or Sqlite  
@@ -85,16 +85,17 @@ By reducing manual workload, clinics can improve **staff efficiency** and **pati
 
 ---
 
-## 📌 Project Scope
-✅ Deliver a **functional AI chatbot** that schedules appointments via natural language.  
-✅ Integrate chatbot with clinic scheduling systems.  
-⚠️ Excluded features (due to time constraints):  
+## Project Scope
+Deliver a **functional AI chatbot** that schedules appointments via natural language.  
+Integrate chatbot with clinic scheduling systems.  
+
+Excluded features (due to time constraints):  
 - Insurance verification  
 - Multi-language support  
 
 ---
 
-## 🗓️ Project Timeline
+## Project Timeline
 | Task | Description | Duration | Dates |
 |------|-------------|----------|-------|
 | 1 | Research AI app integration & design app flow | 2 weeks | 08/15/25 – 08/29/25 |
@@ -105,7 +106,7 @@ By reducing manual workload, clinics can improve **staff efficiency** and **pati
 
 ---
 
-## 🔒 Ethical Considerations
+## Ethical Considerations
 - Adhere to **HIPAA compliance** for patient data security.  
 - Use **secure, encrypted channels** for all communications.  
 - Obtain **explicit patient consent** before collecting data.  
@@ -114,7 +115,7 @@ By reducing manual workload, clinics can improve **staff efficiency** and **pati
 
 ---
 
-## 📬 Contact
+## Contact
 For questions or collaboration, reach out to any of the team members via their UC email addresses.  
 
 ---
