@@ -42,7 +42,7 @@
             <!-- Doctors -->
             <Border Background="#FF8C87" StrokeShape="RoundRectangle 8" Grid.Row="0" Grid.Column="0" HeightRequest="200" WidthRequest="200">
                 <Grid>
-                    <Label Text="Doctors"
+                    <Label Text="Chat"
                            FontSize="18"
                            FontAttributes="Bold"
                            TextColor="White"
