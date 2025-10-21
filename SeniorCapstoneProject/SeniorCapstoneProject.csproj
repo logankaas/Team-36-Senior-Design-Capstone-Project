@@ -115,6 +115,9 @@
 	  <Compile Update="AddAppointmentPage.xaml.cs">
 	    <DependentUpon>AddAppointmentPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="ChatPage.xaml.cs">
+	    <DependentUpon>ChatPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="LoadingPage.xaml.cs">
 	    <DependentUpon>LoadingPage.xaml</DependentUpon>
 	  </Compile>
@@ -134,6 +137,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="CalendarPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="ChatPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="LoadingPage.xaml">

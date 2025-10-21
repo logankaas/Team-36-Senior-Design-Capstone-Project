@@ -27,7 +27,7 @@ namespace SeniorCapstoneProject
 
         private async void OnChatClicked(object sender, EventArgs e)
         {
-            // await Navigation.PushAsync(new ChatPage(_user));
+            await Navigation.PushAsync(new ChatPage(_user));
         }
 
         private async void OnHistoryClicked(object sender, EventArgs e)

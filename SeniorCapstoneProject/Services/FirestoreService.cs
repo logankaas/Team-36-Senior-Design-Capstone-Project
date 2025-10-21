@@ -1,9 +1,6 @@
-﻿using SeniorCapstoneProject.ViewModels;
-using SeniorCapstoneProject.Models;
-using System.Net.Http;
+﻿using SeniorCapstoneProject.Models;
 using System.Net.Http.Json;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace SeniorCapstoneProject
 {
@@ -110,11 +107,15 @@ namespace SeniorCapstoneProject
                 {
                     DoctorName = new { stringValue = appointment.DoctorName },
                     Date = new { timestampValue = appointment.Date.ToString("o") },
-                    TimeRange = new { stringValue = appointment.TimeRange }
+                    TimeRange = new { stringValue = appointment.TimeRange },
+                    UserEmail = new { stringValue = appointment.UserEmail }
                 }
             };
 
             var response = await _httpClient.PostAsJsonAsync(url, payload);
+            var responseContent = await response.Content.ReadAsStringAsync();
+            System.Diagnostics.Debug.WriteLine($"Firestore response: {response.StatusCode} - {responseContent}");
+
             return response.IsSuccessStatusCode;
         }
 

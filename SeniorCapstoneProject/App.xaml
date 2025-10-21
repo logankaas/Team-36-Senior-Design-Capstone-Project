@@ -2,12 +2,24 @@
 <Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:SeniorCapstoneProject"
+             xmlns:converters="clr-namespace:SeniorCapstoneProject.Converters"
              x:Class="SeniorCapstoneProject.App">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+                <ResourceDictionary>
+                    <converters:BoolToBubbleStyleConverter x:Key="BoolToBubbleStyleConverter"/>
+                    <converters:BoolToColorConverter x:Key="BoolToColorConverter"/>
+                    <converters:BubbleAlignmentConverter x:Key="BubbleAlignmentConverter"/>
+                    <converters:BubbleMarginConverter x:Key="BubbleMarginConverter"/>
+                    <converters:BubbleStyleConverter x:Key="BubbleStyleConverter"/>
+                    <converters:BubbleColumnConverter x:Key="BubbleColumnConverter"/>
+                    <converters:BubbleTextColorConverter x:Key="BubbleTextColorConverter"/>
+                    <converters:InverseBoolConverter x:Key="InverseBoolConverter"/>
+                    <converters:BubbleColorConverter x:Key="BubbleColorConverter"/>
+                </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
