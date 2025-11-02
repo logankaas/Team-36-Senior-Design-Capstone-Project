@@ -15,6 +15,8 @@ namespace SeniorCapstoneProject
             _httpClient = new HttpClient();
         }
 
+        #region Get User by Email
+
         public async Task<(User? user, string? docId)> GetUserByEmailAsync(string email, string idToken)
         {
             var url = $"https://firestore.googleapis.com/v1/projects/{_projectId}/databases/(default)/documents:runQuery";
@@ -71,6 +73,10 @@ namespace SeniorCapstoneProject
             return (null, null);
         }
 
+        #endregion Get User by Email
+
+        #region Save New Patient
+
         public async Task<bool> SaveUserAsync(User user, string idToken)
         {
             var url = $"https://firestore.googleapis.com/v1/projects/{_projectId}/databases/(default)/documents/users?documentId={user.Username}";
@@ -95,6 +101,10 @@ namespace SeniorCapstoneProject
             return response.IsSuccessStatusCode;
         }
 
+        #endregion Save New Patient
+
+        #region Save Appointment
+
         public async Task<bool> SaveAppointmentAsync(Appointment appointment, string idToken)
         {
             var url = $"https://firestore.googleapis.com/v1/projects/{_projectId}/databases/(default)/documents/appointments";
@@ -118,6 +128,10 @@ namespace SeniorCapstoneProject
 
             return response.IsSuccessStatusCode;
         }
+
+        #endregion Save Appointment
+
+        #region Get Appointments 
 
         public async Task<List<Appointment>> GetAppointmentsAsync(string idToken)
         {
@@ -156,6 +170,10 @@ namespace SeniorCapstoneProject
             return appointments;
         }
 
+        #endregion Get Appointments
+
+        #region Save Appointment for User
+
         public async Task<bool> SaveAppointmentForUserAsync(Appointment appointment, string userDocId, string idToken)
         {
             var url = $"https://firestore.googleapis.com/v1/projects/{_projectId}/databases/(default)/documents/users/{userDocId}/appointments";
@@ -177,6 +195,10 @@ namespace SeniorCapstoneProject
             System.Diagnostics.Debug.WriteLine($"Firestore response: {responseContent}");
             return response.IsSuccessStatusCode;
         }
+
+        #endregion Save Appointment for User
+
+        #region Get Appointments for User
 
         public async Task<List<Appointment>> GetAppointmentsForUserAsync(string userDocId, string idToken)
         {
@@ -215,5 +237,75 @@ namespace SeniorCapstoneProject
             }
             return appointments;
         }
+
+        #endregion Get Appointments for User
+
+        #region Medication Methods
+
+        #region Get Medications
+
+        public async Task<List<Medication>> GetMedicationsForUserAsync(string userEmail, string idToken)
+        {
+            var url = $"https://firestore.googleapis.com/v1/projects/{_projectId}/databases/(default)/documents/medications";
+            _httpClient.DefaultRequestHeaders.Authorization =
+                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", idToken);
+
+            var response = await _httpClient.GetAsync(url);
+            var medications = new List<Medication>();
+
+            if (!response.IsSuccessStatusCode)
+                return medications;
+
+            var json = await response.Content.ReadAsStringAsync();
+            var doc = JsonDocument.Parse(json);
+
+            if (doc.RootElement.TryGetProperty("documents", out var docs))
+            {
+                foreach (var item in docs.EnumerateArray())
+                {
+                    var fields = item.GetProperty("fields");
+                    var email = fields.GetProperty("UserEmail").GetProperty("stringValue").GetString();
+                    if (email != userEmail) continue;
+
+                    medications.Add(new Medication
+                    {
+                        Name = fields.GetProperty("Name").GetProperty("stringValue").GetString(),
+                        Dosage = fields.GetProperty("Dosage").GetProperty("stringValue").GetString(),
+                        Instructions = fields.GetProperty("Instructions").GetProperty("stringValue").GetString(),
+                        UserEmail = email
+                    });
+                }
+            }
+            return medications;
+        }
+
+        #endregion Get Medications
+
+        #region Save Medication
+
+        public async Task<bool> SaveMedicationAsync(Medication medication, string idToken)
+        {
+            var url = $"https://firestore.googleapis.com/v1/projects/{_projectId}/databases/(default)/documents/medications";
+            _httpClient.DefaultRequestHeaders.Authorization =
+                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", idToken);
+
+            var payload = new
+            {
+                fields = new
+                {
+                    Name = new { stringValue = medication.Name },
+                    Dosage = new { stringValue = medication.Dosage },
+                    Instructions = new { stringValue = medication.Instructions },
+                    UserEmail = new { stringValue = medication.UserEmail }
+                }
+            };
+
+            var response = await _httpClient.PostAsJsonAsync(url, payload);
+            return response.IsSuccessStatusCode;
+        }
+
+        #endregion Save Medication
+
+        #endregion Medication Methods
     }
 }

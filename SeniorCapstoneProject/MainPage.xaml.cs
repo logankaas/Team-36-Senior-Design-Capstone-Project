@@ -1,5 +1,6 @@
 ﻿using Microsoft.Maui.Controls;
 using Microsoft.Maui.Storage;
+using System;
 
 namespace SeniorCapstoneProject
 {
@@ -8,10 +9,50 @@ namespace SeniorCapstoneProject
         private readonly FirebaseAuthService _firebaseAuthService = new FirebaseAuthService("AIzaSyA_WhqRi9PKiFcsswW543zMBTr3OFyQsLs");
         private readonly FirestoreService _firestoreService = new FirestoreService("seniordesigncapstoneproj-49cfd");
 
+        private const string RememberMeKey = "remember_me";
+        private const string RememberMeTimestampKey = "remember_me_timestamp";
+        private static readonly TimeSpan RememberMeDuration = TimeSpan.FromDays(7); // Duration for remebering user login
+
         public MainPage()
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
+
+            // Check for remembered login on page appearing
+            this.Appearing += MainPage_Appearing;
+        }
+
+        private async void MainPage_Appearing(object sender, EventArgs e)
+        {
+            // Check if remember me is set and within duration
+            bool rememberMe = Preferences.Get(RememberMeKey, false);
+            long timestampTicks = Preferences.Get(RememberMeTimestampKey, 0L);
+
+            if (rememberMe && timestampTicks > 0)
+            {
+                DateTime savedTime = new DateTime(timestampTicks, DateTimeKind.Utc);
+                if (DateTime.UtcNow - savedTime < RememberMeDuration)
+                {
+                    // Try to get stored credentials
+                    var email = await SecureStorage.GetAsync("user_email");
+                    var idToken = await SecureStorage.GetAsync("firebase_id_token");
+                    if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(idToken))
+                    {
+                        var (user, docId) = await _firestoreService.GetUserByEmailAsync(email, idToken);
+                        if (user != null && docId != null)
+                        {
+                            await Navigation.PushAsync(new LandingPage(user));
+                            return;
+                        }
+                    }
+                }
+                else
+                {
+                    // Expired, clear remember me
+                    Preferences.Set(RememberMeKey, false);
+                    Preferences.Set(RememberMeTimestampKey, 0L);
+                }
+            }
         }
 
         private async void OnLoginClicked(object sender, EventArgs e)
@@ -40,6 +81,18 @@ namespace SeniorCapstoneProject
 
             await SecureStorage.SetAsync("firebase_id_token", firebaseIdToken);
             await SecureStorage.SetAsync("user_email", email);
+
+            // Handle Remember Me
+            if (RememberMeCheckBox.IsChecked)
+            {
+                Preferences.Set(RememberMeKey, true);
+                Preferences.Set(RememberMeTimestampKey, DateTime.UtcNow.Ticks);
+            }
+            else
+            {
+                Preferences.Set(RememberMeKey, false);
+                Preferences.Set(RememberMeTimestampKey, 0L);
+            }
 
             var (user, docId) = await _firestoreService.GetUserByEmailAsync(email, firebaseIdToken);
             if (user == null || docId == null)

@@ -21,6 +21,11 @@
                 </Grid.ColumnDefinitions>
             </Grid>
 
+            <HorizontalStackLayout>
+                <CheckBox x:Name="RememberMeCheckBox" Color="#FF8C87" BackgroundColor="#FF8C87" />
+                <Label Text="Remember login" VerticalOptions="Center" />
+            </HorizontalStackLayout>
+
             <Button Text="Login" x:Name="LoginButton" Clicked="OnLoginClicked" HorizontalOptions="Fill" Background="#FF8C87" />
 
             <Label x:Name="LoginMessage" Text="" TextColor="Red" IsVisible="False" HorizontalOptions="Center" />

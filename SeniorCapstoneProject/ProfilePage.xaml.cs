@@ -49,5 +49,18 @@ namespace SeniorCapstoneProject
             ProfileMessage.TextColor = Colors.Green;
             ProfileMessage.IsVisible = true;
         }
+
+        private async void OnLogoutClicked(object sender, EventArgs e)
+        {
+            // Remove secure storage keys for login
+            SecureStorage.Remove("firebase_id_token");
+            SecureStorage.Remove("user_email");
+
+            Preferences.Set("remember_me", false);
+            Preferences.Set("remember_me_timestamp", 0L);
+
+            // Navigate back to login page and clear navigation stack
+            Application.Current.MainPage = new NavigationPage(new MainPage());
+        }
     }
 }

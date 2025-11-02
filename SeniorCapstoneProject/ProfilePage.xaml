@@ -21,8 +21,9 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
             </Grid>
-            <Button Text="Save Changes" Clicked="OnSaveClicked" Background="#FF8C87"/>
             <Label x:Name="ProfileMessage" Text="" TextColor="Red" IsVisible="False" HorizontalOptions="Center"/>
+            <Button Text="Save Changes" Clicked="OnSaveClicked" Background="#FF8C87"/>
+            <Button Text="Log Out" Clicked="OnLogoutClicked" BackgroundColor="#FF8C87" TextColor="White" Margin="0,20,0,0"/>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

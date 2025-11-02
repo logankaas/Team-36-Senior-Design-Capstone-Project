@@ -18,6 +18,10 @@ namespace SeniorCapstoneProject
         private DateTime _pendingDate;
         private string _pendingTime;
 
+        private enum ChatContext { None, Appointment, Medication }
+        private ChatContext _currentContext = ChatContext.None;
+        private string _selectedMedication = null;
+
         public ChatPage(User user)
         {
             InitializeComponent();
@@ -49,7 +53,8 @@ namespace SeniorCapstoneProject
             await Task.Delay(1200); // Simulate bot thinking
 
             var botResponse = await GetBotResponseAsync(userText);
-            Messages.Add(new ChatMessage { Text = botResponse, IsUser = false });
+            if (!string.IsNullOrEmpty(botResponse))
+                Messages.Add(new ChatMessage { Text = botResponse, IsUser = false });
 
             IsBotLoading = false;
             OnPropertyChanged(nameof(IsBotLoading));
@@ -59,13 +64,13 @@ namespace SeniorCapstoneProject
         {
             userText = userText.ToLower();
 
-            // Doctor selection
+            // Appointment flow
             if (userText.Contains("schedule") || userText.Contains("appointment"))
             {
-                _pendingDoctor = "Dr. Markins"; // You can prompt for doctor selection or use a default
+                _currentContext = ChatContext.Appointment;
+                _pendingDoctor = "Dr. Markins";
                 _pendingDate = DateTime.Today.AddDays(1);
 
-                // Show available times
                 var availableTimes = new List<string> { "9:00 AM", "10:00 AM", "2:00 PM", "3:30 PM" };
                 Messages.Add(new ChatMessage
                 {
@@ -75,13 +80,12 @@ namespace SeniorCapstoneProject
                     DoctorName = _pendingDoctor,
                     IsTimeSelection = true
                 });
-                return null; // No bot text, handled by message above
+                return null;
             }
 
-            // Confirmation after time selection
-            if (!string.IsNullOrEmpty(_pendingTime))
+            // Appointment time confirmation
+            if (_currentContext == ChatContext.Appointment && !string.IsNullOrEmpty(_pendingTime))
             {
-                // Confirm and save appointment
                 var idToken = await SecureStorage.GetAsync("firebase_id_token");
                 var firestoreService = new FirestoreService("seniordesigncapstoneproj-49cfd");
                 var appointment = new Appointment
@@ -92,10 +96,43 @@ namespace SeniorCapstoneProject
                     UserEmail = _user.Email
                 };
                 var success = await firestoreService.SaveAppointmentAsync(appointment, idToken);
-                _pendingTime = null; // Reset
+                _pendingTime = null;
+                _currentContext = ChatContext.None;
                 return success
-                    ? $"Your appointment with {_pendingDoctor} on {_pendingDate:MMM dd} at {_pendingTime} is confirmed and saved. See you then!"
+                    ? $"Your appointment with {_pendingDoctor} on {_pendingDate:MMM dd} at {appointment.TimeRange} is confirmed and saved. See you then!"
                     : "Sorry, there was a problem saving your appointment. Please try again.";
+            }
+
+            // Medication flow
+            if (userText.Contains("medicine") || userText.Contains("prescription"))
+            {
+                _currentContext = ChatContext.Medication;
+                var idToken = await SecureStorage.GetAsync("firebase_id_token");
+                var firestoreService = new FirestoreService("seniordesigncapstoneproj-49cfd");
+                var medications = await firestoreService.GetMedicationsForUserAsync(_user.Email, idToken);
+
+                if (medications.Count == 0)
+                    return "You have no medications on file.";
+
+                var medNames = medications.Select(m => m.Name).ToList();
+                Messages.Add(new ChatMessage
+                {
+                    Text = "Here are your current prescriptions. Tap one to request a refill or see details:",
+                    IsUser = false,
+                    AvailableTimes = medNames,
+                    IsTimeSelection = true
+                });
+
+                return null;
+            }
+
+            // Medication selection confirmation
+            if (_currentContext == ChatContext.Medication && !string.IsNullOrEmpty(_selectedMedication))
+            {
+                var medName = _selectedMedication;
+                _selectedMedication = null;
+                _currentContext = ChatContext.None;
+                return $"Refill request for {medName} received. Your provider will review and notify you when it's ready.";
             }
 
             // Fun responses
@@ -105,17 +142,11 @@ namespace SeniorCapstoneProject
             if (userText.Contains("hello") || userText.Contains("hi"))
                 return $"Hello {_user.FirstName ?? "there"}! How can I help you today?";
 
-            if (userText.Contains("schedule") || userText.Contains("appointment"))
-                return "To schedule an appointment, please tell me your preferred doctor and date. Or type 'next available' for the soonest slot.";
-
             if (userText.Contains("upcoming") || userText.Contains("next appointment"))
                 return "Your next appointment is with Dr. Markins on June 4th at 15:00. Would you like to reschedule or get directions?";
 
             if (userText.Contains("past") || userText.Contains("previous appointment"))
                 return "Your last appointment was with Dr. Markins on June 1st at 10:00. Need a summary or follow-up?";
-
-            if (userText.Contains("medicine") || userText.Contains("prescription"))
-                return "You have a prescription for Amoxicillin. Would you like to request a refill or see details?";
 
             if (userText.Contains("test") || userText.Contains("lab"))
                 return "Your last lab test was a blood panel on May 28th. Results are normal. Want to schedule another test?";
@@ -135,26 +166,59 @@ namespace SeniorCapstoneProject
             return "I didn't understand that but I'm here to help! You can ask me about your health, appointments, or just say hi.";
         }
 
-        public void OnTimeSelected(string selectedTime)
+        public void OnTimeSelected(string selectedOption)
         {
-            _pendingTime = selectedTime;
+            if (_currentContext == ChatContext.Medication)
+            {
+                _selectedMedication = selectedOption;
+                Messages.Add(new ChatMessage
+                {
+                    Text = $"Refill request for {_selectedMedication} is being processed...",
+                    IsUser = true
+                });
+
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    IsBotLoading = true;
+                    OnPropertyChanged(nameof(IsBotLoading));
+                    await Task.Delay(1000);
+                    var botResponse = await GetBotResponseAsync(""); // Triggers medication confirmation
+                    if (!string.IsNullOrEmpty(botResponse))
+                        Messages.Add(new ChatMessage { Text = botResponse, IsUser = false });
+                    IsBotLoading = false;
+                    OnPropertyChanged(nameof(IsBotLoading));
+                });
+                return;
+            }
+
+            if (_currentContext == ChatContext.Appointment)
+            {
+                _pendingTime = selectedOption;
+                Messages.Add(new ChatMessage
+                {
+                    Text = $"You selected {_pendingTime}. Confirming...",
+                    IsUser = true
+                });
+
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    IsBotLoading = true;
+                    OnPropertyChanged(nameof(IsBotLoading));
+                    await Task.Delay(1000);
+                    var botResponse = await GetBotResponseAsync(""); // Triggers appointment confirmation
+                    if (!string.IsNullOrEmpty(botResponse))
+                        Messages.Add(new ChatMessage { Text = botResponse, IsUser = false });
+                    IsBotLoading = false;
+                    OnPropertyChanged(nameof(IsBotLoading));
+                });
+                return;
+            }
+
+            // Fallback if context not set
             Messages.Add(new ChatMessage
             {
-                Text = $"You selected {_pendingTime}. Confirming...",
-                IsUser = true
-            });
-
-            // Trigger bot confirmation and save
-            Device.BeginInvokeOnMainThread(async () =>
-            {
-                IsBotLoading = true;
-                OnPropertyChanged(nameof(IsBotLoading));
-                await Task.Delay(1000);
-                var botResponse = await GetBotResponseAsync(""); // Trigger the confirmation
-                if (!string.IsNullOrEmpty(botResponse))
-                    Messages.Add(new ChatMessage { Text = botResponse, IsUser = false });
-                IsBotLoading = false;
-                OnPropertyChanged(nameof(IsBotLoading));
+                Text = $"You selected {selectedOption}.",
+                IsUser = false
             });
         }
 
