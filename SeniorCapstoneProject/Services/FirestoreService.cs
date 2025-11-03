@@ -66,6 +66,9 @@ namespace SeniorCapstoneProject
                         FirstName = fields.GetProperty("firstName").GetProperty("stringValue").GetString() ?? "",
                         LastName = fields.GetProperty("lastName").GetProperty("stringValue").GetString() ?? "",
                         Username = fields.GetProperty("username").GetProperty("stringValue").GetString() ?? "",
+                        DoctorId = fields.TryGetProperty("DoctorId", out var doctorIdProp)
+                            ? doctorIdProp.GetProperty("stringValue").GetString()
+                            : null
                     };
                     return (user, docId);
                 }
@@ -87,7 +90,8 @@ namespace SeniorCapstoneProject
                     email = new { stringValue = user.Email },
                     firstName = new { stringValue = user.FirstName },
                     lastName = new { stringValue = user.LastName },
-                    username = new { stringValue = user.Username }
+                    username = new { stringValue = user.Username },
+                    DoctorId = new { stringValue = user.DoctorId ?? "" }
                 }
             };
 
@@ -105,29 +109,29 @@ namespace SeniorCapstoneProject
 
         #region Save Appointment
 
-        public async Task<bool> SaveAppointmentAsync(Appointment appointment, string idToken)
-        {
-            var url = $"https://firestore.googleapis.com/v1/projects/{_projectId}/databases/(default)/documents/appointments";
-            _httpClient.DefaultRequestHeaders.Authorization =
-                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", idToken);
+        //public async Task<bool> SaveAppointmentAsync(Appointment appointment, string idToken)
+        //{
+        //    var url = $"https://firestore.googleapis.com/v1/projects/{_projectId}/databases/(default)/documents/appointments";
+        //    _httpClient.DefaultRequestHeaders.Authorization =
+        //        new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", idToken);
 
-            var payload = new
-            {
-                fields = new
-                {
-                    DoctorName = new { stringValue = appointment.DoctorName },
-                    Date = new { timestampValue = appointment.Date.ToString("o") },
-                    TimeRange = new { stringValue = appointment.TimeRange },
-                    UserEmail = new { stringValue = appointment.UserEmail }
-                }
-            };
+        //    var payload = new
+        //    {
+        //        fields = new
+        //        {
+        //            DoctorName = new { stringValue = appointment.DoctorName },
+        //            Date = new { timestampValue = appointment.Date.ToString("o") },
+        //            TimeRange = new { stringValue = appointment.TimeRange },
+        //            UserEmail = new { stringValue = appointment.UserEmail }
+        //        }
+        //    };
 
-            var response = await _httpClient.PostAsJsonAsync(url, payload);
-            var responseContent = await response.Content.ReadAsStringAsync();
-            System.Diagnostics.Debug.WriteLine($"Firestore response: {response.StatusCode} - {responseContent}");
+        //    var response = await _httpClient.PostAsJsonAsync(url, payload);
+        //    var responseContent = await response.Content.ReadAsStringAsync();
+        //    System.Diagnostics.Debug.WriteLine($"Firestore response: {response.StatusCode} - {responseContent}");
 
-            return response.IsSuccessStatusCode;
-        }
+        //    return response.IsSuccessStatusCode;
+        //}
 
         #endregion Save Appointment
 
@@ -152,17 +156,21 @@ namespace SeniorCapstoneProject
                 foreach (var item in docs.EnumerateArray())
                 {
                     var fields = item.GetProperty("fields");
-                    var doctorName = fields.GetProperty("DoctorName").GetProperty("stringValue").GetString();
-                    var dateStr = fields.GetProperty("Date").GetProperty("timestampValue").GetString();
-                    var timeRange = fields.GetProperty("TimeRange").GetProperty("stringValue").GetString();
+                    var doctorId = fields.GetProperty("doctorId").GetProperty("stringValue").GetString();
+                    var doctorName = fields.GetProperty("doctorName").GetProperty("stringValue").GetString();
+                    var dateStr = fields.GetProperty("date").GetProperty("timestampValue").GetString();
+                    var timeRange = fields.GetProperty("timeRange").GetProperty("stringValue").GetString();
+                    var userEmail = fields.GetProperty("userEmail").GetProperty("stringValue").GetString();
 
                     if (DateTime.TryParse(dateStr, out var date))
                     {
                         appointments.Add(new Appointment
                         {
+                            DoctorId = doctorId,
                             DoctorName = doctorName,
                             Date = date,
-                            TimeRange = timeRange
+                            TimeRange = timeRange,
+                            UserEmail = userEmail
                         });
                     }
                 }
@@ -184,15 +192,42 @@ namespace SeniorCapstoneProject
             {
                 fields = new
                 {
-                    DoctorName = new { stringValue = appointment.DoctorName },
-                    Date = new { timestampValue = appointment.Date.ToUniversalTime().ToString("yyyy-MM-dd'T'HH:mm:ss.fff'Z'") },
-                    TimeRange = new { stringValue = appointment.TimeRange }
+                    doctorId = new { stringValue = appointment.DoctorId },
+                    doctorName = new { stringValue = appointment.DoctorName },
+                    date = new { timestampValue = appointment.Date.ToUniversalTime().ToString("yyyy-MM-dd'T'HH:mm:ss.fff'Z'") },
+                    timeRange = new { stringValue = appointment.TimeRange },
+                    userEmail = new { stringValue = appointment.UserEmail }
                 }
             };
 
             var response = await _httpClient.PostAsJsonAsync(url, payload);
             var responseContent = await response.Content.ReadAsStringAsync();
             System.Diagnostics.Debug.WriteLine($"Firestore response: {responseContent}");
+            return response.IsSuccessStatusCode;
+        }
+
+        public async Task<bool> SaveAppointmentAsync(Appointment appointment, string idToken)
+        {
+            var url = $"https://firestore.googleapis.com/v1/projects/{_projectId}/databases/(default)/documents/appointments";
+            _httpClient.DefaultRequestHeaders.Authorization =
+                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", idToken);
+
+            var payload = new
+            {
+                fields = new
+                {
+                    doctorId = new { stringValue = appointment.DoctorId },
+                    doctorName = new { stringValue = appointment.DoctorName },
+                    date = new { timestampValue = appointment.Date.ToUniversalTime().ToString("yyyy-MM-dd'T'HH:mm:ss.fff'Z'") },
+                    timeRange = new { stringValue = appointment.TimeRange },
+                    userEmail = new { stringValue = appointment.UserEmail }
+                }
+            };
+
+            var response = await _httpClient.PostAsJsonAsync(url, payload);
+            var responseContent = await response.Content.ReadAsStringAsync();
+            System.Diagnostics.Debug.WriteLine($"Firestore response: {response.StatusCode} - {responseContent}");
+
             return response.IsSuccessStatusCode;
         }
 
@@ -307,5 +342,87 @@ namespace SeniorCapstoneProject
         #endregion Save Medication
 
         #endregion Medication Methods
+
+        #region Get Doctors
+
+        public async Task<Doctor?> GetDoctorByIdAsync(string doctorId, string idToken)
+        {
+            var url = $"https://firestore.googleapis.com/v1/projects/{_projectId}/databases/(default)/documents/doctors/{doctorId}";
+            _httpClient.DefaultRequestHeaders.Authorization =
+                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", idToken);
+
+            var response = await _httpClient.GetAsync(url);
+            if (!response.IsSuccessStatusCode)
+                return null;
+
+            var json = await response.Content.ReadAsStringAsync();
+            var doc = JsonDocument.Parse(json);
+
+            if (doc.RootElement.TryGetProperty("fields", out var fields))
+            {
+                return new Doctor
+                {
+                    Id = doctorId,
+                    Name = fields.GetProperty("name").GetProperty("stringValue").GetString() ?? "",
+                    Specialty = fields.GetProperty("specialty").GetProperty("stringValue").GetString() ?? "",
+                    Description = fields.GetProperty("description").GetProperty("stringValue").GetString() ?? "",
+                    ImagePath = fields.GetProperty("imagePath").GetProperty("stringValue").GetString() ?? ""
+                };
+            }
+            return null;
+        }
+
+        public async Task<Doctor?> GetDoctorByNameAsync(string doctorName, string idToken)
+        {
+            var url = $"https://firestore.googleapis.com/v1/projects/{_projectId}/databases/(default)/documents:runQuery";
+            var query = new
+            {
+                structuredQuery = new
+                {
+                    from = new[] { new { collectionId = "doctors" } },
+                    where = new
+                    {
+                        fieldFilter = new
+                        {
+                            field = new { fieldPath = "name" },
+                            op = "EQUAL",
+                            value = new { stringValue = doctorName }
+                        }
+                    },
+                    limit = 1
+                }
+            };
+
+            var request = new HttpRequestMessage(HttpMethod.Post, url)
+            {
+                Content = new StringContent(JsonSerializer.Serialize(query), System.Text.Encoding.UTF8, "application/json")
+            };
+            request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", idToken);
+
+            var response = await _httpClient.SendAsync(request);
+            if (!response.IsSuccessStatusCode)
+                return null;
+
+            var json = await response.Content.ReadAsStringAsync();
+            var doc = JsonDocument.Parse(json);
+
+            foreach (var result in doc.RootElement.EnumerateArray())
+            {
+                if (result.TryGetProperty("document", out var document))
+                {
+                    var fields = document.GetProperty("fields");
+                    return new Doctor
+                    {
+                        Name = fields.GetProperty("name").GetProperty("stringValue").GetString() ?? "",
+                        Specialty = fields.GetProperty("specialty").GetProperty("stringValue").GetString() ?? "",
+                        Description = fields.GetProperty("description").GetProperty("stringValue").GetString() ?? "",
+                        ImagePath = fields.GetProperty("imagePath").GetProperty("stringValue").GetString() ?? ""
+                    };
+                }
+            }
+            return null;
+        }
+
+        #endregion Get Doctors
     }
 }

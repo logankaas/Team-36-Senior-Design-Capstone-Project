@@ -1,22 +1,23 @@
 ﻿using SeniorCapstoneProject.ViewModels;
+using SeniorCapstoneProject.Models;
 
 namespace SeniorCapstoneProject
 {
     public partial class CalendarPage : ContentPage
     {
-        private readonly string _userEmail;
+        private readonly User _user;
         private readonly CalendarViewModel _viewModel;
 
-        public CalendarPage(string userEmail)
+        public CalendarPage(User user, string idToken)
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
 
-            _userEmail = userEmail;
-            _viewModel = new CalendarViewModel(_userEmail);
+            _user = user;
+            _viewModel = new CalendarViewModel(_user, idToken);
             BindingContext = _viewModel;
 
-            if (_userEmail == "kaaslc@mail.uc.edu")
+            if (_user.Email == "kaaslc@mail.uc.edu")
             {
                 var addAppointmentToolbar = new ToolbarItem
                 {

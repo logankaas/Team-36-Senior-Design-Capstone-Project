@@ -10,7 +10,7 @@
                    FontSize="32"
                    FontAttributes="Bold"
                    HorizontalOptions="Center"
-                   TextColor="#FF8C87"/>
+                   TextColor="#21B8FF"/>
 
             <!-- User Picker -->
             <Label Text="Select User" FontSize="16" TextColor="Black"/>
@@ -43,7 +43,7 @@
             <!-- Add Button -->
             <Button Text="Add Appointment"
                     Clicked="OnAddAppointmentClicked"
-                    BackgroundColor="#FF8C87"
+                    BackgroundColor="#21B8FF"
                     TextColor="White"
                     FontAttributes="Bold"
                     CornerRadius="8"

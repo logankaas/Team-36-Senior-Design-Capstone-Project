@@ -1,5 +1,6 @@
 ﻿using Microsoft.Maui.Controls;
 using Microsoft.Maui.Storage;
+using Microsoft.Maui.ApplicationModel;
 using System;
 
 namespace SeniorCapstoneProject
@@ -12,6 +13,7 @@ namespace SeniorCapstoneProject
         private const string RememberMeKey = "remember_me";
         private const string RememberMeTimestampKey = "remember_me_timestamp";
         private static readonly TimeSpan RememberMeDuration = TimeSpan.FromDays(7); // Duration for remebering user login
+        private readonly string version = VersionTracking.CurrentVersion;
 
         public MainPage()
         {

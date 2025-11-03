@@ -24,9 +24,9 @@
                 </Grid.ColumnDefinitions>
             </Grid>
 
-            <Button Text="Register" Clicked="OnRegisterClicked" HorizontalOptions="Fill" BackgroundColor="#FF8C87" />
+            <Button Text="Register" Clicked="OnRegisterClicked" HorizontalOptions="Fill" BackgroundColor="#21B8FF" />
             <Label x:Name="RegisterMessage" Text="" TextColor="Red" IsVisible="False" HorizontalOptions="Center" />
-            <Button Text="Back to Login" Clicked="OnBackToLoginClicked" HorizontalOptions="Center" BackgroundColor="#FF8C87" />
+            <Button Text="Back to Login" Clicked="OnBackToLoginClicked" HorizontalOptions="Center" BackgroundColor="#21B8FF" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

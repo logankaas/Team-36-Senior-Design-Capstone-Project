@@ -7,16 +7,9 @@ using System.Linq;
 
 namespace SeniorCapstoneProject.ViewModels
 {
-    public class CalendarViewModel : INotifyPropertyChanged
+    public class LandingPageViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-
-        private Doctor _doctor;
-        public Doctor Doctor
-        {
-            get => _doctor;
-            set { _doctor = value; OnPropertyChanged(); }
-        }
 
         public ObservableCollection<Appointment> Appointments { get; set; } = new();
 
@@ -24,7 +17,7 @@ namespace SeniorCapstoneProject.ViewModels
         private readonly User _user;
         private readonly string _idToken;
 
-        public CalendarViewModel(User user, string idToken)
+        public LandingPageViewModel(User user, string idToken)
         {
             _user = user;
             _idToken = idToken;
@@ -32,11 +25,6 @@ namespace SeniorCapstoneProject.ViewModels
 
         public async Task InitializeAsync()
         {
-            // Fetch doctor details
-            if (!string.IsNullOrEmpty(_user.DoctorId))
-                Doctor = await _firestoreService.GetDoctorByIdAsync(_user.DoctorId, _idToken);
-
-            // Fetch appointments for this user
             var allAppointments = await _firestoreService.GetAppointmentsAsync(_idToken);
             var userAppointments = allAppointments
                 .Where(a => a.UserEmail == _user.Email)
@@ -47,8 +35,6 @@ namespace SeniorCapstoneProject.ViewModels
             foreach (var appt in userAppointments)
                 Appointments.Add(appt);
 
-            // Notify UI
-            OnPropertyChanged(nameof(Doctor));
             OnPropertyChanged(nameof(Appointments));
         }
 

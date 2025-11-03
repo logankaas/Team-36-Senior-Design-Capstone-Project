@@ -46,6 +46,7 @@ namespace SeniorCapstoneProject
 
                 var appointment = new Appointment
                 {
+                    DoctorId = selectedDoctor.Id,
                     DoctorName = selectedDoctor.Name,
                     Date = selectedDate,
                     TimeRange = selectedTime,

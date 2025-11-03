@@ -2,26 +2,63 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SeniorCapstoneProject.CalendarPage"
-             Title="Appointments Calendar">
+             Title="Appointments Calendar"
+             BackgroundColor="Transparent">
 
-    <VerticalStackLayout Padding="20" Spacing="20">
-        <Label Text="Your Appointments"
-               FontSize="28"
-               FontAttributes="Bold"
-               HorizontalOptions="Center"/>
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#E3E6FF" Offset="0.0"/>
+            <GradientStop Color="#F8E6F6" Offset="1.0"/>
+        </LinearGradientBrush>
+    </ContentPage.Background>
 
-        <CollectionView ItemsSource="{Binding Appointments}" Margin="16">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Frame BorderColor="#FF8C87" CornerRadius="12" Padding="16" Margin="0,8" HasShadow="True" BackgroundColor="#FFF8F6">
-                        <VerticalStackLayout>
-                            <Label Text="{Binding DoctorName}" FontSize="20" FontAttributes="Bold" TextColor="#FF8C87"/>
-                            <Label Text="{Binding Date, StringFormat='{}{0:MMMM dd, yyyy}'}" FontSize="16" TextColor="Black"/>
-                            <Label Text="{Binding TimeRange}" FontSize="16" TextColor="#A0A0A0"/>
-                        </VerticalStackLayout>
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </VerticalStackLayout>
+    <ScrollView>
+        <VerticalStackLayout Padding="24,40,24,24" Spacing="28">
+
+            <!-- Doctor Card -->
+            <Frame CornerRadius="32" Padding="0" HasShadow="True" BackgroundColor="#F6F4FF">
+                <Grid Padding="24" ColumnDefinitions="Auto,*,Auto" RowDefinitions="Auto,Auto,Auto">
+                    <!-- Doctor Image -->
+                    <Image Source="{Binding Doctor.ImagePath}" HeightRequest="90" WidthRequest="90" Aspect="AspectFill" 
+                           VerticalOptions="Start" HorizontalOptions="Start" Margin="0,0,16,0"
+                           Grid.RowSpan="3"/>
+
+                    <!-- Doctor Name & Specialty -->
+                    <VerticalStackLayout Grid.Column="1" Spacing="2">
+                        <Label Text="{Binding Doctor.Name}" FontSize="24" FontAttributes="Bold" TextColor="#22223B"/>
+                        <Label Text="{Binding Doctor.Specialty}" FontSize="16" TextColor="#7B7B93"/>
+                    </VerticalStackLayout>
+
+                    <!-- Contact Icons -->
+                    <HorizontalStackLayout Grid.Column="2" Spacing="12" VerticalOptions="Start">
+                        <Image Source="icon_call.png" HeightRequest="28" WidthRequest="28"/>
+                        <Image Source="icon_message.png" HeightRequest="28" WidthRequest="28"/>
+                        <Image Source="icon_video.png" HeightRequest="28" WidthRequest="28"/>
+                    </HorizontalStackLayout>
+
+                    <!-- Description -->
+                    <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
+                           Text="{Binding Doctor.Description}"
+                           FontSize="14" TextColor="#7B7B93" Margin="0,12,0,0"/>
+                </Grid>
+            </Frame>
+
+            <!-- Scheduled Appointments Section -->
+            <Label Text="Your Scheduled Appointments" FontSize="20" FontAttributes="Bold" TextColor="#22223B" Margin="0,24,0,0"/>
+            <CollectionView ItemsSource="{Binding Appointments}" Margin="0,0,0,12">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BorderColor="#21B8FF" CornerRadius="16" Padding="16" Margin="0,8" HasShadow="True" BackgroundColor="#FFF8F6">
+                            <VerticalStackLayout>
+                                <Label Text="{Binding DoctorName}" FontSize="18" FontAttributes="Bold" TextColor="#21B8FF"/>
+                                <Label Text="{Binding Date, StringFormat='{}{0:MMMM dd, yyyy}'}" FontSize="15" TextColor="Black"/>
+                                <Label Text="{Binding TimeRange}" FontSize="15" TextColor="#A0A0A0"/>
+                                <Label Text="{Binding Location}" FontSize="14" TextColor="#7B7B93"/>
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

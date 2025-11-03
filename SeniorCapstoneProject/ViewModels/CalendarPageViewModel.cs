@@ -3,11 +3,10 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using SeniorCapstoneProject.Models;
 using System.Threading.Tasks;
-using System.Linq;
 
 namespace SeniorCapstoneProject.ViewModels
 {
-    public class CalendarViewModel : INotifyPropertyChanged
+    public class CalendarPageViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -21,35 +20,30 @@ namespace SeniorCapstoneProject.ViewModels
         public ObservableCollection<Appointment> Appointments { get; set; } = new();
 
         private readonly FirestoreService _firestoreService = new FirestoreService("seniordesigncapstoneproj-49cfd");
-        private readonly User _user;
-        private readonly string _idToken;
 
-        public CalendarViewModel(User user, string idToken)
+        public CalendarPageViewModel(User user, string idToken)
         {
-            _user = user;
-            _idToken = idToken;
+            LoadDoctorAndAppointments(user, idToken);
         }
 
-        public async Task InitializeAsync()
+        private async void LoadDoctorAndAppointments(User user, string idToken)
         {
-            // Fetch doctor details
-            if (!string.IsNullOrEmpty(_user.DoctorId))
-                Doctor = await _firestoreService.GetDoctorByIdAsync(_user.DoctorId, _idToken);
+            // Fetch doctor details using DoctorId
+            if (!string.IsNullOrEmpty(user.DoctorId))
+            {
+                Doctor = await _firestoreService.GetDoctorByIdAsync(user.DoctorId, idToken);
+            }
 
-            // Fetch appointments for this user
-            var allAppointments = await _firestoreService.GetAppointmentsAsync(_idToken);
+            // Fetch all appointments from the top-level collection, filter by userEmail
+            var allAppointments = await _firestoreService.GetAppointmentsAsync(idToken);
             var userAppointments = allAppointments
-                .Where(a => a.UserEmail == _user.Email)
+                .Where(a => a.UserEmail == user.Email)
                 .OrderBy(a => a.Date)
                 .ToList();
 
             Appointments.Clear();
             foreach (var appt in userAppointments)
                 Appointments.Add(appt);
-
-            // Notify UI
-            OnPropertyChanged(nameof(Doctor));
-            OnPropertyChanged(nameof(Appointments));
         }
 
         protected void OnPropertyChanged([CallerMemberName] string name = null)

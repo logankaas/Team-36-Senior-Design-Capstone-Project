@@ -17,6 +17,7 @@ namespace SeniorCapstoneProject
         private string _pendingDoctor;
         private DateTime _pendingDate;
         private string _pendingTime;
+        private string _assignedDoctorName;
 
         private enum ChatContext { None, Appointment, Medication }
         private ChatContext _currentContext = ChatContext.None;
@@ -36,6 +37,17 @@ namespace SeniorCapstoneProject
                 Text = "👋 Hi! I'm your health assistant. Ask me about appointments, prescriptions, tests, or just say hello!",
                 IsUser = false
             });
+
+            // Get the assigned user doctor name
+            _ = LoadAssignedDoctorNameAsync();
+        }
+
+        private async Task LoadAssignedDoctorNameAsync()
+        {
+            var idToken = await SecureStorage.GetAsync("firebase_id_token");
+            var firestoreService = new FirestoreService("seniordesigncapstoneproj-49cfd");
+            var doctor = await firestoreService.GetDoctorByIdAsync(_user.DoctorId, idToken);
+            _assignedDoctorName = doctor?.Name ?? "your doctor";
         }
 
         private async void OnSendClicked(object sender, EventArgs e)
@@ -65,13 +77,58 @@ namespace SeniorCapstoneProject
             userText = userText.ToLower();
 
             // Appointment flow
-            if (userText.Contains("schedule") || userText.Contains("appointment"))
+            if (userText.Contains("schedule")
+                || userText.Contains("appointment")
+                || userText.Contains("schedule a appointment")
+                || userText.Contains("schedule an appointment")
+                || userText.Contains("book"))
             {
                 _currentContext = ChatContext.Appointment;
-                _pendingDoctor = "Dr. Markins";
+                _pendingDoctor = _assignedDoctorName;
                 _pendingDate = DateTime.Today.AddDays(1);
 
-                var availableTimes = new List<string> { "9:00 AM", "10:00 AM", "2:00 PM", "3:30 PM" };
+                var allTimes = new List<string> {
+                    "8:00 AM",
+                    "8:30 AM",
+                    "9:00 AM",
+                    "9:30 AM",
+                    "10:00 AM",
+                    "10:30 AM",
+                    "11:00 AM",
+                    "11:30 AM",
+                    "12:00 PM",
+                    "12:30 PM",
+                    "1:00 PM",
+                    "1:30 PM",
+                    "2:00 PM",
+                    "2:30 PM",
+                    "3:00 PM",
+                    "3:30 PM",
+                    "4:00 PM",
+                    "4:30 PM",
+                    "5:00 PM",
+                    "5:30 PM",
+                    "6:00 PM",
+                    "6:30 PM",
+                    "7:00 PM",
+                    "7:30 PM",
+                    "8:00 PM"
+                };
+
+                // Get booked times for this doctor and date
+                var idToken = await SecureStorage.GetAsync("firebase_id_token");
+                var firestoreService = new FirestoreService("seniordesigncapstoneproj-49cfd");
+                var allAppointments = await firestoreService.GetAppointmentsAsync(idToken);
+
+                var bookedTimes = allAppointments
+                    .Where(a =>
+                        a.DoctorId == _user.DoctorId &&
+                        a.Date.Date == _pendingDate.Date)
+                    .Select(a => a.TimeRange)
+                    .ToList();
+
+                var availableTimes = allTimes.Except(bookedTimes).ToList();
+
                 Messages.Add(new ChatMessage
                 {
                     Text = $"Select an available time for {_pendingDoctor} on {_pendingDate:MMM dd}:",
@@ -80,6 +137,7 @@ namespace SeniorCapstoneProject
                     DoctorName = _pendingDoctor,
                     IsTimeSelection = true
                 });
+
                 return null;
             }
 
@@ -88,13 +146,19 @@ namespace SeniorCapstoneProject
             {
                 var idToken = await SecureStorage.GetAsync("firebase_id_token");
                 var firestoreService = new FirestoreService("seniordesigncapstoneproj-49cfd");
+
+                // Get the Firestore document ID (doctorId) for the doctor
+                var doctor = await firestoreService.GetDoctorByIdAsync(_user.DoctorId, idToken);
+
                 var appointment = new Appointment
                 {
-                    DoctorName = _pendingDoctor,
+                    DoctorId = _user.DoctorId,
+                    DoctorName = doctor.Name,
                     Date = _pendingDate,
                     TimeRange = _pendingTime,
                     UserEmail = _user.Email
                 };
+
                 var success = await firestoreService.SaveAppointmentAsync(appointment, idToken);
                 _pendingTime = null;
                 _currentContext = ChatContext.None;

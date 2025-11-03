@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:SeniorCapstoneProject.Controls"
              x:Class="SeniorCapstoneProject.MainPage"
              Title="Login">
 
@@ -22,17 +23,19 @@
             </Grid>
 
             <HorizontalStackLayout>
-                <CheckBox x:Name="RememberMeCheckBox" Color="#FF8C87" BackgroundColor="#FF8C87" />
+                <CheckBox x:Name="RememberMeCheckBox" Color="#21B8FF" BackgroundColor="#21B8FF" />
                 <Label Text="Remember login" VerticalOptions="Center" />
             </HorizontalStackLayout>
 
-            <Button Text="Login" x:Name="LoginButton" Clicked="OnLoginClicked" HorizontalOptions="Fill" Background="#FF8C87" />
+            <Button Text="Login" x:Name="LoginButton" Clicked="OnLoginClicked" HorizontalOptions="Fill" Background="#21B8FF" />
 
             <Label x:Name="LoginMessage" Text="" TextColor="Red" IsVisible="False" HorizontalOptions="Center" />
 
-            <Button Text="Create New Account" Clicked="OnCreateAccountClicked" HorizontalOptions="Center" Background="#FF8C87" />
+            <Button Text="Create New Account" Clicked="OnCreateAccountClicked" HorizontalOptions="Center" Background="#21B8FF" />
 
-            <Button Text="Forgot Password?" Clicked="OnForgotPasswordClicked" BackgroundColor="Transparent" TextColor="#FF8C87" />
+            <Button Text="Forgot Password?" Clicked="OnForgotPasswordClicked" BackgroundColor="Transparent" TextColor="#21B8FF" />
+
+            <controls:VersionLabel />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

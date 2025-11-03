@@ -5,7 +5,7 @@
              Title="Chatbot"
              x:Name="ChatPageRoot">
     <ContentPage.Resources>
-        <Color x:Key="UserBubbleColor">#4F8CFF</Color>
+        <Color x:Key="UserBubbleColor">#21B8FF</Color>
         <Color x:Key="BotBubbleColor">#F2F4F8</Color>
         <Style x:Key="UserBubbleStyle" TargetType="Frame">
             <Setter Property="BackgroundColor" Value="{StaticResource UserBubbleColor}"/>
@@ -55,7 +55,7 @@
                                             <Button Text="{Binding .}"
                                                     Command="{Binding BindingContext.SelectTimeCommand, Source={x:Reference ChatPageRoot}}"
                                                     CommandParameter="{Binding .}"
-                                                    BackgroundColor="#4F8CFF"
+                                                    BackgroundColor="#21B8FF"
                                                     TextColor="White"
                                                     FontAttributes="Bold"
                                                     Padding="0,12"
@@ -92,7 +92,7 @@
             <Button Text="Send"
                     Grid.Column="1"
                     Clicked="OnSendClicked"
-                    BackgroundColor="#4F8CFF"
+                    BackgroundColor="#21B8FF"
                     TextColor="White"
                     FontAttributes="Bold"
                     Padding="20,0"
