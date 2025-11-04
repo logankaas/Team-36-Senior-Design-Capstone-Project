@@ -68,5 +68,14 @@ namespace SeniorCapstoneProject
                 await Navigation.PushAsync(new CalendarPage(_user, idToken));
             }
         }
+
+        private async void OnMedicationsClicked(object sender, EventArgs e)
+        {
+            if (_user != null && !string.IsNullOrEmpty(_user.Email))
+            {
+                var idToken = await SecureStorage.GetAsync("firebase_id_token");
+                await Navigation.PushAsync(new MedicationsPage(_user.Email, idToken));
+            }
+        }
     }
 }

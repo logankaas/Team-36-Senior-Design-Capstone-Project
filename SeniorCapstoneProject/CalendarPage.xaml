@@ -48,9 +48,9 @@
             <CollectionView ItemsSource="{Binding Appointments}" Margin="0,0,0,12">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame BorderColor="#21B8FF" CornerRadius="16" Padding="16" Margin="0,8" HasShadow="True" BackgroundColor="#FFF8F6">
+                        <Frame BorderColor="#2E91FF" CornerRadius="16" Padding="16" Margin="0,8" HasShadow="True" BackgroundColor="#FFF8F6">
                             <VerticalStackLayout>
-                                <Label Text="{Binding DoctorName}" FontSize="18" FontAttributes="Bold" TextColor="#21B8FF"/>
+                                <Label Text="{Binding DoctorName}" FontSize="18" FontAttributes="Bold" TextColor="#2E91FF"/>
                                 <Label Text="{Binding Date, StringFormat='{}{0:MMMM dd, yyyy}'}" FontSize="15" TextColor="Black"/>
                                 <Label Text="{Binding TimeRange}" FontSize="15" TextColor="#A0A0A0"/>
                                 <Label Text="{Binding Location}" FontSize="14" TextColor="#7B7B93"/>

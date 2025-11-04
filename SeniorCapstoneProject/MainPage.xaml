@@ -7,7 +7,7 @@
 
     <ScrollView>
         <VerticalStackLayout Padding="30,0" Spacing="25" VerticalOptions="CenterAndExpand">
-            <Image Source="hospital.png" HeightRequest="120" Aspect="AspectFit" />
+            <Image Source="mha_hero_logo.png" HeightRequest="120" Aspect="AspectFit" />
             <Label Text="Login" FontSize="32" FontAttributes="Bold" HorizontalOptions="Center" />
 
             <Entry x:Name="EmailEntry" Placeholder="Email" Keyboard="Email" />
@@ -23,17 +23,17 @@
             </Grid>
 
             <HorizontalStackLayout>
-                <CheckBox x:Name="RememberMeCheckBox" Color="#21B8FF" BackgroundColor="#21B8FF" />
+                <CheckBox x:Name="RememberMeCheckBox" Color="#2E91FF" BackgroundColor="Transparent" />
                 <Label Text="Remember login" VerticalOptions="Center" />
             </HorizontalStackLayout>
 
-            <Button Text="Login" x:Name="LoginButton" Clicked="OnLoginClicked" HorizontalOptions="Fill" Background="#21B8FF" />
+            <Button Text="Login" x:Name="LoginButton" Clicked="OnLoginClicked" HorizontalOptions="Fill" Background="#2E91FF" />
 
             <Label x:Name="LoginMessage" Text="" TextColor="Red" IsVisible="False" HorizontalOptions="Center" />
 
-            <Button Text="Create New Account" Clicked="OnCreateAccountClicked" HorizontalOptions="Center" Background="#21B8FF" />
+            <Button Text="Create New Account" Clicked="OnCreateAccountClicked" HorizontalOptions="Center" Background="#2E91FF" />
 
-            <Button Text="Forgot Password?" Clicked="OnForgotPasswordClicked" BackgroundColor="Transparent" TextColor="#21B8FF" />
+            <Button Text="Forgot Password?" Clicked="OnForgotPasswordClicked" BackgroundColor="Transparent" TextColor="#2E91FF" />
 
             <controls:VersionLabel />
         </VerticalStackLayout>

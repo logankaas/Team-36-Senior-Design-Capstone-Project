@@ -27,9 +27,9 @@
 		<ApplicationId>com.companyname.seniorcapstoneproject</ApplicationId>
 
 		<!-- Versions -->
-    <ApplicationDisplayVersion>1.0.1</ApplicationDisplayVersion>
-    <ApplicationVersion>1</ApplicationVersion>
-    <WindowsPackageVersion>1.0.1.0</WindowsPackageVersion>
+		<ApplicationDisplayVersion>1.0.1</ApplicationDisplayVersion>
+		<ApplicationVersion>1</ApplicationVersion>
+		<WindowsPackageVersion>1.0.1.0</WindowsPackageVersion>
 
 		<!-- To develop, package, and publish an app to the Microsoft Store, see: https://aka.ms/MauiTemplateUnpackaged -->
 		<WindowsPackageType>None</WindowsPackageType>
@@ -52,23 +52,23 @@
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
 		<MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="300,185" />
-    <MauiImage Update="Resources\Images\person.svg" Resize="True" BaseSize="300,185" />
-    <MauiImage Update="Resources\Images\eye.svg" Resize="True" BaseSize="300,185" />
-    <MauiImage Update="Resources\Images\eyeslash.svg" Resize="True" BaseSize="300,185" />
-    <MauiImage Include="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\doctor.png" />
-    <MauiImage Include="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\emergency_call.png" />
+		<MauiImage Update="Resources\Images\person.svg" Resize="True" BaseSize="300,185" />
+		<MauiImage Update="Resources\Images\eye.svg" Resize="True" BaseSize="300,185" />
+		<MauiImage Update="Resources\Images\eyeslash.svg" Resize="True" BaseSize="300,185" />
+		<MauiImage Include="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\doctor.png" />
+		<MauiImage Include="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\emergency_call.png" />
 
-    <!-- Images: Login -->
-    <MauiImage Include="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\hospital.png" />
-    <MauiImage Include="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\medical_report.png" />
+		<!-- Images: Login -->
+		<MauiImage Include="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\hospital.png" />
+		<MauiImage Include="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\medical_report.png" />
 
-    <!-- Images: Home -->
-    <MauiImage Include="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\medicine.png" />
-    <MauiImage Include="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\nurse.png" />
-    <MauiImage Include="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\prescription.png" />
-    <MauiImage Include="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\sample_tube.png" />
-    <MauiImage Include="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\sources.png" />
-    <MauiImage Include="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\your_health.png" />
+		<!-- Images: Home -->
+		<MauiImage Include="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\medicine.png" />
+		<MauiImage Include="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\nurse.png" />
+		<MauiImage Include="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\prescription.png" />
+		<MauiImage Include="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\sample_tube.png" />
+		<MauiImage Include="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\sources.png" />
+		<MauiImage Include="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\your_health.png" />
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
@@ -78,23 +78,23 @@
 	</ItemGroup>
 
 	<ItemGroup>
-    <None Remove="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\Doctor.png" />
-    <None Remove="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\emergency_call.png" />
-    <None Remove="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\hospital.png" />
-    <None Remove="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\medical_report.png" />
-    <None Remove="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\medicine.png" />
-    <None Remove="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\nurse.png" />
-    <None Remove="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\prescription.png" />
-    <None Remove="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\sample_tube.png" />
-    <None Remove="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\sources.png" />
-    <None Remove="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\your_health.png" />
-  </ItemGroup>
+		<None Remove="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\Doctor.png" />
+		<None Remove="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\emergency_call.png" />
+		<None Remove="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\hospital.png" />
+		<None Remove="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\medical_report.png" />
+		<None Remove="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\medicine.png" />
+		<None Remove="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\nurse.png" />
+		<None Remove="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\prescription.png" />
+		<None Remove="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\sample_tube.png" />
+		<None Remove="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\sources.png" />
+		<None Remove="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Color\PNG\your_health.png" />
+	</ItemGroup>
 
 	<ItemGroup>
-	  <None Include="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\.DS_Store" />
-	  <None Include="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Flat\.DS_Store" />
-	  <None Include="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Line\.DS_Store" />
-	  <None Include="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Line\SVG\.DS_Store" />
+		<None Include="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\.DS_Store" />
+		<None Include="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Flat\.DS_Store" />
+		<None Include="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Line\.DS_Store" />
+		<None Include="Resources\Images\0030-medical-health-icons\DrawKit Vector Medical Health Icons\DrawKit Medical - Line\SVG\.DS_Store" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -113,48 +113,54 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="AddAppointmentPage.xaml.cs">
-	    <DependentUpon>AddAppointmentPage.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="ChatPage.xaml.cs">
-	    <DependentUpon>ChatPage.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="LoadingPage.xaml.cs">
-	    <DependentUpon>LoadingPage.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="ProfilePage.xaml.cs">
-	    <DependentUpon>ProfilePage.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="LandingPage.xaml.cs">
-	    <DependentUpon>LandingPage.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="NewAccount.xaml.cs">
-	    <DependentUpon>NewAccount.xaml</DependentUpon>
-	  </Compile>
+		<Compile Update="MedicationsPage.xaml.cs">
+			<DependentUpon>MedicationsPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="AddAppointmentPage.xaml.cs">
+			<DependentUpon>AddAppointmentPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="ChatPage.xaml.cs">
+			<DependentUpon>ChatPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="LoadingPage.xaml.cs">
+			<DependentUpon>LoadingPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="ProfilePage.xaml.cs">
+			<DependentUpon>ProfilePage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="LandingPage.xaml.cs">
+			<DependentUpon>LandingPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="NewAccount.xaml.cs">
+			<DependentUpon>NewAccount.xaml</DependentUpon>
+		</Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="AddAppointmentPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="CalendarPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="ChatPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="LoadingPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="ProfilePage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="LandingPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="NewAccount.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
+		<MauiXaml Update="MedicationsPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="AddAppointmentPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="CalendarPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="ChatPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="LoadingPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="ProfilePage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="LandingPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="NewAccount.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 	</ItemGroup>
 
 </Project>

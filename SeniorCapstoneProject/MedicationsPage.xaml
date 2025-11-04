@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SeniorCapstoneProject.MedicationsPage"
+             Title="Medications"
+             BackgroundColor="#F8FAFC">
+
+    <VerticalStackLayout Padding="24,16" Spacing="18">
+        <Label Text="Your Medications"
+               FontSize="28"
+               FontAttributes="Bold"
+               TextColor="#22223B"
+               Margin="0,0,0,8"/>
+        <CollectionView ItemsSource="{Binding Medications}"
+                        EmptyView="No medications found."
+                        SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame CornerRadius="16" Padding="16" Margin="0,0,0,12" BackgroundColor="White" HasShadow="True">
+                        <VerticalStackLayout Spacing="6">
+                            <Label Text="{Binding Name}" FontSize="20" FontAttributes="Bold" TextColor="#3A86FF"/>
+                            <Label Text="{Binding Dosage}" FontSize="16" TextColor="#22223B"/>
+                            <Label Text="{Binding Instructions}" FontSize="15" TextColor="#4A4E69"/>
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Color="#3A86FF"/>
+    </VerticalStackLayout>
+</ContentPage>

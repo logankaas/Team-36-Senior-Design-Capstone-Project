@@ -1,6 +1,7 @@
 ﻿using SeniorCapstoneProject.Models;
 using System.Net.Http.Json;
 using System.Text.Json;
+using Google.Cloud.Firestore;
 
 namespace SeniorCapstoneProject
 {
@@ -280,6 +281,41 @@ namespace SeniorCapstoneProject
         #region Get Medications
 
         public async Task<List<Medication>> GetMedicationsForUserAsync(string userEmail, string idToken)
+        {
+            var url = $"https://firestore.googleapis.com/v1/projects/{_projectId}/databases/(default)/documents/medications";
+            _httpClient.DefaultRequestHeaders.Authorization =
+                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", idToken);
+
+            var response = await _httpClient.GetAsync(url);
+            var medications = new List<Medication>();
+
+            if (!response.IsSuccessStatusCode)
+                return medications;
+
+            var json = await response.Content.ReadAsStringAsync();
+            var doc = JsonDocument.Parse(json);
+
+            if (doc.RootElement.TryGetProperty("documents", out var docs))
+            {
+                foreach (var item in docs.EnumerateArray())
+                {
+                    var fields = item.GetProperty("fields");
+                    var email = fields.GetProperty("UserEmail").GetProperty("stringValue").GetString();
+                    if (email != userEmail) continue;
+
+                    medications.Add(new Medication
+                    {
+                        Name = fields.GetProperty("Name").GetProperty("stringValue").GetString(),
+                        Dosage = fields.GetProperty("Dosage").GetProperty("stringValue").GetString(),
+                        Instructions = fields.GetProperty("Instructions").GetProperty("stringValue").GetString(),
+                        UserEmail = email
+                    });
+                }
+            }
+            return medications;
+        }
+
+        public async Task<List<Medication>> GetMedicationsByUserEmailAsync(string userEmail, string idToken)
         {
             var url = $"https://firestore.googleapis.com/v1/projects/{_projectId}/databases/(default)/documents/medications";
             _httpClient.DefaultRequestHeaders.Authorization =
