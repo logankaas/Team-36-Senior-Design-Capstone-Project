@@ -16,6 +16,69 @@ namespace SeniorCapstoneProject
             _httpClient = new HttpClient();
         }
 
+        //#region Get User by Email
+
+        //public async Task<(User? user, string? docId)> GetUserByEmailAsync(string email, string idToken)
+        //{
+        //    var url = $"https://firestore.googleapis.com/v1/projects/{_projectId}/databases/(default)/documents:runQuery";
+
+        //    var query = new
+        //    {
+        //        structuredQuery = new
+        //        {
+        //            from = new[] { new { collectionId = "users" } },
+        //            where = new
+        //            {
+        //                fieldFilter = new
+        //                {
+        //                    field = new { fieldPath = "email" },
+        //                    op = "EQUAL",
+        //                    value = new { stringValue = email }
+        //                }
+        //            },
+        //            limit = 1
+        //        }
+        //    };
+
+        //    var request = new HttpRequestMessage(HttpMethod.Post, url)
+        //    {
+        //        Content = new StringContent(JsonSerializer.Serialize(query), System.Text.Encoding.UTF8, "application/json")
+        //    };
+        //    request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", idToken);
+
+        //    var response = await _httpClient.SendAsync(request);
+        //    if (!response.IsSuccessStatusCode)
+        //        return (null, null);
+
+        //    var json = await response.Content.ReadAsStringAsync();
+        //    var doc = JsonDocument.Parse(json);
+
+        //    foreach (var result in doc.RootElement.EnumerateArray())
+        //    {
+        //        if (result.TryGetProperty("document", out var document))
+        //        {
+        //            var fields = document.GetProperty("fields");
+        //            var name = document.GetProperty("name").GetString();
+        //            var docId = name?.Split('/').Last();
+
+        //            var user = new User
+        //            {
+        //                Email = fields.GetProperty("email").GetProperty("stringValue").GetString() ?? "",
+        //                FirstName = fields.GetProperty("firstName").GetProperty("stringValue").GetString() ?? "",
+        //                LastName = fields.GetProperty("lastName").GetProperty("stringValue").GetString() ?? "",
+        //                Username = fields.GetProperty("username").GetProperty("stringValue").GetString() ?? "",
+        //                DoctorId = fields.TryGetProperty("DoctorId", out var doctorIdProp)
+        //                    ? doctorIdProp.GetProperty("stringValue").GetString()
+        //                    : null
+        //            };
+        //            return (user, docId);
+        //        }
+        //    }
+        //    return (null, null);
+        //}
+
+        //#endregion Get User by Email
+
         #region Get User by Email
 
         public async Task<(User? user, string? docId)> GetUserByEmailAsync(string email, string idToken)
@@ -63,14 +126,32 @@ namespace SeniorCapstoneProject
 
                     var user = new User
                     {
-                        Email = fields.GetProperty("email").GetProperty("stringValue").GetString() ?? "",
-                        FirstName = fields.GetProperty("firstName").GetProperty("stringValue").GetString() ?? "",
-                        LastName = fields.GetProperty("lastName").GetProperty("stringValue").GetString() ?? "",
-                        Username = fields.GetProperty("username").GetProperty("stringValue").GetString() ?? "",
-                        DoctorId = fields.TryGetProperty("DoctorId", out var doctorIdProp)
-                            ? doctorIdProp.GetProperty("stringValue").GetString()
-                            : null
+                        Email = fields.TryGetProperty("email", out var emailProp) ? emailProp.GetProperty("stringValue").GetString() ?? "" : "",
+                        FirstName = fields.TryGetProperty("firstName", out var firstNameProp) ? firstNameProp.GetProperty("stringValue").GetString() ?? "" : "",
+                        LastName = fields.TryGetProperty("lastName", out var lastNameProp) ? lastNameProp.GetProperty("stringValue").GetString() ?? "" : "",
+                        Username = fields.TryGetProperty("username", out var usernameProp) ? usernameProp.GetProperty("stringValue").GetString() ?? "" : "",
+                        DoctorId = fields.TryGetProperty("DoctorId", out var doctorIdProp) ? doctorIdProp.GetProperty("stringValue").GetString() ?? "" : "",
+                        Address = fields.TryGetProperty("address", out var addressProp) ? addressProp.GetProperty("stringValue").GetString() ?? "" : "",
+                        City = fields.TryGetProperty("city", out var cityProp) ? cityProp.GetProperty("stringValue").GetString() ?? "" : "",
+                        ZipCode = fields.TryGetProperty("zipCode", out var zipProp) ? zipProp.GetProperty("stringValue").GetString() ?? "" : "",
+                        PhoneNumber = fields.TryGetProperty("phoneNumber", out var phoneProp) ? phoneProp.GetProperty("stringValue").GetString() ?? "" : "",
+                        DateOfBirth = fields.TryGetProperty("dateOfBirth", out var dobProp) && dobProp.TryGetProperty("timestampValue", out var dobVal) && DateTime.TryParse(dobVal.GetString(), out var dob) ? dob : default,
+                        Gender = fields.TryGetProperty("gender", out var genderProp) ? genderProp.GetProperty("stringValue").GetString() ?? "" : "",
+                        EmergencyContactName = fields.TryGetProperty("emergencyContactName", out var ecnProp) ? ecnProp.GetProperty("stringValue").GetString() ?? "" : "",
+                        EmergencyContactPhone = fields.TryGetProperty("emergencyContactPhone", out var ecpProp) ? ecpProp.GetProperty("stringValue").GetString() ?? "" : "",
+                        InsuranceNumberId = fields.TryGetProperty("insuranceNumberId", out var insNumProp) ? insNumProp.GetProperty("stringValue").GetString() ?? "" : "",
+                        InsuranceCompany = fields.TryGetProperty("insuranceCompany", out var insCompProp) ? insCompProp.GetProperty("stringValue").GetString() ?? "" : "",
+                        InsuranceExpiryDate = fields.TryGetProperty("insuranceExpiryDate", out var insExpProp) && insExpProp.TryGetProperty("timestampValue", out var insExpVal) && DateTime.TryParse(insExpVal.GetString(), out var insExp) ? insExp : default,
+                        DoctorOfficeAddress = fields.TryGetProperty("doctorOfficeAddress", out var docAddrProp) ? docAddrProp.GetProperty("stringValue").GetString() ?? "" : "",
+                        DoctorOfficeCity = fields.TryGetProperty("doctorOfficeCity", out var docCityProp) ? docCityProp.GetProperty("stringValue").GetString() ?? "" : "",
+                        DoctorOfficeZipCode = fields.TryGetProperty("doctorOfficeZipCode", out var docZipProp) ? docZipProp.GetProperty("stringValue").GetString() ?? "" : "",
+                        DoctorOfficePhone = fields.TryGetProperty("doctorOfficePhone", out var docPhoneProp) ? docPhoneProp.GetProperty("stringValue").GetString() ?? "" : "",
+                        BloodType = fields.TryGetProperty("bloodType", out var bloodProp) ? bloodProp.GetProperty("stringValue").GetString() ?? "" : "",
+                        Allergies = fields.TryGetProperty("allergies", out var allergiesProp) ? allergiesProp.GetProperty("stringValue").GetString() ?? "" : "",
+                        ChronicConditions = fields.TryGetProperty("chronicConditions", out var chronicProp) ? chronicProp.GetProperty("stringValue").GetString() ?? "" : "",
+                        Notes = fields.TryGetProperty("notes", out var notesProp) ? notesProp.GetProperty("stringValue").GetString() ?? "" : ""
                     };
+
                     return (user, docId);
                 }
             }
@@ -78,6 +159,35 @@ namespace SeniorCapstoneProject
         }
 
         #endregion Get User by Email
+
+        //#region Save New Patient
+
+        //public async Task<bool> SaveUserAsync(User user, string idToken)
+        //{
+        //    var url = $"https://firestore.googleapis.com/v1/projects/{_projectId}/databases/(default)/documents/users?documentId={user.Username}";
+        //    var doc = new
+        //    {
+        //        fields = new
+        //        {
+        //            email = new { stringValue = user.Email },
+        //            firstName = new { stringValue = user.FirstName },
+        //            lastName = new { stringValue = user.LastName },
+        //            username = new { stringValue = user.Username },
+        //            DoctorId = new { stringValue = user.DoctorId ?? "" }
+        //        }
+        //    };
+
+        //    var request = new HttpRequestMessage(HttpMethod.Post, url)
+        //    {
+        //        Content = new StringContent(JsonSerializer.Serialize(doc), System.Text.Encoding.UTF8, "application/json")
+        //    };
+        //    request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", idToken);
+
+        //    var response = await _httpClient.SendAsync(request);
+        //    return response.IsSuccessStatusCode;
+        //}
+
+        //#endregion Save New Patient
 
         #region Save New Patient
 
@@ -92,7 +202,27 @@ namespace SeniorCapstoneProject
                     firstName = new { stringValue = user.FirstName },
                     lastName = new { stringValue = user.LastName },
                     username = new { stringValue = user.Username },
-                    DoctorId = new { stringValue = user.DoctorId ?? "" }
+                    DoctorId = new { stringValue = user.DoctorId ?? "" },
+                    address = new { stringValue = user.Address ?? "" },
+                    city = new { stringValue = user.City ?? "" },
+                    zipCode = new { stringValue = user.ZipCode ?? "" },
+                    phoneNumber = new { stringValue = user.PhoneNumber ?? "" },
+                    dateOfBirth = new { timestampValue = user.DateOfBirth != default ? user.DateOfBirth.ToUniversalTime().ToString("yyyy-MM-dd'T'HH:mm:ss.fff'Z'") : "" },
+                    gender = new { stringValue = user.Gender ?? "" },
+                    emergencyContactName = new { stringValue = user.EmergencyContactName ?? "" },
+                    emergencyContactPhone = new { stringValue = user.EmergencyContactPhone ?? "" },
+                    insuranceNumberId = new { stringValue = user.InsuranceNumberId ?? "" },
+                    insuranceCompany = new { stringValue = user.InsuranceCompany ?? "" },
+                    insuranceExpiryDate = new { timestampValue = user.InsuranceExpiryDate != default ? user.InsuranceExpiryDate.ToUniversalTime().ToString("yyyy-MM-dd'T'HH:mm:ss.fff'Z'") : "" },
+                    doctorOfficeAddress = new { stringValue = user.DoctorOfficeAddress ?? "" },
+                    doctorOfficeCity = new { stringValue = user.DoctorOfficeCity ?? "" },
+                    doctorOfficeZipCode = new { stringValue = user.DoctorOfficeZipCode ?? "" },
+                    doctorOfficePhone = new { stringValue = user.DoctorOfficePhone ?? "" },
+                    bloodType = new { stringValue = user.BloodType ?? "" },
+                    allergies = new { stringValue = user.Allergies ?? "" },
+                    chronicConditions = new { stringValue = user.ChronicConditions ?? "" },
+                    medications = new { stringValue = user.Medications ?? "" },
+                    notes = new { stringValue = user.Notes ?? "" }
                 }
             };
 
@@ -279,6 +409,32 @@ namespace SeniorCapstoneProject
         #region Medication Methods
 
         #region Get Medications
+
+        public async Task<Medication?> GetMedicationByPathAsync(string medicationPath, string idToken)
+        {
+            var url = $"https://firestore.googleapis.com/v1/projects/{_projectId}/databases/(default)/documents{medicationPath}";
+            _httpClient.DefaultRequestHeaders.Authorization =
+                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", idToken);
+
+            var response = await _httpClient.GetAsync(url);
+            if (!response.IsSuccessStatusCode)
+                return null;
+
+            var json = await response.Content.ReadAsStringAsync();
+            var doc = JsonDocument.Parse(json);
+
+            if (doc.RootElement.TryGetProperty("fields", out var fields))
+            {
+                return new Medication
+                {
+                    Name = fields.TryGetProperty("Name", out var nameProp) ? nameProp.GetProperty("stringValue").GetString() ?? "" : "",
+                    Dosage = fields.TryGetProperty("Dosage", out var dosageProp) ? dosageProp.GetProperty("stringValue").GetString() ?? "" : "",
+                    Instructions = fields.TryGetProperty("Instructions", out var instrProp) ? instrProp.GetProperty("stringValue").GetString() ?? "" : "",
+                    UserEmail = fields.TryGetProperty("UserEmail", out var emailProp) ? emailProp.GetProperty("stringValue").GetString() ?? "" : ""
+                };
+            }
+            return null;
+        }
 
         public async Task<List<Medication>> GetMedicationsForUserAsync(string userEmail, string idToken)
         {

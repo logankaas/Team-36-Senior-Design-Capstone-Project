@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SeniorCapstoneProject.MedicalIdPage"
+             Title="Medical ID"
+             BackgroundColor="#F6F8FA">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="24" Spacing="18">
+            <!-- Back Button Row -->
+            <HorizontalStackLayout Spacing="0" Margin="0,0,0,0" VerticalOptions="Start" HeightRequest="40">
+                <Button Text="←"
+                        FontSize="28"
+                        TextColor="#2E91FF"
+                        BackgroundColor="Transparent"
+                        Padding="0"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Center"
+                        Clicked="OnBackButtonClicked"/>
+            </HorizontalStackLayout>
+
+            <!-- Medical Id Header -->
+            <Border Background="#2E91FF" StrokeShape="RoundRectangle 16" Margin="0,0,0,12" HeightRequest="64" VerticalOptions="Start">
+                <Label Text="Medical ID"
+                       FontSize="28"
+                       FontAttributes="Bold"
+                       TextColor="White"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"/>
+            </Border>
+
+            <!-- Name Section -->
+            <VerticalStackLayout Spacing="0" Margin="0,0,0,12" HorizontalOptions="Center">
+                <Label Text="{Binding FirstName}" FontSize="24" FontAttributes="Bold" TextColor="#22223B" HorizontalOptions="Center"/>
+                <Label Text="{Binding LastName}" FontSize="22" FontAttributes="None" TextColor="#22223B" HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+
+            <!-- Info Card -->
+            <Border Background="White" StrokeShape="RoundRectangle 16" Padding="18" Margin="0,0,0,0" VerticalOptions="Start">
+                <VerticalStackLayout Spacing="16">
+                    <HorizontalStackLayout Spacing="8">
+                        <Label Text="Username:" FontAttributes="Bold" TextColor="#2E91FF" WidthRequest="140"/>
+                        <Label Text="{Binding Username}" TextColor="#22223B" Margin="8,0,0,0"/>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="8">
+                        <Label Text="Email:" FontAttributes="Bold" TextColor="#2E91FF" WidthRequest="140"/>
+                        <Label Text="{Binding Email}" TextColor="#22223B" Margin="8,0,0,0"/>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="8">
+                        <Label Text="Phone:" FontAttributes="Bold" TextColor="#2E91FF" WidthRequest="140"/>
+                        <Label Text="{Binding PhoneNumber}" TextColor="#22223B" Margin="8,0,0,0"/>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="8">
+                        <Label Text="Address:" FontAttributes="Bold" TextColor="#2E91FF" WidthRequest="140"/>
+                        <Label Text="{Binding Address}" TextColor="#22223B" Margin="8,0,0,0"/>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="8">
+                        <Label Text="City:" FontAttributes="Bold" TextColor="#2E91FF" WidthRequest="140"/>
+                        <Label Text="{Binding City}" TextColor="#22223B" Margin="8,0,0,0"/>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="8">
+                        <Label Text="Zip Code:" FontAttributes="Bold" TextColor="#2E91FF" WidthRequest="140"/>
+                        <Label Text="{Binding ZipCode}" TextColor="#22223B" Margin="8,0,0,0"/>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="8">
+                        <Label Text="Date of Birth:" FontAttributes="Bold" TextColor="#2E91FF" WidthRequest="140"/>
+                        <Label Text="{Binding DateOfBirth, StringFormat='{0:MMMM dd, yyyy}'}" TextColor="#22223B" Margin="8,0,0,0"/>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="8">
+                        <Label Text="Gender:" FontAttributes="Bold" TextColor="#2E91FF" WidthRequest="140"/>
+                        <Label Text="{Binding Gender}" TextColor="#22223B" Margin="8,0,0,0"/>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="8">
+                        <Label Text="Emergency Contact:" FontAttributes="Bold" TextColor="#2E91FF" WidthRequest="140"/>
+                        <Label Text="{Binding EmergencyContactName}" TextColor="#22223B" Margin="8,0,0,0"/>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="8">
+                        <Label Text="Emergency Phone:" FontAttributes="Bold" TextColor="#2E91FF" WidthRequest="140"/>
+                        <Label Text="{Binding EmergencyContactPhone}" TextColor="#22223B" Margin="8,0,0,0"/>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="8">
+                        <Label Text="Insurance #:" FontAttributes="Bold" TextColor="#2E91FF" WidthRequest="140"/>
+                        <Label Text="{Binding InsuranceNumberId}" TextColor="#22223B" Margin="8,0,0,0"/>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="8">
+                        <Label Text="Insurance Company:" FontAttributes="Bold" TextColor="#2E91FF" WidthRequest="140"/>
+                        <Label Text="{Binding InsuranceCompany}" TextColor="#22223B" Margin="8,0,0,0"/>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="8">
+                        <Label Text="Insurance Expiry:" FontAttributes="Bold" TextColor="#2E91FF" WidthRequest="140"/>
+                        <Label Text="{Binding InsuranceExpiryDate, StringFormat='{0:MMMM dd, yyyy}'}" TextColor="#22223B" Margin="8,0,0,0"/>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="8">
+                        <Label Text="Doctor Office:" FontAttributes="Bold" TextColor="#2E91FF" WidthRequest="140"/>
+                        <Label Text="{Binding DoctorOfficeAddress}" TextColor="#22223B" Margin="8,0,0,0"/>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="8">
+                        <Label Text="Doctor City:" FontAttributes="Bold" TextColor="#2E91FF" WidthRequest="140"/>
+                        <Label Text="{Binding DoctorOfficeCity}" TextColor="#22223B" Margin="8,0,0,0"/>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="8">
+                        <Label Text="Doctor Zip:" FontAttributes="Bold" TextColor="#2E91FF" WidthRequest="140"/>
+                        <Label Text="{Binding DoctorOfficeZipCode}" TextColor="#22223B" Margin="8,0,0,0"/>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="8">
+                        <Label Text="Doctor Phone:" FontAttributes="Bold" TextColor="#2E91FF" WidthRequest="140"/>
+                        <Label Text="{Binding DoctorOfficePhone}" TextColor="#22223B" Margin="8,0,0,0"/>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="8">
+                        <Label Text="Blood Type:" FontAttributes="Bold" TextColor="#2E91FF" WidthRequest="140"/>
+                        <Label Text="{Binding BloodType}" TextColor="#22223B" Margin="8,0,0,0"/>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="8">
+                        <Label Text="Allergies:" FontAttributes="Bold" TextColor="#2E91FF" WidthRequest="140"/>
+                        <Label Text="{Binding Allergies}" TextColor="#22223B" Margin="8,0,0,0"/>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="8">
+                        <Label Text="Chronic Conditions:" FontAttributes="Bold" TextColor="#2E91FF" WidthRequest="140"/>
+                        <Label Text="{Binding ChronicConditions}" TextColor="#22223B" Margin="8,0,0,0"/>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="8">
+                        <Label Text="Notes:" FontAttributes="Bold" TextColor="#2E91FF" WidthRequest="140"/>
+                        <Label Text="{Binding Notes}" TextColor="#22223B" Margin="8,0,0,0"/>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

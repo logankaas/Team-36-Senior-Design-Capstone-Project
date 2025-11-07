@@ -77,5 +77,13 @@ namespace SeniorCapstoneProject
                 await Navigation.PushAsync(new MedicationsPage(_user.Email, idToken));
             }
         }
+
+        private async void OnMedicalIdTapped(object sender, EventArgs e)
+        {
+            if (_user != null)
+            {
+                await Navigation.PushAsync(new MedicalIdPage(_user));
+            }
+        }
     }
 }

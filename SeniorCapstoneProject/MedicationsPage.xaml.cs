@@ -14,5 +14,10 @@ namespace SeniorCapstoneProject
             BindingContext = vm;
             vm.LoadMedicationsCommand.Execute(null);
         }
+
+        private void OnBackButtonClicked(object sender, EventArgs e)
+        {
+            Navigation.PopAsync();
+        }
     }
 }

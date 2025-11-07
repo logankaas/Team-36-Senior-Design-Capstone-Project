@@ -26,6 +26,8 @@ namespace SeniorCapstoneProject
         public ChatPage(User user)
         {
             InitializeComponent();
+
+            NavigationPage.SetHasNavigationBar(this, false);
             BindingContext = this;
             _user = user;
             SelectTimeCommand = new Command<string>(OnTimeSelected);
@@ -293,6 +295,11 @@ namespace SeniorCapstoneProject
                 if (Messages.Count > 0)
                     ChatCollectionView.ScrollTo(Messages.Last(), position: ScrollToPosition.End, animate: true);
             });
+        }
+
+        private void OnBackButtonClicked(object sender, EventArgs e)
+        {
+            Navigation.PopAsync();
         }
     }
 }

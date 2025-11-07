@@ -6,11 +6,26 @@
              BackgroundColor="#F8FAFC">
 
     <VerticalStackLayout Padding="24,16" Spacing="18">
+        <!-- Back Button Row -->
+        <HorizontalStackLayout Spacing="0" Margin="0,0,0,0" VerticalOptions="Start" HeightRequest="40" Grid.Row="0">
+            <Button Text="←"
+            FontSize="28"
+            TextColor="#2E91FF"
+            BackgroundColor="Transparent"
+            Padding="0"
+            HorizontalOptions="Start"
+            VerticalOptions="Center"
+            Clicked="OnBackButtonClicked"/>
+        </HorizontalStackLayout>
+
+        <!-- Your Medications Header -->
         <Label Text="Your Medications"
                FontSize="28"
                FontAttributes="Bold"
                TextColor="#22223B"
                Margin="0,0,0,8"/>
+
+        <!-- Medications List -->
         <CollectionView ItemsSource="{Binding Medications}"
                         EmptyView="No medications found."
                         SelectionMode="None">

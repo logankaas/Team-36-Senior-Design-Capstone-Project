@@ -113,6 +113,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Compile Update="MedicalIdPage.xaml.cs">
+		  <DependentUpon>MedicalIdPage.xaml</DependentUpon>
+		</Compile>
 		<Compile Update="MedicationsPage.xaml.cs">
 			<DependentUpon>MedicationsPage.xaml</DependentUpon>
 		</Compile>
@@ -137,6 +140,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<MauiXaml Update="MedicalIdPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 		<MauiXaml Update="MedicationsPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>

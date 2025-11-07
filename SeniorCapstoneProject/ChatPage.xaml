@@ -5,7 +5,7 @@
              Title="Chatbot"
              x:Name="ChatPageRoot">
     <ContentPage.Resources>
-        <Color x:Key="UserBubbleColor">#21B8FF</Color>
+        <Color x:Key="UserBubbleColor">#2E91FF</Color>
         <Color x:Key="BotBubbleColor">#F2F4F8</Color>
         <Style x:Key="UserBubbleStyle" TargetType="Frame">
             <Setter Property="BackgroundColor" Value="{StaticResource UserBubbleColor}"/>
@@ -22,12 +22,35 @@
             <Setter Property="HorizontalOptions" Value="Start"/>
         </Style>
     </ContentPage.Resources>
-    <Grid RowDefinitions="*,Auto" Padding="0">
+    <Grid RowDefinitions="Auto,*,Auto" Padding="0">
+
+        <!-- Back Button Row -->
+        <HorizontalStackLayout Spacing="0" Margin="0,0,0,0" VerticalOptions="Start" HeightRequest="40" Grid.Row="0">
+            <Button Text="←"
+                    FontSize="28"
+                    TextColor="#2E91FF"
+                    BackgroundColor="Transparent"
+                    Padding="0"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Center"
+                    Clicked="OnBackButtonClicked"/>
+        </HorizontalStackLayout>
+
+        <!-- Modern Header -->
+        <Border Background="#2E91FF" StrokeShape="RoundRectangle 16" Margin="0,50,0,12" HeightRequest="64" VerticalOptions="Start">
+            <Label Text="MyHealthAssistant Chat"
+           FontSize="28"
+           FontAttributes="Bold"
+           TextColor="White"
+           HorizontalOptions="Center"
+           VerticalOptions="Center"/>
+        </Border>
+
         <!-- Chat History -->
         <CollectionView x:Name="ChatCollectionView"
                         ItemsSource="{Binding Messages}"
                         SelectionMode="None"
-                        Grid.Row="0"
+                        Grid.Row="1"
                         VerticalOptions="Fill"
                         Margin="0,0,0,0">
             <CollectionView.ItemTemplate>
@@ -55,7 +78,7 @@
                                             <Button Text="{Binding .}"
                                                     Command="{Binding BindingContext.SelectTimeCommand, Source={x:Reference ChatPageRoot}}"
                                                     CommandParameter="{Binding .}"
-                                                    BackgroundColor="#21B8FF"
+                                                    BackgroundColor="#2E91FF"
                                                     TextColor="White"
                                                     FontAttributes="Bold"
                                                     Padding="0,12"
@@ -75,16 +98,16 @@
         <ActivityIndicator x:Name="BotLoadingIndicator"
                            IsVisible="{Binding IsBotLoading}"
                            IsRunning="{Binding IsBotLoading}"
-                           Color="#4F8CFF"
+                           Color="#2E91FF"
                            HeightRequest="32"
                            WidthRequest="32"
                            VerticalOptions="End"
                            HorizontalOptions="Center"
-                           Grid.Row="0"
+                           Grid.Row="1"
                            Margin="0,8,0,8"/>
 
         <!-- Message Entry -->
-        <Grid Grid.Row="1" ColumnDefinitions="*,Auto" Padding="8,8,8,8" BackgroundColor="#F8F8F8">
+        <Grid Grid.Row="2" ColumnDefinitions="*,Auto" Padding="8,8,8,8" BackgroundColor="#F8F8F8">
             <Entry x:Name="MessageEntry"
                    Placeholder="Type your message..."
                    FontSize="16"
@@ -92,7 +115,7 @@
             <Button Text="Send"
                     Grid.Column="1"
                     Clicked="OnSendClicked"
-                    BackgroundColor="#21B8FF"
+                    BackgroundColor="#2E91FF"
                     TextColor="White"
                     FontAttributes="Bold"
                     Padding="20,0"

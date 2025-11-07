@@ -164,7 +164,11 @@
                 <Label Text="Sources" FontSize="10" TextColor="#A0A0A0"/>
             </VerticalStackLayout>
             <VerticalStackLayout Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center">
-                <Image Source="medical_report.png" HeightRequest="24" WidthRequest="24"/>
+                <Image Source="medical_report.png" HeightRequest="24" WidthRequest="24">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnMedicalIdTapped"/>
+                    </Image.GestureRecognizers>
+                </Image>
                 <Label Text="Medical ID" FontSize="10" TextColor="#A0A0A0"/>
             </VerticalStackLayout>
         </Grid>

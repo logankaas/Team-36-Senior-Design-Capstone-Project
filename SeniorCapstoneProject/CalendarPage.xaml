@@ -13,10 +13,31 @@
     </ContentPage.Background>
 
     <ScrollView>
-        <VerticalStackLayout Padding="24,40,24,24" Spacing="28">
+        <VerticalStackLayout Padding="24" Spacing="18">
+            <!-- Back Button Row -->
+            <HorizontalStackLayout Spacing="0" Margin="0,0,0,0" VerticalOptions="Start" HeightRequest="40">
+                <Button Text="←"
+                        FontSize="28"
+                        TextColor="#2E91FF"
+                        BackgroundColor="Transparent"
+                        Padding="0"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Center"
+                        Clicked="OnBackButtonClicked"/>
+            </HorizontalStackLayout>
+
+            <!-- Modern Header -->
+            <Border Background="#2E91FF" StrokeShape="RoundRectangle 16" Margin="0,0,0,12" HeightRequest="64" VerticalOptions="Start">
+                <Label Text="Appointments Calendar"
+                       FontSize="28"
+                       FontAttributes="Bold"
+                       TextColor="White"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"/>
+            </Border>
 
             <!-- Doctor Card -->
-            <Frame CornerRadius="32" Padding="0" HasShadow="True" BackgroundColor="#F6F4FF">
+            <Border Background="#F6F4FF" StrokeShape="RoundRectangle 32" Padding="0" Margin="0,0,0,0">
                 <Grid Padding="24" ColumnDefinitions="Auto,*,Auto" RowDefinitions="Auto,Auto,Auto">
                     <!-- Doctor Image -->
                     <Image Source="{Binding Doctor.ImagePath}" HeightRequest="90" WidthRequest="90" Aspect="AspectFill" 
@@ -41,21 +62,21 @@
                            Text="{Binding Doctor.Description}"
                            FontSize="14" TextColor="#7B7B93" Margin="0,12,0,0"/>
                 </Grid>
-            </Frame>
+            </Border>
 
             <!-- Scheduled Appointments Section -->
             <Label Text="Your Scheduled Appointments" FontSize="20" FontAttributes="Bold" TextColor="#22223B" Margin="0,24,0,0"/>
             <CollectionView ItemsSource="{Binding Appointments}" Margin="0,0,0,12">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame BorderColor="#2E91FF" CornerRadius="16" Padding="16" Margin="0,8" HasShadow="True" BackgroundColor="#FFF8F6">
-                            <VerticalStackLayout>
+                        <Border Stroke="#2E91FF" StrokeShape="RoundRectangle 16" Padding="16" Margin="0,8" Background="White">
+                            <VerticalStackLayout Spacing="8">
                                 <Label Text="{Binding DoctorName}" FontSize="18" FontAttributes="Bold" TextColor="#2E91FF"/>
                                 <Label Text="{Binding Date, StringFormat='{}{0:MMMM dd, yyyy}'}" FontSize="15" TextColor="Black"/>
                                 <Label Text="{Binding TimeRange}" FontSize="15" TextColor="#A0A0A0"/>
                                 <Label Text="{Binding Location}" FontSize="14" TextColor="#7B7B93"/>
                             </VerticalStackLayout>
-                        </Frame>
+                        </Border>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
