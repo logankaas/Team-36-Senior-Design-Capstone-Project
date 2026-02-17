@@ -4,25 +4,38 @@
              x:Class="SeniorCapstoneProject.LandingPage"
              Title="Home">
 
-    <Grid RowDefinitions="Auto,*,Auto,Auto" ColumnDefinitions="*">
+    <Grid RowDefinitions="Auto,Auto,*,Auto" ColumnDefinitions="*">
         <!-- Header -->
-        <Grid Grid.Row="0" Padding="24,24,24,0" ColumnDefinitions="*,Auto">
+        <Grid Grid.Row="0" Padding="24,24,24,0" ColumnDefinitions="*,Auto,Auto">
             <Label Text="Your Health"
                    FontSize="32"
                    FontAttributes="Bold"
                    VerticalOptions="Center"
                    HorizontalOptions="Start"
                    TextColor="Black"/>
-            <Border
+            <Border Grid.Column="1"
+                WidthRequest="32"
+                HeightRequest="32"
+                StrokeThickness="0"
+                Background="#FF6B6B"
+                StrokeShape="RoundRectangle 16"
+                HorizontalOptions="End"
+                VerticalOptions="Center"
+                Margin="0,0,12,0">
+                <Label Text="🔔" FontSize="16" HorizontalOptions="Center" VerticalOptions="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnNotificationsClicked"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            </Border>
+            <Border Grid.Column="2"
                 WidthRequest="32"
                 HeightRequest="32"
                 StrokeThickness="0"
                 Background="#2E91FF"
                 StrokeShape="RoundRectangle 16"
                 HorizontalOptions="End"
-                VerticalOptions="Center"
-                Margin="0,0,0,0"
-                Grid.Column="1">
+                VerticalOptions="Center">
                 <Label
                     x:Name="ProfileInitial"
                     Text="A"
@@ -30,123 +43,242 @@
                     HorizontalOptions="Center"
                     VerticalOptions="Center"
                     VerticalTextAlignment="Center"
-                    HorizontalTextAlignment="Center"/>
+                    HorizontalTextAlignment="Center"
+                    TextColor="White"/>
                 <Border.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnProfileClicked"/>
                 </Border.GestureRecognizers>
             </Border>
         </Grid>
 
-        <!-- 2x2 Feature Grid -->
-        <Grid Grid.Row="1" Padding="5,20,5,0" RowSpacing="16" ColumnSpacing="1" RowDefinitions="Auto,Auto" ColumnDefinitions="*,*">
-            <!-- Doctors -->
-            <Border Background="#2E91FF" StrokeShape="RoundRectangle 8" Grid.Row="0" Grid.Column="0" HeightRequest="200" WidthRequest="200">
-                <Grid>
-                    <Label Text="Chat"
-                           FontSize="18"
-                           FontAttributes="Bold"
-                           TextColor="White"
-                           HorizontalOptions="Start"
-                           VerticalOptions="Start"
-                           Margin="12,10,0,0"/>
-                    <Image Source="doctor.png"
-                           HeightRequest="100"
-                           WidthRequest="100"
-                           HorizontalOptions="End"
-                           VerticalOptions="End"
-                           Margin="0,0,10,10"/>
-                    <Grid.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnChatClicked"/>
-                    </Grid.GestureRecognizers>
-                </Grid>
-            </Border>
-            <!-- Medicine -->
-            <Border Background="#2E91FF" StrokeShape="RoundRectangle 8" Grid.Row="0" Grid.Column="1" HeightRequest="200" WidthRequest="200">
-                <Grid>
-                    <Label Text="Medicine"
-                           FontSize="18"
-                           FontAttributes="Bold"
-                           TextColor="White"
-                           HorizontalOptions="Start"
-                           VerticalOptions="Start"
-                           Margin="12,10,0,0"/>
-                    <Image Source="medicine.png"
-                           HeightRequest="100"
-                           WidthRequest="100"
-                           HorizontalOptions="End"
-                           VerticalOptions="End"
-                           Margin="0,0,10,10"/>
-                    <Grid.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnMedicationsClicked"/>
-                    </Grid.GestureRecognizers>
-                </Grid>
-            </Border>
-            <!-- Tests -->
-            <Border Background="#2E91FF" StrokeShape="RoundRectangle 8" Grid.Row="1" Grid.Column="0" HeightRequest="200" WidthRequest="200">
-                <Grid>
-                    <Label Text="Tests"
-                           FontSize="18"
-                           FontAttributes="Bold"
-                           TextColor="White"
-                           HorizontalOptions="Start"
-                           VerticalOptions="Start"
-                           Margin="12,10,0,0"/>
-                    <Image Source="sample_tube.png"
-                           HeightRequest="100"
-                           WidthRequest="100"
-                           HorizontalOptions="End"
-                           VerticalOptions="End"
-                           Margin="0,0,10,10"/>
-                </Grid>
-            </Border>
-            <!-- Prescriptions -->
-            <Border Background="#2E91FF" StrokeShape="RoundRectangle 8" Grid.Row="1" Grid.Column="1" HeightRequest="200" WidthRequest="200">
-                <Grid>
-                    <Label Text="Prescriptions"
-                           FontSize="18"
-                           FontAttributes="Bold"
-                           TextColor="White"
-                           HorizontalOptions="Start"
-                           VerticalOptions="Start"
-                           Margin="12,10,0,0"/>
-                    <Image Source="prescription.png"
-                           HeightRequest="100"
-                           WidthRequest="100"
-                           HorizontalOptions="End"
-                           VerticalOptions="End"
-                           Margin="0,0,10,10"/>
-                    <Grid.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnMedicationsClicked"/>
-                    </Grid.GestureRecognizers>
-                </Grid>
-            </Border>
-        </Grid>
+        <!-- Health Metrics Quick View -->
+        <Border Grid.Row="1" Margin="24,16,24,0" Background="#F8F9FA" StrokeShape="RoundRectangle 16" StrokeThickness="0" Padding="16">
+            <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
+                <VerticalStackLayout HorizontalOptions="Center">
+                    <Label Text="🚶" FontSize="24"/>
+                    <Label Text="8,234" FontSize="20" FontAttributes="Bold" TextColor="#2E91FF"/>
+                    <Label Text="Steps" FontSize="10" TextColor="#666"/>
+                </VerticalStackLayout>
+                <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center">
+                    <Label Text="💧" FontSize="24"/>
+                    <Label Text="6" FontSize="20" FontAttributes="Bold" TextColor="#2E91FF"/>
+                    <Label Text="Glasses" FontSize="10" TextColor="#666"/>
+                </VerticalStackLayout>
+                <VerticalStackLayout Grid.Column="2" HorizontalOptions="Center">
+                    <Label Text="❤️" FontSize="24"/>
+                    <Label Text="72" FontSize="20" FontAttributes="Bold" TextColor="#FF6B6B"/>
+                    <Label Text="BPM" FontSize="10" TextColor="#666"/>
+                </VerticalStackLayout>
+            </Grid>
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnHealthMetricsClicked"/>
+            </Border.GestureRecognizers>
+        </Border>
 
-        <!-- Appointments List (Dynamic from DB) -->
-        <VerticalStackLayout Grid.Row="2" Padding="24,24,24,0" Spacing="10">
-            <Label Text="Upcoming Appointments" FontSize="20" FontAttributes="Bold" TextColor="#22223B" Margin="0,0,0,8"/>
-            <CollectionView ItemsSource="{Binding Appointments}" Margin="0,0,0,12">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid ColumnDefinitions="4,Auto,*,Auto" RowDefinitions="Auto">
-                            <BoxView Color="#2E91FF" WidthRequest="4" HeightRequest="48" VerticalOptions="Start" CornerRadius="2"/>
-                            <VerticalStackLayout Grid.Column="1" Spacing="0" Padding="8,0,0,0">
-                                <Label Text="{Binding Date, StringFormat='{}{0:dd}'}" FontSize="16" FontAttributes="Bold" TextColor="Black"/>
-                                <Label Text="{Binding Date, StringFormat='{}{0:MMM}'.ToUpper()}" FontSize="10" TextColor="#A0A0A0"/>
-                            </VerticalStackLayout>
-                            <VerticalStackLayout Grid.Column="2" Spacing="0">
-                                <Label Text="{Binding DoctorName}" FontSize="16" TextColor="Black"/>
-                                <Label Text="{Binding TimeRange}" FontSize="12" TextColor="#A0A0A0"/>
-                            </VerticalStackLayout>
+        <!-- Scrollable Content -->
+        <ScrollView Grid.Row="2">
+            <VerticalStackLayout Spacing="16">
+                <!-- 2x2 Feature Grid -->
+                <Grid Padding="24,20,24,0" RowSpacing="16" ColumnSpacing="16" RowDefinitions="Auto,Auto" ColumnDefinitions="*,*">
+                    <!-- Chat -->
+                    <Border StrokeShape="RoundRectangle 16" Grid.Row="0" Grid.Column="0" HeightRequest="160" StrokeThickness="0">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#667EEA" Offset="0.0" />
+                                <GradientStop Color="#764BA2" Offset="1.0" />
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Grid>
+                            <Label Text="Chat"
+                                   FontSize="18"
+                                   FontAttributes="Bold"
+                                   TextColor="White"
+                                   HorizontalOptions="Start"
+                                   VerticalOptions="Start"
+                                   Margin="16,12,0,0"/>
+                            <Label Text="Talk to a doctor"
+                                   FontSize="11"
+                                   TextColor="White"
+                                   Opacity="0.8"
+                                   HorizontalOptions="Start"
+                                   VerticalOptions="Start"
+                                   Margin="16,36,0,0"/>
+                            <Image Source="doctor.png"
+                                   HeightRequest="80"
+                                   WidthRequest="80"
+                                   HorizontalOptions="End"
+                                   VerticalOptions="End"
+                                   Margin="0,0,10,10"/>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnChatClicked"/>
+                            </Grid.GestureRecognizers>
                         </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </VerticalStackLayout>
+                    </Border>
+
+                    <!-- Medicine -->
+                    <Border StrokeShape="RoundRectangle 16" Grid.Row="0" Grid.Column="1" HeightRequest="160" StrokeThickness="0">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#F093FB" Offset="0.0" />
+                                <GradientStop Color="#F5576C" Offset="1.0" />
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Grid>
+                            <Label Text="Medicine"
+                                   FontSize="18"
+                                   FontAttributes="Bold"
+                                   TextColor="White"
+                                   HorizontalOptions="Start"
+                                   VerticalOptions="Start"
+                                   Margin="16,12,0,0"/>
+                            <Label Text="Track meds"
+                                   FontSize="11"
+                                   TextColor="White"
+                                   Opacity="0.8"
+                                   HorizontalOptions="Start"
+                                   VerticalOptions="Start"
+                                   Margin="16,36,0,0"/>
+                            <Image Source="medicine.png"
+                                   HeightRequest="80"
+                                   WidthRequest="80"
+                                   HorizontalOptions="End"
+                                   VerticalOptions="End"
+                                   Margin="0,0,10,10"/>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnMedicationsClicked"/>
+                            </Grid.GestureRecognizers>
+                        </Grid>
+                    </Border>
+
+                    <!-- Symptom Checker -->
+                    <Border StrokeShape="RoundRectangle 16" Grid.Row="1" Grid.Column="0" HeightRequest="160" StrokeThickness="0">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#4FACFE" Offset="0.0" />
+                                <GradientStop Color="#00F2FE" Offset="1.0" />
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Grid>
+                            <Label Text="Symptoms"
+                                   FontSize="18"
+                                   FontAttributes="Bold"
+                                   TextColor="White"
+                                   HorizontalOptions="Start"
+                                   VerticalOptions="Start"
+                                   Margin="16,12,0,0"/>
+                            <Label Text="Check now"
+                                   FontSize="11"
+                                   TextColor="White"
+                                   Opacity="0.8"
+                                   HorizontalOptions="Start"
+                                   VerticalOptions="Start"
+                                   Margin="16,36,0,0"/>
+                            <Label Text="🔍"
+                                   FontSize="60"
+                                   HorizontalOptions="End"
+                                   VerticalOptions="End"
+                                   Margin="0,0,16,16"/>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnSymptomCheckerClicked"/>
+                            </Grid.GestureRecognizers>
+                        </Grid>
+                    </Border>
+
+                    <!-- Lab Results -->
+                    <Border StrokeShape="RoundRectangle 16" Grid.Row="1" Grid.Column="1" HeightRequest="160" StrokeThickness="0">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#FA709A" Offset="0.0" />
+                                <GradientStop Color="#FEE140" Offset="1.0" />
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Grid>
+                            <Label Text="Lab Results"
+                                   FontSize="18"
+                                   FontAttributes="Bold"
+                                   TextColor="White"
+                                   HorizontalOptions="Start"
+                                   VerticalOptions="Start"
+                                   Margin="16,12,0,0"/>
+                            <Label Text="View reports"
+                                   FontSize="11"
+                                   TextColor="White"
+                                   Opacity="0.8"
+                                   HorizontalOptions="Start"
+                                   VerticalOptions="Start"
+                                   Margin="16,36,0,0"/>
+                            <Image Source="sample_tube.png"
+                                   HeightRequest="80"
+                                   WidthRequest="80"
+                                   HorizontalOptions="End"
+                                   VerticalOptions="End"
+                                   Margin="0,0,10,10"/>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnLabResultsClicked"/>
+                            </Grid.GestureRecognizers>
+                        </Grid>
+                    </Border>
+                </Grid>
+
+                <!-- Appointments Section - DATABASE CONNECTED -->
+                <VerticalStackLayout Padding="24,8,24,0" Spacing="12">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Text="Appointments" FontSize="20" FontAttributes="Bold" TextColor="#22223B"/>
+                        <Label Grid.Column="1" Text="See All" FontSize="14" TextColor="#2E91FF" VerticalOptions="Center">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnCalendarTapped"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Grid>
+
+                    <!-- THIS PULLS FROM YOUR FIRESTORE DATABASE -->
+                    <CollectionView ItemsSource="{Binding Appointments}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border Background="White" StrokeShape="RoundRectangle 12" StrokeThickness="1" Stroke="#E0E0E0" Padding="12" Margin="0,0,0,8">
+                                    <Grid ColumnDefinitions="4,Auto,*,Auto" RowDefinitions="Auto">
+                                        <BoxView Color="#2E91FF" WidthRequest="4" HeightRequest="56" VerticalOptions="Fill" CornerRadius="2"/>
+                                        <VerticalStackLayout Grid.Column="1" Spacing="0" Padding="12,0,12,0">
+                                            <Label Text="{Binding Date, StringFormat='{0:dd}'}" FontSize="20" FontAttributes="Bold" TextColor="#000"/>
+                                            <Label Text="{Binding Date, StringFormat='{0:MMM}'}" FontSize="11" TextColor="#666"/>
+                                        </VerticalStackLayout>
+                                        <VerticalStackLayout Grid.Column="2" Spacing="4">
+                                            <Label Text="{Binding DoctorName}" FontSize="16" FontAttributes="Bold" TextColor="Black"/>
+                                            <Label Text="{Binding TimeRange}" FontSize="13" TextColor="#2E91FF"/>
+                                            <Label Text="{Binding Location}" FontSize="11" TextColor="#999"/>
+                                        </VerticalStackLayout>
+                                        <Label Grid.Column="3" Text="›" FontSize="24" TextColor="#CCC" VerticalOptions="Center"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+
+                <!-- Health Journal Quick Add -->
+                <Border Margin="24,8,24,0" Background="#E8F5E9" StrokeShape="RoundRectangle 16" StrokeThickness="0" Padding="16">
+                    <Grid ColumnDefinitions="Auto,*,Auto">
+                        <Label Text="📝" FontSize="32" VerticalOptions="Center"/>
+                        <VerticalStackLayout Grid.Column="1" Spacing="2" Padding="12,0,0,0">
+                            <Label Text="How are you feeling today?" FontSize="16" FontAttributes="Bold" TextColor="#2E7D32"/>
+                            <Label Text="Log your daily health journal" FontSize="12" TextColor="#666"/>
+                        </VerticalStackLayout>
+                        <Button Grid.Column="2" Text="Log" Background="#4CAF50" TextColor="White" CornerRadius="8" Padding="16,8" Clicked="OnHealthJournalClicked"/>
+                    </Grid>
+                </Border>
+
+                <BoxView HeightRequest="80"/>
+            </VerticalStackLayout>
+        </ScrollView>
 
         <!-- Bottom Navigation Bar -->
-        <Grid Grid.Row="3" Padding="0,24,0,0" HeightRequest="64" BackgroundColor="White"
+        <Grid Grid.Row="3" Padding="0,12,0,24" HeightRequest="64" BackgroundColor="White"
               ColumnDefinitions="*,*,*,*">
+            <Border Grid.ColumnSpan="4" Background="White" StrokeThickness="0">
+                <Border.Shadow>
+                    <Shadow Brush="Black" Opacity="0.1" Offset="0,-2" Radius="8"/>
+                </Border.Shadow>
+            </Border>
             <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
                 <Image Source="emergency_call.png" HeightRequest="24" WidthRequest="24">
                     <Image.GestureRecognizers>
@@ -157,19 +289,23 @@
             </VerticalStackLayout>
             <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center">
                 <Image Source="your_health.png" HeightRequest="24" WidthRequest="24"/>
-                <Label Text="Your Health" FontSize="10" TextColor="#2E91FF"/>
+                <Label Text="Your Health" FontSize="10" TextColor="#2E91FF" FontAttributes="Bold"/>
             </VerticalStackLayout>
             <VerticalStackLayout Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center">
-                <Image Source="sources.png" HeightRequest="24" WidthRequest="24"/>
-                <Label Text="Sources" FontSize="10" TextColor="#A0A0A0"/>
+                <Image Source="sources.png" HeightRequest="24" WidthRequest="24">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnWellnessClicked"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Label Text="Wellness" FontSize="10" TextColor="#A0A0A0"/>
             </VerticalStackLayout>
             <VerticalStackLayout Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center">
                 <Image Source="medical_report.png" HeightRequest="24" WidthRequest="24">
                     <Image.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnMedicalIdTapped"/>
+                        <TapGestureRecognizer Tapped="OnEmergencyClicked"/>
                     </Image.GestureRecognizers>
                 </Image>
-                <Label Text="Medical ID" FontSize="10" TextColor="#A0A0A0"/>
+                <Label Text="Emergency" FontSize="10" TextColor="#A0A0A0"/>
             </VerticalStackLayout>
         </Grid>
     </Grid>

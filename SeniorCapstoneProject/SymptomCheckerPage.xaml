@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SeniorCapstoneProject.SymptomCheckerPage"
+             Title="Symptom Checker"
+             BackgroundColor="#F8F9FA">
+
+    <Grid RowDefinitions="Auto,*">
+        <!-- Header -->
+        <Grid Grid.Row="0" Padding="24,24,24,16" BackgroundColor="White">
+            <Button Text="←" FontSize="24" WidthRequest="40" HeightRequest="40" CornerRadius="20" Background="Transparent" TextColor="#2E91FF" HorizontalOptions="Start" Clicked="OnBackClicked"/>
+            <Label Text="Symptom Checker" FontSize="28" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center"/>
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="24" Spacing="20">
+                <!-- AI Assistant Card -->
+                <Border Background="#4FACFE" StrokeShape="RoundRectangle 20" Padding="20" StrokeThickness="0">
+                    <VerticalStackLayout Spacing="12">
+                        <Label Text="AI Health Assistant" FontSize="24" FontAttributes="Bold" TextColor="White"/>
+                        <Label Text="Tell me your symptoms and I'll help you understand what might be going on. Remember, this is not a substitute for professional medical advice." 
+                               FontSize="14" 
+                               TextColor="White" 
+                               Opacity="0.95"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Body Area Selection -->
+                <Label Text="Where do you feel discomfort?" FontSize="20" FontAttributes="Bold" TextColor="#22223B"/>
+
+                <Grid ColumnDefinitions="*,*,*" RowDefinitions="Auto,Auto,Auto" ColumnSpacing="12" RowSpacing="12">
+                    <Border Background="White" StrokeShape="RoundRectangle 12" Padding="16" StrokeThickness="2" Stroke="#E0E0E0">
+                        <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                            <Label Text="🧠" FontSize="40"/>
+                            <Label Text="Head" FontSize="14" TextColor="#666" HorizontalTextAlignment="Center"/>
+                        </VerticalStackLayout>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnBodyPartSelected" CommandParameter="Head"/>
+                        </Border.GestureRecognizers>
+                    </Border>
+
+                    <Border Grid.Column="1" Background="White" StrokeShape="RoundRectangle 12" Padding="16" StrokeThickness="2" Stroke="#E0E0E0">
+                        <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                            <Label Text="👁️" FontSize="40"/>
+                            <Label Text="Eyes" FontSize="14" TextColor="#666" HorizontalTextAlignment="Center"/>
+                        </VerticalStackLayout>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnBodyPartSelected" CommandParameter="Eyes"/>
+                        </Border.GestureRecognizers>
+                    </Border>
+
+                    <Border Grid.Column="2" Background="White" StrokeShape="RoundRectangle 12" Padding="16" StrokeThickness="2" Stroke="#E0E0E0">
+                        <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                            <Label Text="👃" FontSize="40"/>
+                            <Label Text="Nose" FontSize="14" TextColor="#666" HorizontalTextAlignment="Center"/>
+                        </VerticalStackLayout>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnBodyPartSelected" CommandParameter="Nose"/>
+                        </Border.GestureRecognizers>
+                    </Border>
+
+                    <Border Grid.Row="1" Background="White" StrokeShape="RoundRectangle 12" Padding="16" StrokeThickness="2" Stroke="#E0E0E0">
+                        <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                            <Label Text="🫀" FontSize="40"/>
+                            <Label Text="Chest" FontSize="14" TextColor="#666" HorizontalTextAlignment="Center"/>
+                        </VerticalStackLayout>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnBodyPartSelected" CommandParameter="Chest"/>
+                        </Border.GestureRecognizers>
+                    </Border>
+
+                    <Border Grid.Row="1" Grid.Column="1" Background="White" StrokeShape="RoundRectangle 12" Padding="16" StrokeThickness="2" Stroke="#E0E0E0">
+                        <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                            <Label Text="🫁" FontSize="40"/>
+                            <Label Text="Stomach" FontSize="14" TextColor="#666" HorizontalTextAlignment="Center"/>
+                        </VerticalStackLayout>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnBodyPartSelected" CommandParameter="Stomach"/>
+                        </Border.GestureRecognizers>
+                    </Border>
+
+                    <Border Grid.Row="1" Grid.Column="2" Background="White" StrokeShape="RoundRectangle 12" Padding="16" StrokeThickness="2" Stroke="#E0E0E0">
+                        <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                            <Label Text="🦴" FontSize="40"/>
+                            <Label Text="Back" FontSize="14" TextColor="#666" HorizontalTextAlignment="Center"/>
+                        </VerticalStackLayout>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnBodyPartSelected" CommandParameter="Back"/>
+                        </Border.GestureRecognizers>
+                    </Border>
+
+                    <Border Grid.Row="2" Background="White" StrokeShape="RoundRectangle 12" Padding="16" StrokeThickness="2" Stroke="#E0E0E0">
+                        <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                            <Label Text="🦵" FontSize="40"/>
+                            <Label Text="Legs" FontSize="14" TextColor="#666" HorizontalTextAlignment="Center"/>
+                        </VerticalStackLayout>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnBodyPartSelected" CommandParameter="Legs"/>
+                        </Border.GestureRecognizers>
+                    </Border>
+
+                    <Border Grid.Row="2" Grid.Column="1" Background="White" StrokeShape="RoundRectangle 12" Padding="16" StrokeThickness="2" Stroke="#E0E0E0">
+                        <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                            <Label Text="💪" FontSize="40"/>
+                            <Label Text="Arms" FontSize="14" TextColor="#666" HorizontalTextAlignment="Center"/>
+                        </VerticalStackLayout>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnBodyPartSelected" CommandParameter="Arms"/>
+                        </Border.GestureRecognizers>
+                    </Border>
+
+                    <Border Grid.Row="2" Grid.Column="2" Background="White" StrokeShape="RoundRectangle 12" Padding="16" StrokeThickness="2" Stroke="#E0E0E0">
+                        <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                            <Label Text="🌡️" FontSize="40"/>
+                            <Label Text="General" FontSize="14" TextColor="#666" HorizontalTextAlignment="Center"/>
+                        </VerticalStackLayout>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnBodyPartSelected" CommandParameter="General"/>
+                        </Border.GestureRecognizers>
+                    </Border>
+                </Grid>
+
+                <!-- Common Symptoms -->
+                <Label Text="Common Symptoms" FontSize="20" FontAttributes="Bold" TextColor="#22223B" Margin="0,16,0,0"/>
+
+                <FlexLayout Wrap="Wrap" JustifyContent="Start" AlignItems="Start">
+                    <Border Background="White" StrokeShape="RoundRectangle 20" Padding="12,8" Margin="0,0,8,8" StrokeThickness="1" Stroke="#E0E0E0">
+                        <Label Text="🤒 Fever" FontSize="14" TextColor="#666"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnSymptomSelected" CommandParameter="Fever"/>
+                        </Border.GestureRecognizers>
+                    </Border>
+                    <Border Background="White" StrokeShape="RoundRectangle 20" Padding="12,8" Margin="0,0,8,8" StrokeThickness="1" Stroke="#E0E0E0">
+                        <Label Text="🤧 Cough" FontSize="14" TextColor="#666"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnSymptomSelected" CommandParameter="Cough"/>
+                        </Border.GestureRecognizers>
+                    </Border>
+                    <Border Background="White" StrokeShape="RoundRectangle 20" Padding="12,8" Margin="0,0,8,8" StrokeThickness="1" Stroke="#E0E0E0">
+                        <Label Text="🤕 Headache" FontSize="14" TextColor="#666"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnSymptomSelected" CommandParameter="Headache"/>
+                        </Border.GestureRecognizers>
+                    </Border>
+                    <Border Background="White" StrokeShape="RoundRectangle 20" Padding="12,8" Margin="0,0,8,8" StrokeThickness="1" Stroke="#E0E0E0">
+                        <Label Text="🤢 Nausea" FontSize="14" TextColor="#666"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnSymptomSelected" CommandParameter="Nausea"/>
+                        </Border.GestureRecognizers>
+                    </Border>
+                    <Border Background="White" StrokeShape="RoundRectangle 20" Padding="12,8" Margin="0,0,8,8" StrokeThickness="1" Stroke="#E0E0E0">
+                        <Label Text="😴 Fatigue" FontSize="14" TextColor="#666"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnSymptomSelected" CommandParameter="Fatigue"/>
+                        </Border.GestureRecognizers>
+                    </Border>
+                    <Border Background="White" StrokeShape="RoundRectangle 20" Padding="12,8" Margin="0,0,8,8" StrokeThickness="1" Stroke="#E0E0E0">
+                        <Label Text="💧 Runny Nose" FontSize="14" TextColor="#666"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnSymptomSelected" CommandParameter="Runny Nose"/>
+                        </Border.GestureRecognizers>
+                    </Border>
+                    <Border Background="White" StrokeShape="RoundRectangle 20" Padding="12,8" Margin="0,0,8,8" StrokeThickness="1" Stroke="#E0E0E0">
+                        <Label Text="🥵 Chills" FontSize="14" TextColor="#666"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnSymptomSelected" CommandParameter="Chills"/>
+                        </Border.GestureRecognizers>
+                    </Border>
+                    <Border Background="White" StrokeShape="RoundRectangle 20" Padding="12,8" Margin="0,0,8,8" StrokeThickness="1" Stroke="#E0E0E0">
+                        <Label Text="😣 Body Aches" FontSize="14" TextColor="#666"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnSymptomSelected" CommandParameter="Body Aches"/>
+                        </Border.GestureRecognizers>
+                    </Border>
+                </FlexLayout>
+
+                <!-- Describe Symptoms -->
+                <Label Text="Describe Your Symptoms" FontSize="20" FontAttributes="Bold" TextColor="#22223B" Margin="0,16,0,0"/>
+
+                <Border Background="White" StrokeShape="RoundRectangle 16" Padding="16" StrokeThickness="1" Stroke="#E0E0E0">
+                    <Editor x:Name="SymptomsEditor" 
+                            Placeholder="Tell us more about what you're experiencing..."
+                            HeightRequest="120"
+                            FontSize="16"
+                            TextColor="#333"/>
+                </Border>
+
+                <!-- Analyze Button -->
+                <Button Text="Analyze Symptoms" 
+                        Background="#2E91FF" 
+                        TextColor="White" 
+                        CornerRadius="16" 
+                        Padding="20" 
+                        FontSize="18" 
+                        FontAttributes="Bold" 
+                        Clicked="OnAnalyzeClicked"
+                        Margin="0,8,0,0"/>
+
+                <!-- Emergency Warning -->
+                <Border Background="#FFF3CD" StrokeShape="RoundRectangle 12" Padding="16" StrokeThickness="1" Stroke="#FFC107">
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="⚠️ Emergency Warning" FontSize="16" FontAttributes="Bold" TextColor="#856404"/>
+                        <Label Text="If you're experiencing severe symptoms like chest pain, difficulty breathing, or severe bleeding, call 911 immediately." 
+                               FontSize="13" 
+                               TextColor="#856404"/>
+                        <Button Text="Call 911" 
+                                Background="#DC3545" 
+                                TextColor="White" 
+                                CornerRadius="8" 
+                                Padding="12" 
+                                FontSize="14" 
+                                FontAttributes="Bold"
+                                Clicked="OnEmergencyCallClicked"
+                                Margin="0,8,0,0"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <BoxView HeightRequest="20"/>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

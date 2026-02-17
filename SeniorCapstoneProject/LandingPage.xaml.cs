@@ -1,6 +1,7 @@
-﻿using SeniorCapstoneProject;
-using SeniorCapstoneProject.ViewModels;
+﻿using Google.Apis.Auth.OAuth2;
 using Microsoft.Maui.Controls;
+using SeniorCapstoneProject;
+using SeniorCapstoneProject.ViewModels;
 
 namespace SeniorCapstoneProject
 {
@@ -84,6 +85,46 @@ namespace SeniorCapstoneProject
             {
                 await Navigation.PushAsync(new MedicalIdPage(_user));
             }
+        }
+
+        private async void OnNotificationsClicked(object sender, EventArgs e)
+        {
+            await DisplayAlert("Notifications", "No new notifications", "OK");
+        }
+
+        private async void OnHealthMetricsClicked(object sender, EventArgs e)
+        {
+            var idToken = await SecureStorage.GetAsync("firebase_id_token");
+            await Navigation.PushAsync(new HealthMetricsPage(_user.Email, idToken));
+        }
+
+        private async void OnSymptomCheckerClicked(object sender, EventArgs e)
+        {
+            var idToken = await SecureStorage.GetAsync("firebase_id_token");
+            await Navigation.PushAsync(new SymptomCheckerPage(_user.Email, idToken));
+        }
+
+        private async void OnLabResultsClicked(object sender, EventArgs e)
+        {
+            var idToken = await SecureStorage.GetAsync("firebase_id_token");
+            await Navigation.PushAsync(new LabResultsPage(_user.Email, idToken));
+        }
+
+        private async void OnHealthJournalClicked(object sender, EventArgs e)
+        {
+            var idToken = await SecureStorage.GetAsync("firebase_id_token");
+            await Navigation.PushAsync(new HealthJournalPage(_user.Email, idToken));
+        }
+
+        private async void OnWellnessClicked(object sender, EventArgs e)
+        {
+            await DisplayAlert("Coming Soon", "Wellness features coming soon", "OK");
+        }
+
+        private async void OnEmergencyClicked(object sender, EventArgs e)
+        {
+            var idToken = await SecureStorage.GetAsync("firebase_id_token");
+            await Navigation.PushAsync(new EmergencyPage(_user.Email, idToken));
         }
     }
 }

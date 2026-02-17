@@ -4,20 +4,28 @@ namespace SeniorCapstoneProject
 {
     public partial class MedicationsPage : ContentPage
     {
+        private MedicationsViewModel _viewModel;
+
         public MedicationsPage(string userEmail, string idToken)
         {
             InitializeComponent();
-
             NavigationPage.SetHasNavigationBar(this, false);
 
-            var vm = new MedicationsViewModel(userEmail, idToken);
-            BindingContext = vm;
-            vm.LoadMedicationsCommand.Execute(null);
+            _viewModel = new MedicationsViewModel(userEmail, idToken);
+            BindingContext = _viewModel;
         }
 
-        private void OnBackButtonClicked(object sender, EventArgs e)
+        protected override async void OnAppearing()
         {
-            Navigation.PopAsync();
+            base.OnAppearing();
+
+            // Load medications when page appears
+            _viewModel.LoadMedicationsCommand.Execute(null);
+        }
+
+        private async void OnBackButtonClicked(object sender, EventArgs e)
+        {
+            await Navigation.PopAsync();
         }
     }
 }

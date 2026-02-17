@@ -27,13 +27,43 @@
                 <Label Text="Remember login" VerticalOptions="Center" />
             </HorizontalStackLayout>
 
-            <Button Text="Login" x:Name="LoginButton" Clicked="OnLoginClicked" HorizontalOptions="Fill" Background="#2E91FF" />
+            <ImageButton x:Name="LoginButton"
+                         Source="mha_login_btn.png"
+                         Clicked="OnLoginClicked"
+                         HorizontalOptions="Center"
+                         HeightRequest="30"
+                         WidthRequest="150"
+                         BorderColor="#2E91FF"
+                         CornerRadius="20"
+                         BorderWidth="1"
+                         Aspect="AspectFit"
+                         BackgroundColor="Transparent" />
 
             <Label x:Name="LoginMessage" Text="" TextColor="Red" IsVisible="False" HorizontalOptions="Center" />
 
-            <Button Text="Create New Account" Clicked="OnCreateAccountClicked" HorizontalOptions="Center" Background="#2E91FF" />
+            <ImageButton Source="mha_create_account_btn.png"
+                         Clicked="OnCreateAccountClicked"
+                         HorizontalOptions="Center"
+                         HeightRequest="30"
+                         WidthRequest="150"
+                         BorderColor="#2E91FF"
+                         CornerRadius="20"
+                         Padding="10"
+                         BorderWidth="1"
+                         Aspect="AspectFit"
+                         BackgroundColor="Transparent" />
 
-            <Button Text="Forgot Password?" Clicked="OnForgotPasswordClicked" BackgroundColor="Transparent" TextColor="#2E91FF" />
+            <ImageButton Source="mha_forgot_psswd_btn.png"
+                         Clicked="OnForgotPasswordClicked"
+                         HorizontalOptions="Center"
+                         HeightRequest="30"
+                         WidthRequest="150"
+                         BorderColor="#2E91FF"
+                         CornerRadius="20"
+                         Padding="10"
+                         BorderWidth="1"
+                         Aspect="AspectFit"
+                         BackgroundColor="Transparent" />
 
             <controls:VersionLabel />
         </VerticalStackLayout>

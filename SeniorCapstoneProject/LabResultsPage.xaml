@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SeniorCapstoneProject.LabResultsPage"
+             Title="Lab Results"
+             BackgroundColor="#F8F9FA">
+
+    <Grid RowDefinitions="Auto,*">
+        <!-- Header -->
+        <Grid Grid.Row="0" Padding="24,24,24,16" BackgroundColor="White">
+            <Button Text="←" FontSize="24" WidthRequest="40" HeightRequest="40" CornerRadius="20" Background="Transparent" TextColor="#2E91FF" HorizontalOptions="Start" Clicked="OnBackClicked"/>
+            <Label Text="Lab Results" FontSize="28" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center"/>
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="24" Spacing="20">
+                <!-- Latest Results Summary -->
+                <Border Background="#2E91FF" StrokeShape="RoundRectangle 20" Padding="20" StrokeThickness="0">
+                    <VerticalStackLayout Spacing="12">
+                        <Label Text="Latest Results" FontSize="24" FontAttributes="Bold" TextColor="White"/>
+                        <Label Text="January 28, 2026" FontSize="14" TextColor="White" Opacity="0.9"/>
+                        <Grid ColumnDefinitions="*,*,*" ColumnSpacing="16" Margin="0,12,0,0">
+                            <VerticalStackLayout HorizontalOptions="Center">
+                                <Label Text="✅" FontSize="28"/>
+                                <Label Text="Normal" FontSize="12" TextColor="White" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center">
+                                <Label Text="12" FontSize="28" FontAttributes="Bold" TextColor="White"/>
+                                <Label Text="Tests" FontSize="12" TextColor="White" HorizontalTextAlignment="Center"/>
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Column="2" HorizontalOptions="Center">
+                                <Label Text="📊" FontSize="28"/>
+                                <Label Text="View All" FontSize="12" TextColor="White" HorizontalTextAlignment="Center"/>
+                            </VerticalStackLayout>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Key Metrics -->
+                <Label Text="Key Metrics" FontSize="20" FontAttributes="Bold" TextColor="#22223B"/>
+
+                <!-- Cholesterol -->
+                <Border Background="White" StrokeShape="RoundRectangle 16" Padding="20" StrokeThickness="1" Stroke="#E0E0E0">
+                    <VerticalStackLayout Spacing="12">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="Cholesterol" FontSize="18" FontAttributes="Bold" TextColor="#22223B"/>
+                            <Label Grid.Column="1" Text="Normal" FontSize="13" TextColor="White" Background="#4CAF50" Padding="8,4" HorizontalTextAlignment="Center">
+                                <Label.Clip>
+                                    <RoundRectangleGeometry CornerRadius="12" Rect="0,0,80,24"/>
+                                </Label.Clip>
+                            </Label>
+                        </Grid>
+                        <Grid ColumnDefinitions="*,*,*" ColumnSpacing="12">
+                            <VerticalStackLayout>
+                                <Label Text="Total" FontSize="11" TextColor="#666"/>
+                                <Label Text="180" FontSize="24" FontAttributes="Bold" TextColor="#2E91FF"/>
+                                <Label Text="mg/dL" FontSize="10" TextColor="#999"/>
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Column="1">
+                                <Label Text="LDL" FontSize="11" TextColor="#666"/>
+                                <Label Text="110" FontSize="24" FontAttributes="Bold" TextColor="#2E91FF"/>
+                                <Label Text="mg/dL" FontSize="10" TextColor="#999"/>
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Column="2">
+                                <Label Text="HDL" FontSize="11" TextColor="#666"/>
+                                <Label Text="55" FontSize="24" FontAttributes="Bold" TextColor="#2E91FF"/>
+                                <Label Text="mg/dL" FontSize="10" TextColor="#999"/>
+                            </VerticalStackLayout>
+                        </Grid>
+                        <BoxView Color="#E0E0E0" HeightRequest="1" Margin="0,8,0,8"/>
+                        <Label Text="📈 Improved from last test" FontSize="13" TextColor="#4CAF50" FontAttributes="Bold"/>
+                    </VerticalStackLayout>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnTestDetailClicked" CommandParameter="Cholesterol"/>
+                    </Border.GestureRecognizers>
+                </Border>
+
+                <!-- Blood Glucose -->
+                <Border Background="White" StrokeShape="RoundRectangle 16" Padding="20" StrokeThickness="1" Stroke="#E0E0E0">
+                    <VerticalStackLayout Spacing="12">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="Blood Glucose" FontSize="18" FontAttributes="Bold" TextColor="#22223B"/>
+                            <Label Grid.Column="1" Text="Normal" FontSize="13" TextColor="White" Background="#4CAF50" Padding="8,4" HorizontalTextAlignment="Center">
+                                <Label.Clip>
+                                    <RoundRectangleGeometry CornerRadius="12" Rect="0,0,80,24"/>
+                                </Label.Clip>
+                            </Label>
+                        </Grid>
+                        <HorizontalStackLayout Spacing="12">
+                            <VerticalStackLayout>
+                                <Label Text="Fasting" FontSize="11" TextColor="#666"/>
+                                <Label Text="95" FontSize="28" FontAttributes="Bold" TextColor="#2E91FF"/>
+                                <Label Text="mg/dL" FontSize="11" TextColor="#999"/>
+                            </VerticalStackLayout>
+                            <BoxView Color="#E0E0E0" WidthRequest="1" Margin="12,0"/>
+                            <VerticalStackLayout>
+                                <Label Text="Normal Range" FontSize="11" TextColor="#666"/>
+                                <Label Text="70-100 mg/dL" FontSize="13" TextColor="#666"/>
+                                <Label Text="You're in range ✓" FontSize="11" TextColor="#4CAF50" FontAttributes="Bold"/>
+                            </VerticalStackLayout>
+                        </HorizontalStackLayout>
+                        <ProgressBar Progress="0.6" ProgressColor="#4CAF50" BackgroundColor="#E0E0E0" HeightRequest="8"/>
+                    </VerticalStackLayout>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnTestDetailClicked" CommandParameter="Glucose"/>
+                    </Border.GestureRecognizers>
+                </Border>
+
+                <!-- Hemoglobin A1C -->
+                <Border Background="White" StrokeShape="RoundRectangle 16" Padding="20" StrokeThickness="1" Stroke="#E0E0E0">
+                    <VerticalStackLayout Spacing="12">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="Hemoglobin A1C" FontSize="18" FontAttributes="Bold" TextColor="#22223B"/>
+                            <Label Grid.Column="1" Text="Good" FontSize="13" TextColor="White" Background="#4CAF50" Padding="8,4" HorizontalTextAlignment="Center">
+                                <Label.Clip>
+                                    <RoundRectangleGeometry CornerRadius="12" Rect="0,0,80,24"/>
+                                </Label.Clip>
+                            </Label>
+                        </Grid>
+                        <Grid ColumnDefinitions="Auto,*">
+                            <VerticalStackLayout>
+                                <Label Text="5.4" FontSize="36" FontAttributes="Bold" TextColor="#4CAF50"/>
+                                <Label Text="%" FontSize="14" TextColor="#999"/>
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Column="1" Padding="20,0,0,0" Spacing="8">
+                                <Label Text="Average glucose over 3 months" FontSize="12" TextColor="#666"/>
+                                <Label Text="Target: &lt;5.7%" FontSize="12" TextColor="#666"/>
+                                <Label Text="Trend: 📉 Decreasing" FontSize="12" TextColor="#4CAF50" FontAttributes="Bold"/>
+                            </VerticalStackLayout>
+                        </Grid>
+                    </VerticalStackLayout>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnTestDetailClicked" CommandParameter="A1C"/>
+                    </Border.GestureRecognizers>
+                </Border>
+
+                <!-- All Lab Tests -->
+                <Label Text="All Lab Tests" FontSize="20" FontAttributes="Bold" TextColor="#22223B" Margin="0,16,0,0"/>
+
+                <CollectionView>
+                    <CollectionView.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Complete Blood Count</x:String>
+                            <x:String>Liver Function</x:String>
+                            <x:String>Kidney Function</x:String>
+                            <x:String>Thyroid Panel</x:String>
+                            <x:String>Vitamin D</x:String>
+                            <x:String>Iron Studies</x:String>
+                        </x:Array>
+                    </CollectionView.ItemsSource>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Background="White" StrokeShape="RoundRectangle 12" Padding="16" StrokeThickness="1" Stroke="#E0E0E0" Margin="0,0,0,12">
+                                <Grid ColumnDefinitions="Auto,*,Auto">
+                                    <Label Text="✓" FontSize="24" TextColor="#4CAF50" VerticalOptions="Center"/>
+                                    <VerticalStackLayout Grid.Column="1" Spacing="4" Padding="12,0,0,0">
+                                        <Label Text="{Binding}" FontSize="16" FontAttributes="Bold" TextColor="#22223B"/>
+                                        <Label Text="Jan 28, 2026 • Normal" FontSize="12" TextColor="#666"/>
+                                    </VerticalStackLayout>
+                                    <Image Grid.Column="2" Source="arrow_right.png" HeightRequest="20" WidthRequest="20" VerticalOptions="Center"/>
+                                </Grid>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnTestDetailClicked"/>
+                                </Border.GestureRecognizers>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <!-- Download Report -->
+                <Button Text="📄 Download Full Report" 
+                        Background="Transparent" 
+                        TextColor="#2E91FF" 
+                        BorderColor="#2E91FF" 
+                        BorderWidth="2" 
+                        CornerRadius="12" 
+                        Padding="16" 
+                        FontSize="16" 
+                        Clicked="OnDownloadReportClicked"/>
+
+                <BoxView HeightRequest="20"/>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

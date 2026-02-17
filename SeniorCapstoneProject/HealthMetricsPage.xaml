@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SeniorCapstoneProject.HealthMetricsPage"
+             Title="Health Metrics"
+             BackgroundColor="#F8F9FA">
+
+    <Grid RowDefinitions="Auto,*">
+        <!-- Header -->
+        <Grid Grid.Row="0" Padding="24,24,24,16" BackgroundColor="White">
+            <Button Text="←" FontSize="24" WidthRequest="40" HeightRequest="40" CornerRadius="20" Background="Transparent" TextColor="#2E91FF" HorizontalOptions="Start" Clicked="OnBackClicked"/>
+            <Label Text="Health Metrics" FontSize="28" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center"/>
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="24" Spacing="16">
+                <!-- Daily Goals Progress -->
+                <Border Background="#667EEA" StrokeShape="RoundRectangle 20" Padding="20" StrokeThickness="0">
+                    <VerticalStackLayout Spacing="12">
+                        <Label Text="Today's Progress" FontSize="24" FontAttributes="Bold" TextColor="White"/>
+                        <Label Text="You're doing great! Keep it up! 🎉" FontSize="14" TextColor="White" Opacity="0.9"/>
+
+                        <!-- Steps Progress -->
+                        <Grid Margin="0,8,0,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Label Text="🚶 Steps: 8,234 / 10,000" FontSize="14" TextColor="White" FontAttributes="Bold"/>
+                            <ProgressBar Grid.Row="1" Progress="0.82" ProgressColor="#4CAF50" BackgroundColor="White" Opacity="0.3" HeightRequest="8" Margin="0,4,0,0"/>
+                        </Grid>
+
+                        <!-- Water Progress -->
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Label Text="💧 Water: 6 / 8 glasses" FontSize="14" TextColor="White" FontAttributes="Bold"/>
+                            <ProgressBar Grid.Row="1" Progress="0.75" ProgressColor="#00BCD4" BackgroundColor="White" Opacity="0.3" HeightRequest="8" Margin="0,4,0,0"/>
+                        </Grid>
+
+                        <!-- Sleep Progress -->
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Label Text="😴 Sleep: 7.5 / 8 hours" FontSize="14" TextColor="White" FontAttributes="Bold"/>
+                            <ProgressBar Grid.Row="1" Progress="0.94" ProgressColor="#9C27B0" BackgroundColor="White" Opacity="0.3" HeightRequest="8" Margin="0,4,0,0"/>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Vital Signs -->
+                <Label Text="Vital Signs" FontSize="20" FontAttributes="Bold" TextColor="#22223B"/>
+
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="12" RowSpacing="12">
+                    <!-- Heart Rate -->
+                    <Border Background="White" StrokeShape="RoundRectangle 16" Padding="16" StrokeThickness="1" Stroke="#E0E0E0">
+                        <VerticalStackLayout Spacing="8">
+                            <Label Text="❤️" FontSize="32"/>
+                            <Label Text="Heart Rate" FontSize="12" TextColor="#666"/>
+                            <Label Text="72" FontSize="28" FontAttributes="Bold" TextColor="#FF6B6B"/>
+                            <Label Text="BPM" FontSize="11" TextColor="#999"/>
+                            <Label Text="Normal" FontSize="11" TextColor="#4CAF50" FontAttributes="Bold"/>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!-- Blood Pressure -->
+                    <Border Grid.Column="1" Background="White" StrokeShape="RoundRectangle 16" Padding="16" StrokeThickness="1" Stroke="#E0E0E0">
+                        <VerticalStackLayout Spacing="8">
+                            <Label Text="🩺" FontSize="32"/>
+                            <Label Text="Blood Pressure" FontSize="12" TextColor="#666"/>
+                            <Label Text="120/80" FontSize="24" FontAttributes="Bold" TextColor="#2E91FF"/>
+                            <Label Text="mmHg" FontSize="11" TextColor="#999"/>
+                            <Label Text="Optimal" FontSize="11" TextColor="#4CAF50" FontAttributes="Bold"/>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!-- Temperature -->
+                    <Border Background="White" StrokeShape="RoundRectangle 16" Padding="16" StrokeThickness="1" Stroke="#E0E0E0">
+                        <VerticalStackLayout Spacing="8">
+                            <Label Text="🌡️" FontSize="32"/>
+                            <Label Text="Temperature" FontSize="12" TextColor="#666"/>
+                            <Label Text="98.6" FontSize="28" FontAttributes="Bold" TextColor="#FF9800"/>
+                            <Label Text="°F" FontSize="11" TextColor="#999"/>
+                            <Label Text="Normal" FontSize="11" TextColor="#4CAF50" FontAttributes="Bold"/>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!-- Oxygen Level -->
+                    <Border Grid.Column="1" Background="White" StrokeShape="RoundRectangle 16" Padding="16" StrokeThickness="1" Stroke="#E0E0E0">
+                        <VerticalStackLayout Spacing="8">
+                            <Label Text="🫁" FontSize="32"/>
+                            <Label Text="O₂ Saturation" FontSize="12" TextColor="#666"/>
+                            <Label Text="98" FontSize="28" FontAttributes="Bold" TextColor="#00BCD4"/>
+                            <Label Text="%" FontSize="11" TextColor="#999"/>
+                            <Label Text="Excellent" FontSize="11" TextColor="#4CAF50" FontAttributes="Bold"/>
+                        </VerticalStackLayout>
+                    </Border>
+                </Grid>
+
+                <!-- Body Metrics -->
+                <Label Text="Body Metrics" FontSize="20" FontAttributes="Bold" TextColor="#22223B" Margin="0,16,0,0"/>
+
+                <Grid ColumnDefinitions="*,*,*" ColumnSpacing="12">
+                    <Border Background="White" StrokeShape="RoundRectangle 16" Padding="16" StrokeThickness="1" Stroke="#E0E0E0">
+                        <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                            <Label Text="⚖️" FontSize="28"/>
+                            <Label Text="Weight" FontSize="11" TextColor="#666"/>
+                            <Label Text="165" FontSize="20" FontAttributes="Bold" TextColor="#2E91FF"/>
+                            <Label Text="lbs" FontSize="10" TextColor="#999"/>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border Grid.Column="1" Background="White" StrokeShape="RoundRectangle 16" Padding="16" StrokeThickness="1" Stroke="#E0E0E0">
+                        <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                            <Label Text="📏" FontSize="28"/>
+                            <Label Text="Height" FontSize="11" TextColor="#666"/>
+                            <Label Text="5'10&quot;" FontSize="20" FontAttributes="Bold" TextColor="#2E91FF"/>
+                            <Label Text="ft" FontSize="10" TextColor="#999"/>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border Grid.Column="2" Background="White" StrokeShape="RoundRectangle 16" Padding="16" StrokeThickness="1" Stroke="#E0E0E0">
+                        <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                            <Label Text="📊" FontSize="28"/>
+                            <Label Text="BMI" FontSize="11" TextColor="#666"/>
+                            <Label Text="23.7" FontSize="20" FontAttributes="Bold" TextColor="#4CAF50"/>
+                            <Label Text="Healthy" FontSize="10" TextColor="#999"/>
+                        </VerticalStackLayout>
+                    </Border>
+                </Grid>
+
+                <!-- Quick Actions -->
+                <Label Text="Quick Actions" FontSize="20" FontAttributes="Bold" TextColor="#22223B" Margin="0,16,0,0"/>
+
+                <Button Text="📝 Log New Reading" Background="#2E91FF" TextColor="White" CornerRadius="12" Padding="16" FontSize="16" FontAttributes="Bold" Clicked="OnLogReadingClicked"/>
+                <Button Text="📈 View History" Background="Transparent" TextColor="#2E91FF" BorderColor="#2E91FF" BorderWidth="2" CornerRadius="12" Padding="16" FontSize="16" Clicked="OnViewHistoryClicked"/>
+
+                <BoxView HeightRequest="20"/>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

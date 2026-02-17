@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net9.0-android;net9.0-ios;net9.0-maccatalyst</TargetFrameworks>
-		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net9.0-windows10.0.19041.0</TargetFrameworks>
+    <PackageVersion>1.2.0</PackageVersion>
+    <TargetFrameworks>net9.0-android;net9.0-ios;net9.0-maccatalyst;net9.0-windows10.0.19041.0</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net9.0-tizen</TargetFrameworks> -->
 
@@ -21,15 +21,15 @@
 		<Nullable>enable</Nullable>
 
 		<!-- Display name -->
-		<ApplicationTitle>SeniorCapstoneProject</ApplicationTitle>
+		<ApplicationTitle>My Health Assistant</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>com.companyname.seniorcapstoneproject</ApplicationId>
 
 		<!-- Versions -->
-		<ApplicationDisplayVersion>1.0.1</ApplicationDisplayVersion>
-		<ApplicationVersion>1</ApplicationVersion>
-		<WindowsPackageVersion>1.0.1.0</WindowsPackageVersion>
+		<ApplicationDisplayVersion>2.0.0</ApplicationDisplayVersion>
+		<ApplicationVersion>2</ApplicationVersion>
+		<WindowsPackageVersion>2.0.0.0</WindowsPackageVersion>
 
 		<!-- To develop, package, and publish an app to the Microsoft Store, see: https://aka.ms/MauiTemplateUnpackaged -->
 		<WindowsPackageType>None</WindowsPackageType>
@@ -113,6 +113,21 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Compile Update="EmergencyPage.xaml.cs">
+		  <DependentUpon>EmergencyPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="LabResultsPage.xaml.cs">
+		  <DependentUpon>LabResultsPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="HealthJournalPage.xaml.cs">
+		  <DependentUpon>HealthJournalPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="SymptomCheckerPage.xaml.cs">
+		  <DependentUpon>SymptomCheckerPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="HealthMetricsPage.xaml.cs">
+		  <DependentUpon>HealthMetricsPage.xaml</DependentUpon>
+		</Compile>
 		<Compile Update="MedicalIdPage.xaml.cs">
 		  <DependentUpon>MedicalIdPage.xaml</DependentUpon>
 		</Compile>
@@ -140,6 +155,21 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<MauiXaml Update="EmergencyPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="LabResultsPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="HealthJournalPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="SymptomCheckerPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="HealthMetricsPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 		<MauiXaml Update="MedicalIdPage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>

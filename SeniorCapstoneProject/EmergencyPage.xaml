@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SeniorCapstoneProject.EmergencyPage"
+             Title="Emergency"
+             BackgroundColor="#F8F9FA">
+
+    <Grid RowDefinitions="Auto,*">
+        <!-- Header -->
+        <Grid Grid.Row="0" Padding="24,24,24,16" BackgroundColor="#DC3545">
+            <Button Text="←" FontSize="24" WidthRequest="40" HeightRequest="40" CornerRadius="20" Background="Transparent" TextColor="White" HorizontalOptions="Start" Clicked="OnBackClicked"/>
+            <Label Text="Emergency Info" FontSize="28" FontAttributes="Bold" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="24" Spacing="20">
+                <!-- Emergency Call -->
+                <Border Background="#DC3545" StrokeShape="RoundRectangle 20" Padding="24" StrokeThickness="0">
+                    <VerticalStackLayout Spacing="16">
+                        <Label Text="In case of life-threatening emergency" FontSize="14" TextColor="White" Opacity="0.9" HorizontalTextAlignment="Center"/>
+                        <Button Text="CALL 911" 
+                                Background="White" 
+                                TextColor="#DC3545" 
+                                CornerRadius="16" 
+                                Padding="20" 
+                                FontSize="22" 
+                                FontAttributes="Bold" 
+                                Clicked="OnCall911Clicked"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Medical ID Card -->
+                <Label Text="Medical ID" FontSize="20" FontAttributes="Bold" TextColor="#22223B"/>
+
+                <Border Background="White" StrokeShape="RoundRectangle 20" Padding="24" StrokeThickness="2" Stroke="#2E91FF">
+                    <VerticalStackLayout Spacing="16">
+                        <Grid ColumnDefinitions="Auto,*">
+                            <Border Background="#2E91FF" StrokeShape="RoundRectangle 32" WidthRequest="64" HeightRequest="64" StrokeThickness="0">
+                                <Label Text="JD" FontSize="28" FontAttributes="Bold" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
+                            </Border>
+                            <VerticalStackLayout Grid.Column="1" Padding="16,0,0,0" Spacing="4">
+                                <Label Text="Logan Kaas" FontSize="24" FontAttributes="Bold" TextColor="#22223B"/>
+                                <Label Text="DOB: 02/19/2003 • Male" FontSize="14" TextColor="#666"/>
+                                <Label Text="Blood Type: O+" FontSize="14" TextColor="#DC3545" FontAttributes="Bold"/>
+                            </VerticalStackLayout>
+                        </Grid>
+
+                        <BoxView Color="#E0E0E0" HeightRequest="1"/>
+
+                        <VerticalStackLayout Spacing="12">
+                            <Label Text="⚠️ Allergies" FontSize="16" FontAttributes="Bold" TextColor="#22223B"/>
+                            <Label Text="• Seasonal Allergies (mediocre reaction)&#10;" FontSize="14" TextColor="#DC3545" LineHeight="1.5"/>
+                        </VerticalStackLayout>
+
+                        <BoxView Color="#E0E0E0" HeightRequest="1"/>
+
+                        <VerticalStackLayout Spacing="12">
+                            <Label Text="💊 Current Medications" FontSize="16" FontAttributes="Bold" TextColor="#22223B"/>
+                            <Label Text="• Adderall 15mg (ADHD)&#10;" FontSize="14" TextColor="#666" LineHeight="1.5"/>
+                        </VerticalStackLayout>
+
+                        <BoxView Color="#E0E0E0" HeightRequest="1"/>
+
+                        <VerticalStackLayout Spacing="12">
+                            <Label Text="🏥 Medical Conditions" FontSize="16" FontAttributes="Bold" TextColor="#22223B"/>
+                            <Label Text="• Heart Murmur&#10;" FontSize="14" TextColor="#666" LineHeight="1.5"/>
+                        </VerticalStackLayout>
+
+                        <Button Text="Edit Medical ID" 
+                                Background="#2E91FF" 
+                                TextColor="White" 
+                                CornerRadius="12" 
+                                Padding="16" 
+                                FontSize="16" 
+                                Clicked="OnEditMedicalIdClicked"
+                                Margin="0,8,0,0"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Emergency Contacts -->
+                <Label Text="Emergency Contacts" FontSize="20" FontAttributes="Bold" TextColor="#22223B" Margin="0,16,0,0"/>
+
+                <Border Background="White" StrokeShape="RoundRectangle 16" Padding="20" StrokeThickness="1" Stroke="#E0E0E0">
+                    <Grid ColumnDefinitions="Auto,*,Auto" RowSpacing="12">
+                        <Border Background="#4CAF50" StrokeShape="RoundRectangle 12" WidthRequest="48" HeightRequest="48" StrokeThickness="0">
+                            <Label Text="👤" FontSize="24" HorizontalOptions="Center" VerticalOptions="Center"/>
+                        </Border>
+                        <VerticalStackLayout Grid.Column="1" Spacing="4" Padding="12,0,0,0">
+                            <Label Text="Jane Doe (Spouse)" FontSize="16" FontAttributes="Bold" TextColor="#22223B"/>
+                            <Label Text="Primary Contact" FontSize="12" TextColor="#4CAF50"/>
+                            <Label Text="+1 (555) 123-4567" FontSize="14" TextColor="#2E91FF"/>
+                        </VerticalStackLayout>
+                        <Button Grid.Column="2" Text="📞" Background="#4CAF50" TextColor="White" WidthRequest="48" HeightRequest="48" CornerRadius="24" FontSize="16" Clicked="OnCallContactClicked"/>
+                    </Grid>
+                </Border>
+
+                <Border Background="White" StrokeShape="RoundRectangle 16" Padding="20" StrokeThickness="1" Stroke="#E0E0E0">
+                    <Grid ColumnDefinitions="Auto,*,Auto">
+                        <Border Background="#FF9800" StrokeShape="RoundRectangle 12" WidthRequest="48" HeightRequest="48" StrokeThickness="0">
+                            <Label Text="👤" FontSize="24" HorizontalOptions="Center" VerticalOptions="Center"/>
+                        </Border>
+                        <VerticalStackLayout Grid.Column="1" Spacing="4" Padding="12,0,0,0">
+                            <Label Text="Dr. Kaas (Primary Care)" FontSize="16" FontAttributes="Bold" TextColor="#22223B"/>
+                            <Label Text="Healthcare Provider" FontSize="12" TextColor="#666"/>
+                            <Label Text="+1 (555) 987-6543" FontSize="14" TextColor="#2E91FF"/>
+                        </VerticalStackLayout>
+                        <Button Grid.Column="2" Text="📞" Background="#FF9800" TextColor="White" WidthRequest="48" HeightRequest="48" CornerRadius="24" FontSize="16" Clicked="OnCallContactClicked"/>
+                    </Grid>
+                </Border>
+
+                <Button Text="+ Add Emergency Contact" 
+                        Background="Transparent" 
+                        TextColor="#2E91FF" 
+                        BorderColor="#2E91FF" 
+                        BorderWidth="2" 
+                        CornerRadius="12" 
+                        Padding="16" 
+                        FontSize="16" 
+                        Clicked="OnAddContactClicked"/>
+
+                <!-- Nearby Hospitals -->
+                <Label Text="Your Hospitals" FontSize="20" FontAttributes="Bold" TextColor="#22223B" Margin="0,16,0,0"/>
+
+                <Border Background="White" StrokeShape="RoundRectangle 16" Padding="16" StrokeThickness="1" Stroke="#E0E0E0">
+                    <Grid ColumnDefinitions="Auto,*,Auto">
+                        <Label Text="🏥" FontSize="32" VerticalOptions="Center"/>
+                        <VerticalStackLayout Grid.Column="1" Spacing="4" Padding="12,0,0,0">
+                            <Label Text="TriHealth Five Mile | Anderson" FontSize="16" FontAttributes="Bold" TextColor="#22223B"/>
+                            <Label Text="14.2 miles away • ER available" FontSize="12" TextColor="#666"/>
+                            <Label Text="7810 Five Mile Rd, Cincinnati, OH 45230" FontSize="12" TextColor="#2E91FF"/>
+                        </VerticalStackLayout>
+                        <Button Grid.Column="2" Text="🗺️" Background="#2E91FF" TextColor="White" WidthRequest="48" HeightRequest="48" CornerRadius="24" FontSize="20" Clicked="OnGetDirectionsClicked"/>
+                    </Grid>
+                </Border>
+
+                <BoxView HeightRequest="20"/>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

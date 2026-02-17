@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SeniorCapstoneProject.HealthJournalPage"
+             Title="Health Journal"
+             BackgroundColor="#F8F9FA">
+
+    <Grid RowDefinitions="Auto,*">
+        <!-- Header -->
+        <Grid Grid.Row="0" Padding="24,24,24,16" BackgroundColor="White">
+            <Button Text="←" FontSize="24" WidthRequest="40" HeightRequest="40" CornerRadius="20" Background="Transparent" TextColor="#2E91FF" HorizontalOptions="Start" Clicked="OnBackClicked"/>
+            <Label Text="Health Journal" FontSize="28" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center"/>
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="24" Spacing="20">
+                <!-- Today's Entry Card -->
+                <Border Background="#E8F5E9" StrokeShape="RoundRectangle 20" Padding="20" StrokeThickness="0">
+                    <VerticalStackLayout Spacing="12">
+                        <Label Text="Today's Entry" FontSize="24" FontAttributes="Bold" TextColor="#2E7D32"/>
+                        <Label Text="{Binding Today, StringFormat='{}{0:dddd, MMMM dd, yyyy}'}" FontSize="14" TextColor="#2E7D32" Opacity="0.8"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Mood Tracker -->
+                <Label Text="How are you feeling?" FontSize="20" FontAttributes="Bold" TextColor="#22223B"/>
+
+                <Grid ColumnDefinitions="*,*,*,*,*" ColumnSpacing="8">
+                    <Border Background="White" StrokeShape="RoundRectangle 16" Padding="16" StrokeThickness="2" Stroke="#E0E0E0">
+                        <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                            <Label Text="😄" FontSize="48"/>
+                            <Label Text="Great" FontSize="11" TextColor="#666" HorizontalTextAlignment="Center"/>
+                        </VerticalStackLayout>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnMoodSelected" CommandParameter="Great"/>
+                        </Border.GestureRecognizers>
+                    </Border>
+
+                    <Border Grid.Column="1" Background="White" StrokeShape="RoundRectangle 16" Padding="16" StrokeThickness="2" Stroke="#E0E0E0">
+                        <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                            <Label Text="🙂" FontSize="48"/>
+                            <Label Text="Good" FontSize="11" TextColor="#666" HorizontalTextAlignment="Center"/>
+                        </VerticalStackLayout>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnMoodSelected" CommandParameter="Good"/>
+                        </Border.GestureRecognizers>
+                    </Border>
+
+                    <Border Grid.Column="2" Background="White" StrokeShape="RoundRectangle 16" Padding="16" StrokeThickness="2" Stroke="#E0E0E0">
+                        <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                            <Label Text="😐" FontSize="48"/>
+                            <Label Text="Okay" FontSize="11" TextColor="#666" HorizontalTextAlignment="Center"/>
+                        </VerticalStackLayout>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnMoodSelected" CommandParameter="Okay"/>
+                        </Border.GestureRecognizers>
+                    </Border>
+
+                    <Border Grid.Column="3" Background="White" StrokeShape="RoundRectangle 16" Padding="16" StrokeThickness="2" Stroke="#E0E0E0">
+                        <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                            <Label Text="😕" FontSize="48"/>
+                            <Label Text="Bad" FontSize="11" TextColor="#666" HorizontalTextAlignment="Center"/>
+                        </VerticalStackLayout>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnMoodSelected" CommandParameter="Bad"/>
+                        </Border.GestureRecognizers>
+                    </Border>
+
+                    <Border Grid.Column="4" Background="White" StrokeShape="RoundRectangle 16" Padding="16" StrokeThickness="2" Stroke="#E0E0E0">
+                        <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                            <Label Text="😢" FontSize="48"/>
+                            <Label Text="Awful" FontSize="11" TextColor="#666" HorizontalTextAlignment="Center"/>
+                        </VerticalStackLayout>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnMoodSelected" CommandParameter="Awful"/>
+                        </Border.GestureRecognizers>
+                    </Border>
+                </Grid>
+
+                <!-- Symptoms Today -->
+                <Label Text="Any symptoms today?" FontSize="20" FontAttributes="Bold" TextColor="#22223B" Margin="0,16,0,0"/>
+
+                <FlexLayout Wrap="Wrap" JustifyContent="Start">
+                    <CheckBox x:Name="PainCheckBox" Color="#2E91FF"/>
+                    <Label Text="Pain" VerticalOptions="Center" Margin="0,0,16,0"/>
+                    <CheckBox x:Name="FatigueCheckBox" Color="#2E91FF"/>
+                    <Label Text="Fatigue" VerticalOptions="Center" Margin="0,0,16,0"/>
+                    <CheckBox x:Name="NauseaCheckBox" Color="#2E91FF"/>
+                    <Label Text="Nausea" VerticalOptions="Center" Margin="0,0,16,0"/>
+                    <CheckBox x:Name="HeadacheCheckBox" Color="#2E91FF"/>
+                    <Label Text="Headache" VerticalOptions="Center"/>
+                </FlexLayout>
+
+                <!-- Activity Tracker -->
+                <Label Text="Activities" FontSize="20" FontAttributes="Bold" TextColor="#22223B" Margin="0,16,0,0"/>
+
+                <Grid ColumnDefinitions="*,*,*" ColumnSpacing="12" RowSpacing="12">
+                    <Border Background="White" StrokeShape="RoundRectangle 12" Padding="16" StrokeThickness="1" Stroke="#E0E0E0">
+                        <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                            <Label Text="🏃" FontSize="32"/>
+                            <Label Text="Exercise" FontSize="13" TextColor="#666"/>
+                            <Label Text="30 min" FontSize="16" FontAttributes="Bold" TextColor="#2E91FF"/>
+                        </VerticalStackLayout>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnActivityClicked" CommandParameter="Exercise"/>
+                        </Border.GestureRecognizers>
+                    </Border>
+
+                    <Border Grid.Column="1" Background="White" StrokeShape="RoundRectangle 12" Padding="16" StrokeThickness="1" Stroke="#E0E0E0">
+                        <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                            <Label Text="😴" FontSize="32"/>
+                            <Label Text="Sleep" FontSize="13" TextColor="#666"/>
+                            <Label Text="7.5 hrs" FontSize="16" FontAttributes="Bold" TextColor="#9C27B0"/>
+                        </VerticalStackLayout>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnActivityClicked" CommandParameter="Sleep"/>
+                        </Border.GestureRecognizers>
+                    </Border>
+
+                    <Border Grid.Column="2" Background="White" StrokeShape="RoundRectangle 12" Padding="16" StrokeThickness="1" Stroke="#E0E0E0">
+                        <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                            <Label Text="💧" FontSize="32"/>
+                            <Label Text="Water" FontSize="13" TextColor="#666"/>
+                            <Label Text="6 cups" FontSize="16" FontAttributes="Bold" TextColor="#00BCD4"/>
+                        </VerticalStackLayout>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnActivityClicked" CommandParameter="Water"/>
+                        </Border.GestureRecognizers>
+                    </Border>
+                </Grid>
+
+                <!-- Notes -->
+                <Label Text="Today's Notes" FontSize="20" FontAttributes="Bold" TextColor="#22223B" Margin="0,16,0,0"/>
+
+                <Border Background="White" StrokeShape="RoundRectangle 16" Padding="16" StrokeThickness="1" Stroke="#E0E0E0">
+                    <Editor x:Name="NotesEditor" 
+                            Placeholder="Write about your day, how you're feeling, or anything on your mind..."
+                            HeightRequest="150"
+                            FontSize="16"
+                            TextColor="#333"/>
+                </Border>
+
+                <!-- Save Button -->
+                <Button Text="Save Entry" 
+                        Background="#4CAF50" 
+                        TextColor="White" 
+                        CornerRadius="16" 
+                        Padding="20" 
+                        FontSize="18" 
+                        FontAttributes="Bold" 
+                        Clicked="OnSaveEntryClicked"
+                        Margin="0,8,0,0"/>
+
+                <!-- Recent Entries -->
+                <Label Text="Recent Entries" FontSize="20" FontAttributes="Bold" TextColor="#22223B" Margin="0,24,0,0"/>
+
+                <Border Background="White" StrokeShape="RoundRectangle 16" Padding="16" StrokeThickness="1" Stroke="#E0E0E0">
+                    <Grid ColumnDefinitions="Auto,*,Auto">
+                        <Label Text="😊" FontSize="32" VerticalOptions="Center"/>
+                        <VerticalStackLayout Grid.Column="1" Spacing="4" Padding="12,0,0,0">
+                            <Label Text="Yesterday" FontSize="16" FontAttributes="Bold" TextColor="#22223B"/>
+                            <Label Text="Feeling great! Had a good workout." FontSize="13" TextColor="#666" MaxLines="2"/>
+                            <Label Text="Mood: Good • Exercise: 45min" FontSize="11" TextColor="#2E91FF"/>
+                        </VerticalStackLayout>
+                        <Image Grid.Column="2" Source="arrow_right.png" HeightRequest="20" WidthRequest="20" VerticalOptions="Center"/>
+                    </Grid>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnViewEntryClicked"/>
+                    </Border.GestureRecognizers>
+                </Border>
+
+                <Border Background="White" StrokeShape="RoundRectangle 16" Padding="16" StrokeThickness="1" Stroke="#E0E0E0">
+                    <Grid ColumnDefinitions="Auto,*,Auto">
+                        <Label Text="😐" FontSize="32" VerticalOptions="Center"/>
+                        <VerticalStackLayout Grid.Column="1" Spacing="4" Padding="12,0,0,0">
+                            <Label Text="2 days ago" FontSize="16" FontAttributes="Bold" TextColor="#22223B"/>
+                            <Label Text="Slight headache in the morning..." FontSize="13" TextColor="#666" MaxLines="2"/>
+                            <Label Text="Mood: Okay • Symptoms: Headache" FontSize="11" TextColor="#FF9800"/>
+                        </VerticalStackLayout>
+                        <Image Grid.Column="2" Source="arrow_right.png" HeightRequest="20" WidthRequest="20" VerticalOptions="Center"/>
+                    </Grid>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnViewEntryClicked"/>
+                    </Border.GestureRecognizers>
+                </Border>
+
+                <BoxView HeightRequest="20"/>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

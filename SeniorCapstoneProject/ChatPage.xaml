@@ -3,123 +3,216 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SeniorCapstoneProject.ChatPage"
              Title="Chatbot"
-             x:Name="ChatPageRoot">
+             x:Name="ChatPageRoot"
+             BackgroundColor="#FFFFFF">
+
     <ContentPage.Resources>
+        <!-- Color Resources -->
+        <Color x:Key="PrimaryBlue">#2E91FF</Color>
         <Color x:Key="UserBubbleColor">#2E91FF</Color>
-        <Color x:Key="BotBubbleColor">#F2F4F8</Color>
+        <Color x:Key="BotBubbleColor">#F5F6FA</Color>
+        <Color x:Key="BackgroundColor">#FFFFFF</Color>
+        <Color x:Key="InputBackgroundColor">#F8F9FB</Color>
+        <Color x:Key="BorderColor">#E8EAED</Color>
+
+        <!-- Bubble Styles -->
         <Style x:Key="UserBubbleStyle" TargetType="Frame">
             <Setter Property="BackgroundColor" Value="{StaticResource UserBubbleColor}"/>
-            <Setter Property="CornerRadius" Value="18"/>
+            <Setter Property="CornerRadius" Value="20"/>
             <Setter Property="HasShadow" Value="False"/>
-            <Setter Property="Margin" Value="60,8,8,8"/>
-            <Setter Property="HorizontalOptions" Value="End"/>
+            <Setter Property="Padding" Value="16,12"/>
+            <Setter Property="Margin" Value="48,4,12,4"/>
         </Style>
+
         <Style x:Key="BotBubbleStyle" TargetType="Frame">
             <Setter Property="BackgroundColor" Value="{StaticResource BotBubbleColor}"/>
-            <Setter Property="CornerRadius" Value="18"/>
+            <Setter Property="CornerRadius" Value="20"/>
             <Setter Property="HasShadow" Value="False"/>
-            <Setter Property="Margin" Value="8,8,60,8"/>
-            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="Padding" Value="16,12"/>
+            <Setter Property="Margin" Value="12,4,48,4"/>
         </Style>
     </ContentPage.Resources>
-    <Grid RowDefinitions="Auto,*,Auto" Padding="0">
 
-        <!-- Back Button Row -->
-        <HorizontalStackLayout Spacing="0" Margin="0,0,0,0" VerticalOptions="Start" HeightRequest="40" Grid.Row="0">
-            <Button Text="←"
-                    FontSize="28"
-                    TextColor="#2E91FF"
+    <Grid RowDefinitions="Auto,*,Auto" RowSpacing="0">
+
+        <!-- Header Section -->
+        <Grid Grid.Row="0" 
+              BackgroundColor="{StaticResource PrimaryBlue}"
+              Padding="16,12,16,16"
+              RowDefinitions="Auto,Auto"
+              ColumnDefinitions="Auto,*">
+
+            <!-- Back Button -->
+            <Button Grid.Row="0"
+                    Grid.Column="0"
+                    Text="←"
+                    FontSize="32"
+                    TextColor="White"
                     BackgroundColor="Transparent"
+                    WidthRequest="48"
+                    HeightRequest="48"
                     Padding="0"
+                    Margin="0,0,8,0"
                     HorizontalOptions="Start"
                     VerticalOptions="Center"
                     Clicked="OnBackButtonClicked"/>
-        </HorizontalStackLayout>
 
-        <!-- Modern Header -->
-        <Border Background="#2E91FF" StrokeShape="RoundRectangle 16" Margin="0,50,0,12" HeightRequest="64" VerticalOptions="Start">
-            <Label Text="MyHealthAssistant Chat"
-           FontSize="28"
-           FontAttributes="Bold"
-           TextColor="White"
-           HorizontalOptions="Center"
-           VerticalOptions="Center"/>
-        </Border>
+            <!-- Title -->
+            <Label Grid.Row="0"
+                   Grid.Column="1"
+                   Text="MyHealthAssistant"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   TextColor="White"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Start"/>
 
-        <!-- Chat History -->
-        <CollectionView x:Name="ChatCollectionView"
-                        ItemsSource="{Binding Messages}"
-                        SelectionMode="None"
-                        Grid.Row="1"
-                        VerticalOptions="Fill"
-                        Margin="0,0,0,0">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Frame Padding="14,10"
-                               CornerRadius="18"
-                               HasShadow="False"
-                               Margin="0,8,0,8"
-                               WidthRequest="320"
-                               HorizontalOptions="{Binding IsUser, Converter={StaticResource BubbleAlignmentConverter}}"
-                               BackgroundColor="{Binding IsUser, Converter={StaticResource BubbleColorConverter}}">
-                            <VerticalStackLayout Spacing="6">
-                                <Label Text="{Binding Text}"
-                                       FontSize="16"
-                                       TextColor="{Binding IsUser, Converter={StaticResource BubbleTextColorConverter}}"
-                                       Padding="0"/>
-                                <!-- Time selection buttons (vertical) -->
-                                <VerticalStackLayout IsVisible="{Binding IsTimeSelection}" Spacing="8" Margin="0,8,0,0">
-                                    <BindableLayout.ItemsSource>
-                                        <Binding Path="AvailableTimes"/>
-                                    </BindableLayout.ItemsSource>
-                                    <BindableLayout.ItemTemplate>
-                                        <DataTemplate>
-                                            <Button Text="{Binding .}"
-                                                    Command="{Binding BindingContext.SelectTimeCommand, Source={x:Reference ChatPageRoot}}"
-                                                    CommandParameter="{Binding .}"
-                                                    BackgroundColor="#2E91FF"
-                                                    TextColor="White"
-                                                    FontAttributes="Bold"
-                                                    Padding="0,12"
-                                                    Margin="0,0,0,0"
-                                                    CornerRadius="16"/>
-                                        </DataTemplate>
-                                    </BindableLayout.ItemTemplate>
-                                </VerticalStackLayout>
-                            </VerticalStackLayout>
-                        </Frame>
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-
-        <!-- Loading Indicator -->
-        <ActivityIndicator x:Name="BotLoadingIndicator"
-                           IsVisible="{Binding IsBotLoading}"
-                           IsRunning="{Binding IsBotLoading}"
-                           Color="#2E91FF"
-                           HeightRequest="32"
-                           WidthRequest="32"
-                           VerticalOptions="End"
-                           HorizontalOptions="Center"
-                           Grid.Row="1"
-                           Margin="0,8,0,8"/>
-
-        <!-- Message Entry -->
-        <Grid Grid.Row="2" ColumnDefinitions="*,Auto" Padding="8,8,8,8" BackgroundColor="#F8F8F8">
-            <Entry x:Name="MessageEntry"
-                   Placeholder="Type your message..."
-                   FontSize="16"
-                   VerticalOptions="Center"/>
-            <Button Text="Send"
-                    Grid.Column="1"
-                    Clicked="OnSendClicked"
-                    BackgroundColor="#2E91FF"
-                    TextColor="White"
-                    FontAttributes="Bold"
-                    Padding="20,0"
-                    CornerRadius="16"/>
+            <!-- Subtitle -->
+            <Label Grid.Row="1"
+                   Grid.Column="1"
+                   Text="Your personal health chatbot"
+                   FontSize="14"
+                   TextColor="#E0F0FF"
+                   VerticalOptions="Start"
+                   HorizontalOptions="Start"
+                   Margin="0,2,0,0"/>
         </Grid>
+
+        <!-- Chat Messages Area -->
+        <Grid Grid.Row="1" BackgroundColor="#FAFBFC">
+
+            <!-- Chat Collection View -->
+            <CollectionView x:Name="ChatCollectionView"
+                            ItemsSource="{Binding Messages}"
+                            SelectionMode="None"
+                            VerticalOptions="Fill"
+                            Margin="0,12,0,12">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="0,6">
+                            <!-- Message Bubble -->
+                            <Frame Padding="16,12"
+                                   CornerRadius="20"
+                                   HasShadow="False"
+                                   MaximumWidthRequest="280"
+                                   HorizontalOptions="{Binding IsUser, Converter={StaticResource BubbleAlignmentConverter}}"
+                                   BackgroundColor="{Binding IsUser, Converter={StaticResource BubbleColorConverter}}"
+                                   Margin="{Binding IsUser, Converter={StaticResource BubbleMarginConverter}}">
+
+                                <VerticalStackLayout Spacing="8">
+                                    <!-- Message Text -->
+                                    <Label Text="{Binding Text}"
+                                           FontSize="15"
+                                           LineHeight="1.4"
+                                           TextColor="{Binding IsUser, Converter={StaticResource BubbleTextColorConverter}}"/>
+
+                                    <!-- Time Selection Buttons -->
+                                    <VerticalStackLayout IsVisible="{Binding IsTimeSelection}" 
+                                                         Spacing="10" 
+                                                         Margin="0,4,0,0">
+                                        <BindableLayout.ItemsSource>
+                                            <Binding Path="AvailableTimes"/>
+                                        </BindableLayout.ItemsSource>
+                                        <BindableLayout.ItemTemplate>
+                                            <DataTemplate>
+                                                <Button Text="{Binding .}"
+                                                        Command="{Binding BindingContext.SelectTimeCommand, Source={x:Reference ChatPageRoot}}"
+                                                        CommandParameter="{Binding .}"
+                                                        BackgroundColor="White"
+                                                        TextColor="{StaticResource PrimaryBlue}"
+                                                        FontSize="14"
+                                                        FontAttributes="Bold"
+                                                        Padding="12,10"
+                                                        CornerRadius="12"
+                                                        BorderColor="{StaticResource PrimaryBlue}"
+                                                        BorderWidth="2"/>
+                                            </DataTemplate>
+                                        </BindableLayout.ItemTemplate>
+                                    </VerticalStackLayout>
+                                </VerticalStackLayout>
+                            </Frame>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Loading Indicator -->
+            <Grid IsVisible="{Binding IsBotLoading}"
+                  VerticalOptions="End"
+                  HorizontalOptions="Start"
+                  Margin="12,0,0,16"
+                  WidthRequest="60"
+                  HeightRequest="44"
+                  BackgroundColor="{StaticResource BotBubbleColor}"
+                  Padding="12,8">
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer/>
+                </Grid.GestureRecognizers>
+                <ActivityIndicator IsRunning="{Binding IsBotLoading}"
+                                   Color="{StaticResource PrimaryBlue}"
+                                   HeightRequest="24"
+                                   WidthRequest="24"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"/>
+            </Grid>
+        </Grid>
+
+        <!-- Message Input Section -->
+        <Border Grid.Row="2"
+                BackgroundColor="White"
+                StrokeThickness="1"
+                Stroke="{StaticResource BorderColor}"
+                Padding="12,10">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="0"/>
+            </Border.StrokeShape>
+
+            <Grid ColumnDefinitions="*,Auto" 
+                  ColumnSpacing="10">
+
+                <!-- Message Entry -->
+                <Border Grid.Column="0"
+                        BackgroundColor="{StaticResource InputBackgroundColor}"
+                        Stroke="{StaticResource BorderColor}"
+                        StrokeThickness="1"
+                        Padding="0"
+                        VerticalOptions="Center">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="24"/>
+                    </Border.StrokeShape>
+
+                    <Entry x:Name="MessageEntry"
+                           Placeholder="Type your message..."
+                           PlaceholderColor="#9CA3AF"
+                           FontSize="15"
+                           TextColor="#1F2937"
+                           BackgroundColor="Transparent"
+                           VerticalOptions="Center"
+                           HeightRequest="48"
+                           Margin="16,0"/>
+                </Border>
+
+                <!-- Send Button -->
+                <Border Grid.Column="1"
+                        BackgroundColor="{StaticResource PrimaryBlue}"
+                        VerticalOptions="Center"
+                        WidthRequest="56"
+                        HeightRequest="48">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="24"/>
+                    </Border.StrokeShape>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnSendClicked"/>
+                    </Border.GestureRecognizers>
+
+                    <Label Text="➤"
+                           FontSize="20"
+                           TextColor="White"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           FontAttributes="Bold"/>
+                </Border>
+            </Grid>
+        </Border>
     </Grid>
 </ContentPage>

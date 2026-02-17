@@ -3,44 +3,125 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SeniorCapstoneProject.MedicationsPage"
              Title="Medications"
-             BackgroundColor="#F8FAFC">
+             BackgroundColor="#F8F9FA">
 
-    <VerticalStackLayout Padding="24,16" Spacing="18">
-        <!-- Back Button Row -->
-        <HorizontalStackLayout Spacing="0" Margin="0,0,0,0" VerticalOptions="Start" HeightRequest="40" Grid.Row="0">
-            <Button Text="←"
-            FontSize="28"
-            TextColor="#2E91FF"
-            BackgroundColor="Transparent"
-            Padding="0"
-            HorizontalOptions="Start"
-            VerticalOptions="Center"
-            Clicked="OnBackButtonClicked"/>
-        </HorizontalStackLayout>
+    <Grid RowDefinitions="Auto,*">
+        <!-- Header -->
+        <Grid Grid.Row="0" Padding="24,24,24,16" BackgroundColor="White">
+            <Border Background="Transparent" 
+                    StrokeThickness="0"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Center">
+                <Border.Shadow>
+                    <Shadow Brush="Black" Opacity="0" />
+                </Border.Shadow>
+                <Button Text="←" 
+                        FontSize="24" 
+                        WidthRequest="40" 
+                        HeightRequest="40" 
+                        CornerRadius="20" 
+                        Background="Transparent" 
+                        TextColor="#2E91FF" 
+                        Clicked="OnBackButtonClicked"/>
+            </Border>
+            <Label Text="My Medications" 
+                   FontSize="28" 
+                   FontAttributes="Bold" 
+                   HorizontalOptions="Center" 
+                   VerticalOptions="Center"
+                   TextColor="#22223B"/>
+        </Grid>
 
-        <!-- Your Medications Header -->
-        <Label Text="Your Medications"
-               FontSize="28"
-               FontAttributes="Bold"
-               TextColor="#22223B"
-               Margin="0,0,0,8"/>
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="24,16,24,24" Spacing="16">
+                <!-- Medications List from Database -->
+                <Label Text="Your Medications" 
+                       FontSize="20" 
+                       FontAttributes="Bold" 
+                       TextColor="#22223B"/>
 
-        <!-- Medications List -->
-        <CollectionView ItemsSource="{Binding Medications}"
-                        EmptyView="No medications found."
-                        SelectionMode="None">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Frame CornerRadius="16" Padding="16" Margin="0,0,0,12" BackgroundColor="White" HasShadow="True">
-                        <VerticalStackLayout Spacing="6">
-                            <Label Text="{Binding Name}" FontSize="20" FontAttributes="Bold" TextColor="#3A86FF"/>
-                            <Label Text="{Binding Dosage}" FontSize="16" TextColor="#22223B"/>
-                            <Label Text="{Binding Instructions}" FontSize="15" TextColor="#4A4E69"/>
-                        </VerticalStackLayout>
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-        <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Color="#3A86FF"/>
-    </VerticalStackLayout>
+                <CollectionView ItemsSource="{Binding Medications}"
+                                EmptyView="No medications found">
+                    <CollectionView.EmptyViewTemplate>
+                        <DataTemplate>
+                            <Border Background="White" 
+                                    StrokeShape="RoundRectangle 16" 
+                                    Padding="32" 
+                                    StrokeThickness="1" 
+                                    Stroke="#E0E0E0"
+                                    Margin="0,8,0,0">
+                                <VerticalStackLayout Spacing="12" HorizontalOptions="Center">
+                                    <Label Text="💊" 
+                                           FontSize="48" 
+                                           HorizontalTextAlignment="Center"/>
+                                    <Label Text="No medications found" 
+                                           FontSize="16" 
+                                           TextColor="#666" 
+                                           HorizontalTextAlignment="Center"/>
+                                    <Label Text="Add your first medication to get started" 
+                                           FontSize="13" 
+                                           TextColor="#999" 
+                                           HorizontalTextAlignment="Center"/>
+                                </VerticalStackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.EmptyViewTemplate>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Background="White" 
+                                    StrokeShape="RoundRectangle 16" 
+                                    Padding="20" 
+                                    StrokeThickness="1" 
+                                    Stroke="#E0E0E0"
+                                    Margin="0,0,0,12">
+                                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="16">
+                                    <!-- Medication Icon -->
+                                    <Border Background="#2E91FF" 
+                                            StrokeShape="RoundRectangle 12" 
+                                            WidthRequest="56" 
+                                            HeightRequest="56" 
+                                            StrokeThickness="0" 
+                                            VerticalOptions="Start">
+                                        <Label Text="💊" 
+                                               FontSize="28" 
+                                               HorizontalOptions="Center" 
+                                               VerticalOptions="Center"/>
+                                    </Border>
+
+                                    <!-- Medication Details -->
+                                    <VerticalStackLayout Grid.Column="1" 
+                                                         Spacing="6" 
+                                                         VerticalOptions="Center">
+                                        <Label Text="{Binding Name}" 
+                                               FontSize="18" 
+                                               FontAttributes="Bold" 
+                                               TextColor="#22223B"/>
+                                        <Label Text="{Binding Dosage, StringFormat='Dosage: {0}'}" 
+                                               FontSize="14" 
+                                               TextColor="#666"/>
+                                        <Label Text="{Binding Instructions}" 
+                                               FontSize="13" 
+                                               TextColor="#2E91FF"
+                                               MaxLines="2"
+                                               LineBreakMode="TailTruncation"/>
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <!-- Loading Indicator -->
+                <ActivityIndicator IsRunning="{Binding IsBusy}" 
+                                   IsVisible="{Binding IsBusy}"
+                                   Color="#2E91FF"
+                                   HeightRequest="40"
+                                   WidthRequest="40"
+                                   HorizontalOptions="Center"
+                                   Margin="0,20,0,0"/>
+
+                <BoxView HeightRequest="20"/>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>
